@@ -68,10 +68,20 @@
 						filterBy="#{usuario.funcionario.nome}">
 						<h:outputText value="#{usuario.funcionario.nome}" />
 					</p:column>
+					
+					<p:column headerText="Razão social" sortBy="#{usuario.fornecedor.razaoSocial}"
+						filterBy="#{usuario.fornecedor.razaoSocial}">
+						<h:outputText value="#{usuario.fornecedor.razaoSocial}" />
+					</p:column>
 
 					<p:column headerText="CPF" sortBy="#{usuario.funcionario.cpf}"
 						filterBy="#{usuario.funcionario.cpf}">
 						<h:outputText value="#{usuario.funcionario.cpf}" />
+					</p:column>
+					
+					<p:column headerText="Cnpj" sortBy="#{usuario.fornecedor.cnpj}"
+						filterBy="#{usuario.fornecedor.cnpj}">
+						<h:outputText value="#{usuario.fornecedor.cnpj}" />
 					</p:column>
 
 					<p:column headerText="Tipo" sortBy="#{usuario.tipo}"
