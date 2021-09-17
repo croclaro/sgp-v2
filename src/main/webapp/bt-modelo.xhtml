@@ -287,17 +287,17 @@
 				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-usuario.xhtml"><i class="fas fa-oil-can"></i>
 						<span>Usuário</span></p:link></li>
 
-				<li class="header"></li>
-				<li class="header">CADASTROS</li>
+				<li class="header"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link></li>
+				<li class="header"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link>CADASTROS</li>
 
-				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="#"><i
+				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}" href="#"><i
 						class="fas fa-hands-helping"></i> <span> Indicação</span> <span
 						class="pull-right-container"> <i
 							class="fa fa-angle-left pull-right"></i>
 					</span> </p:link>
 					<ul class="treeview-menu">
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="cad-fornecedor.xhtml">Fornecedor</p:link></li>
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="cad-afiliado.xhtml">Afiliado</p:link></li>
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}" href="cad-fornecedor.xhtml">Fornecedor</p:link></li>
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}" href="cad-afiliado.xhtml">Afiliado</p:link></li>
 
 					</ul></li>
 
