@@ -1,0 +1,309 @@
+/* ====== RESET ====== */
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	border: none;
+	outline: none;
+	font-weight: 300;
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+}
+/* ====== FIM RESET ====== */
+.tudo {
+	width: 95%;
+	margin: 0 auto;
+}
+
+/* ====== INÍCIO ARQUIVO MODELO.XHTML ====== */
+.topo {
+	width: 100%;
+	height: 100px;
+	float: left;
+	text-align: center;
+	margin-top: 5px;
+	float: left;
+	background: #efefef;
+}
+
+.box-logo {
+	width: 30%;
+	height: 200px;
+	padding: 1%;
+	float: left;
+	margin: 0 auto;
+}
+
+.descricao {
+	width: 70%;
+	height: 200px;
+	padding: 3% 4%;
+	float: left;
+	margin: 0 auto;
+}
+
+.descricao h1 {
+	font-size: 1.3em;
+}
+
+.descricao h2 {
+	font-size: 0.9em;
+}
+
+.descricao h3 {
+	text-align: right;
+	font-weight: bold;
+	color: #ce0000;
+}
+
+.cabecalho {
+	width: 100%;
+	height: 48px;
+	float: left;
+	margin: 0 auto;
+	float: left;
+	font-size: 1.3em;
+}
+
+.conteudo {
+	width: 100%;
+	float: left;
+	background: #efefef;
+	padding: 2% 3%;
+}
+
+.rodape {
+	width: 100%;
+	float: left;
+	padding: 3% 4%;
+	text-align: center;
+	color: red;
+}
+
+.copyright {
+	margin-top: 2%;
+	color: #696969;
+}
+/* ====== FIM ARQUIVO MODELO.XHTML ====== */
+
+/* ====== INÍCIO ARQUIVO CONSULTAS ====== */
+.consulta {
+	width: 100%;
+	float: left;
+	background: #efefef;
+	padding: 2% 3%;
+	margin-top: 30px;
+	box-shadow: 5px 5px 10px #666666;
+	-webkit-box-shadow: 5px 5px 10px #666666;
+	-moz-box-shadow: 5px 5px 10px #666666;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+.consulta h1 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 2em;
+	margin-bottom: 2%;
+	color: black;
+	text-shadow: 1px 3px 3px rgba(135, 206, 235, 0.6);
+}
+
+/* ====== FIM ARQUIVO CONSULTAS ====== */
+
+/* ====== INÍCIO ARQUIVO CADASTROS ====== */
+h1 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.6em;
+	margin-bottom: 2%;
+	color: black;
+	text-shadow: 1px 3px 3px rgba(135, 206, 235, 0.6);
+}
+
+.ui-widget, .ui-widget, .ui-widget {
+	font-size: 0.5em;
+}
+
+.dados {
+	width: 49%;
+	padding: 2% 3%;
+	float: left;
+	box-shadow: 0px 0px 1em #666;
+	-webkit-box-shadow: 0px 0px 1em #666;
+	-moz-box-shadow: 0px 0px 1em #666;
+}
+
+.endereco {
+	width: 49%;
+	padding: 2% 3%;
+	margin-left: 20px;
+	float: left;
+	box-shadow: 0px 0px 1em #666;
+	-webkit-box-shadow: 0px 0px 1em #666;
+	-moz-box-shadow: 0px 0px 1em #666;
+}
+
+.produto {
+	width: 40%;
+	padding: 2% 3%;
+	float: left;
+	margin-left: 30%;
+	box-shadow: 0px 0px 1em #666;
+	-webkit-box-shadow: 0px 0px 1em #666;
+	-moz-box-shadow: 0px 0px 1em #666;
+}
+
+.usuario {
+	width: 50%;
+	padding: 2% 3%;
+	float: left;
+	margin-left: 26%;
+	box-shadow: 0px 0px 1em #666;
+	-webkit-box-shadow: 0px 0px 1em #666;
+	-moz-box-shadow: 0px 0px 1em #666;
+}
+
+.botaoFornecedor, .botaoFuncionario, .botaoUsuario {
+	margin-top: 20px;
+}
+
+.topo {
+	height: 150px;
+	float: left;
+	background: #efefef;
+	box-shadow: 5px 5px 10px #666666;
+	-webkit-box-shadow: 5px 5px 10px #666666;
+	-moz-box-shadow: 5px 5px 10px #666666;
+}
+
+.logo {
+	width: 180px;
+	height: 180px;
+	padding: 3% 4%;
+	float: left;
+}
+
+.conteudo {
+	margin-top: 10px;
+	background: #efefef;
+	box-shadow: 5px 5px 10px #666666;
+	-webkit-box-shadow: 5px 5px 10px #666666;
+	-moz-box-shadow: 5px 5px 10px #666666;
+}
+
+.ui-widget, .ui-widget, .ui-widget {
+	font-size: 0.9em;
+}
+
+.cabecalho {
+	margin-top: 10px;
+	background: #efefef;
+	box-shadow: 5px 5px 10px #666666;
+	-webkit-box-shadow: 5px 5px 10px #666666;
+	-moz-box-shadow: 5px 5px 10px #666666;
+	background: #efefef;
+}
+
+.btnCartao {
+	float: left;
+}
+
+/* ====== INÍCIO ARQUIVO DOWNLOADS ====== */
+.download {
+	width: 100%;
+	height: auto;
+	float: left;
+}
+
+.download h2 {
+	font-size: 1.2em;
+	padding: 1%;
+	color: black;
+	text-shadow: 1px 3px 3px rgba(135, 206, 235, 1);
+}
+
+.sgpMobile, .instalador, .netcfv {
+	font-size: 1em;
+	color: black;
+	padding: 2px 0px 0px 15px;
+	text-shadow: 1px 3px 3px rgba(255, 201, 0, 1);
+}
+/* ====== FIM ARQUIVO DOWNLOADS ====== */
+
+/* ====== INÍCIO TELA PRINCIPAL ====== */
+.texto {
+	font-size: 3em;
+	padding: 1% 2%;
+	color: black;
+	text-shadow: 1px 3px 3px rgba(135, 206, 235, 1);
+}
+
+.grafico {
+	margin: 0 auto;
+	width: 100%;		
+	float: left;	
+	padding: 3% 4%;
+	
+}
+
+
+/* ====== FIM TELA PRINCIPAL ====== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ====== AQUI COMEÃ‡A O RESPONSIVO ... ====== */
+
+/* ====== TELAS PEQUENAS / SMARTPHONE ====== */
+@media screen and (min-width: 480px) {
+}
+
+/* ====== TELAS PEQUENAS / TABLETS ====== */
+@media screen and (min-width: 768px) {
+}
+/* ====== TELAS MEDIAS / TABLETS AND DESKTOPS ====== */
+@media screen and (min-width: 960px) {
+}
+
+/* ====== TELAS GRANDES / DESKTOPS ====== */
+@media screen and (min-width: 1280px) {
+}

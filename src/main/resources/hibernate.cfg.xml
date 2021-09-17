@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Configurações de Conexão com o Banco de Dados -->
+		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="connection.url">jdbc:sqlserver://dbsq0015.whservidor.com;databaseName=disqueoleo1</property>
+		<property name="connection.username">disqueoleo1</property>
+		<property name="connection.password">@gor@b@nco</property>
+
+		<!-- Pool de Conexões -->
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.timeout">300</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
+		<property name="hibernate.c3p0.idle_test_period">3000</property>
+
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+
+		<!-- Mostra as SQLs Geradas -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+		<!-- Cria as tabelas do banco de dados -->
+		<property name="hbm2ddl.auto">validate</property>
+
+		<!-- Mapeamento das entidades -->
+		<mapping class="br.com.disqueoleo.sgp.domain.Beneficiario" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Banco" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Cliente" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Fornecedor" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Funcionario" />
+		<mapping class="br.com.disqueoleo.sgp.domain.TipoSanguineo" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Funcao" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Historico" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Retirada" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Usuario" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Produto" />
+		<mapping class="br.com.disqueoleo.sgp.domain.Afiliado" />				
+
+	</session-factory>
+
+</hibernate-configuration>

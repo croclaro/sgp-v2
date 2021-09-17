@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" lang="en">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<!-- login style -->
+	<link rel="stylesheet" href="resources/css/bt-login.css" />
+
+
+	<title>SGP - Sistema Gerenciador de Produtos</title>
+</h:head>
+
+<h:body class="bg-gradient-primary">
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:growl id="mensagem" />
+
+	<div class="container">
+
+		<div class="card">
+			<div class="row g-0">
+				<div class="col-md-6 ">
+					<img src="resources/img/LogoDisqueOleo.png" class=""
+						style="max-width: 27rem; height: auto" alt="..." />
+				</div>
+				<div class="col-md-6 ">
+					<div class="card-body">
+						<h2 class="card-title">Seja bem vindo!</h2>
+
+						<h:form id="formCadastro" class="user">
+
+							<div class="form-group">
+								<input type="emaillogin" class="form-control form-control-user"
+									id="exampleInputEmail" aria-describedby="emailHelp"
+									placeholder="Digite o CPF ou Cnpj"
+									jsf:value="#{autenticacaoBean.usuario.funcionario.cpf}"
+									jsf:required="true"
+									jsf:requiredMessage="O campo CPF é obrigatório" />
+
+							</div>
+
+							<!-- INICIO CAMPO SENHA -->
+							<div class="col-xl-6 col-md-6 mb-4">
+								<br />
+								<p:password id="inputSenha" placeholder="Digite a senha"
+									style="width: 100%" size="12"
+									value="#{usuarioBean.usuario.senha}" required="true"
+									requiredMessage="O campo 'SENHA' é obrigatório"
+									validatorMessage="Informe uma senha de no mínimo 8 caracteres">
+									<f:validateLength minimum="8" />
+								</p:password>
+							</div>
+							<!-- FIM CAMPO SENHA -->
+
+							<!-- INICIO CAMPO CONFIRME A SENHA -->
+							<div class="col-xl-6 col-md-6 mb-4">
+								<br />
+								<p:password id="inputConfSenha" placeholder="Confirme a senha"
+									style="width: 100%" size="12"
+									value="#{usuarioBean.usuario.confSenha}" required="true"
+									requiredMessage="O campo 'SENHA' é obrigatório">
+								</p:password>
+							</div>
+							<!-- FIM CAMPO CONFIRME A SENHA -->
+							<p:commandButton styleClass="btn btn-primary btn-user btn-block"
+								value="Login" update=":mensagem"
+								actionListener="#{autenticacaoBean.autenticar}" />
+							<!-- 	 update=":mensagem"   -->
+							<hr></hr>
+
+						</h:form>				
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- card -->
+	</div>
+</h:body>
+</html>

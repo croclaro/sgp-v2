@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $%$%$%$%$%$%$%$$%% Desenvolvido por Celso Jr® &*&**&*&*&*&*&*&*&*&*&*& -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modelo.xhtml">
+
+
+	<ui:define name="bt-conteudo">
+
+		<!-- INICIO FORMULÁRIO DE CADASTRO -->
+		<p:growl id="mensagem" />
+
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+		<h1>Cadastro de Funcionário</h1>
+		</section>
+
+		<!-- Main content -->
+		<section class="content container-fluid"> <!-- FORMULÁRIO DE CADASTRO -->
+
+		<h:form id="formCadastro" prependId="false">
+			<p:focus context="@form" />
+
+			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
+				<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}"
+					update=":mensagem :formCadastro" icon="fa fa-floppy-o"
+					styleClass="btn-success" />
+
+				<p:commandButton value="Voltar" immediate="true"
+					action="con-funcionario?faces-redirect=true" process="@this"
+					icon="fa fa-hand-o-left" styleClass="btn btn-sm" />
+
+			</p:panel>
+
+
+			<!-- INICIO DADOS PESSOAIS -->
+			<h3 class="mt-4 text-gray-100">Dados Pessoais</h3>
+			<p:panel id="pnlDadosPessoais" styleClass="box-warning card mt-2">
+
+				<!-- ####### INICIO LINHA 1 - 2 COLUNAS TAG col-md-(6 X 2 = ATÉ 12 COLUNAS) -->
+				<div id="LI1" class="row">
+					<!-- INICIO CAMPO RAZÃO SOCIAL -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputText id="nomeFuncionario" type="text"
+							placeholder="Nome do funcionário" style="width: 100%" size="40"
+							value="#{funcionarioBean.funcionario.nome}" required="true"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="O campo 'NOME DO FUNCIONÁRIO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO RAZÃO SOCIAL -->
+
+					<!-- INICIO CAMPO NOME FANTASIA -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputText id="apelido" type="text" placeholder="Apelido"
+							style="width: 100%" size="40"
+							value="#{funcionarioBean.funcionario.apelido}" required="true"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="O campo 'APELIDO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO NOME FANTASIA -->
+				</div>
+				<!-- ####### FIM LINHA 1 -->
+
+				<!-- ####### INICIO LINHA 2 - 3 COLUNAS  -->
+				<div id="LI2" class="row">
+
+					<!-- INICIO CAMPO CPF: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCPF" placeholder="CPF" style="width: 100%"
+							value="#{funcionarioBean.funcionario.cpf}" readonly="false"
+							converter="upperCaseConverter" mask="999.999.999-99" />
+					</div>
+					<!-- FIM CAMPO NOME CPF -->
+
+					<!-- INICIO CAMPO Licença de operação -->
+					<div class="col-xl-4 col-md-4 mb-4">
+						<br />
+						<p:inputText id="cnh" placeholder="CNH" style="width: 100%"
+							size="30" value="#{funcionarioBean.funcionario.cnh}"
+							readonly="false" converter="upperCaseConverter" />
+					</div>
+					<!-- FIM CAMPO Licença de operação -->
+
+					<div id="LI8" class="row">
+						<!-- INICIO Tipo sanguíneo -->
+						<div class="col-xl-3 col-md-3 mb-4">
+							<br />
+
+							<p:selectOneMenu id="tipoSanguineo" filter="true"
+								style="width: 100%" required="true"
+								requiredMessage="O campo 'TIPO SANGUÍNEO' é obrigatório"
+								value="#{funcionarioBean.funcionario.tipoSanguineo}"
+								converter="omnifaces.SelectItemsConverter">
+
+								<f:selectItem noSelectionOption="true"
+									itemLabel="Selecione o Tipo Sanguíneo" />
+								<f:selectItems value="#{funcionarioBean.tiposSanguineos}"
+									var="tipoSanguineo" itemValue="#{tipoSanguineo}"
+									itemLabel="#{tipoSanguineo.tipoSanguineo}" />
+							</p:selectOneMenu>
+						</div>
+						<!-- FIM CAMPO Tipo sanguíneo -->
+					</div>
+				</div>
+				<!-- ####### FIM LINHA 2 -->
+
+				<!-- ####### INICIO LINHA 3 - 2 COLUNAS-->
+				<div id="LI3" class="row">
+					<!-- INICIO CAMPO Número Ibama -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputText id="mopp" placeholder="Mopp" style="width: 100%"
+							size="30" value="#{funcionarioBean.funcionario.mopp}"
+							readonly="false" converter="upperCaseConverter" />
+					</div>
+					<!-- FIM CAMPO Número Ibama -->
+
+					<!-- INICIO CAMPO Função-->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:selectOneMenu id="funcao" filter="true" style="width:262px"
+							required="true" requiredMessage="O campo 'FUNÇÃO' é obrigatório"
+							value="#{funcionarioBean.funcionario.funcao}"
+							converter="omnifaces.SelectItemsConverter">
+
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione a função" />
+							<f:selectItems value="#{funcionarioBean.funcoes}" var="funcao"
+								itemValue="#{funcao}" itemLabel="#{funcao.nomeFuncao}" />
+						</p:selectOneMenu>
+					</div>
+					<!-- FIM CAMPO Função -->
+
+					<!-- INICIO CAMPO Email: -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputEmail" placeholder="Email"
+							style="width: 100%" size="12"
+							value="#{funcionarioBean.funcionario.email}" required="true"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="O campo 'EMAIL' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Email -->
+				</div>
+				<!-- ####### FIM LINHA 3 -->
+
+				<!-- ####### INICIO LINHA 4 - 4 COLUNAS-->
+				<div id="LI4" class="row">
+
+					<!-- INICIO CAMPO Telefone Fixo: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputTelFixo" placeholder="Telefone fixo"
+							style="width: 100%" size="15"
+							value="#{funcionarioBean.funcionario.telFixo}" readonly="false"
+							converter="upperCaseConverter" mask="(99)9999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Fixo -->
+
+					<!-- INICIO CAMPO Telefone Celular 1: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular1" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{funcionarioBean.funcionario.celular1}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 1 -->
+
+					<!-- INICIO CAMPO Telefone Celular 2: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular2" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{funcionarioBean.funcionario.celular2}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 2 -->
+
+					<!-- INICIO CAMPO Telefone Celular 3: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular3" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{funcionarioBean.funcionario.celular3}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 3 -->
+
+				</div>
+				<!-- ####### FIM LINHA 4 -->
+			</p:panel>
+			<!-- FIM DADOS PESSOAIS -->
+
+			<!-- INICIO PAINEL ENDEREÇO -->
+			<h3 class="mt-4 text-gray-100">Endereço</h3>
+
+			<p:panel id="pnlEndereco" styleClass="box-warning card mt-2">
+
+				<!-- ####### INICIO LINHA 5 - 3 COLUNAS TAG col-md-(4 X 3 = ATÉ 12 COLUNAS) -->
+				<div id="LI5" class="row">
+
+					<!-- INICIO CAMPO CEP: -->
+					<div class="col-xl-2 col-md-2 mb-4">
+						<br />
+						<p:inputMask id="inputCEP" placeholder="CEP" style="width: 100%"
+							size="10" value="#{funcionarioBean.funcionario.cep}"
+							required="true" readonly="false"
+							requiredMessage="O campo 'CEP' é obrigatório" mask="99999-999">
+							<p:ajax event="blur" listener="#{funcionarioBean.consultarCEP}"
+								process="@this" update=":mensagem :formCadastro:pnlEndereco" />
+						</p:inputMask>
+					</div>
+					<!-- FIM CAMPO CEP -->
+
+					<!-- INICIO CAMPO Logradouro -->
+					<div class="col-xl-7 col-md-7 mb-4">
+						<br />
+						<p:inputText id="inputLogradouro" type="text"
+							placeholder="Logradouro" style="width: 100%" size="60"
+							value="#{funcionarioBean.funcionario.logradouro}" required="true"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="O campo 'LOGRADOURO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Logradouro -->
+
+					<!-- INICIO CAMPO Número -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputText id="inputNumero" type="text" placeholder="Número"
+							style="width: 100%" size="40"
+							value="#{funcionarioBean.funcionario.numero}" required="true"
+							readonly="false"
+							requiredMessage="O campo 'NÚMERO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Número -->
+
+				</div>
+				<!-- ####### FIM LINHA 5 - 3 COLUNAS TAG col-md-(4 X 3 = ATÉ 12 COLUNAS) -->
+
+				<!-- ####### INICIO LINHA 6 - 2 COLUNAS -->
+				<div id="LI6" class="row">
+
+					<!-- INICIO CAMPO COMLEMENTO -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputComplemento" type="text"
+							placeholder="Complemrento" style="width: 100%" size="30"
+							value="#{funcionarioBean.funcionario.complemento}"
+							readonly="false" />
+					</div>
+					<!-- FIM CAMPO COMLEMENTO -->
+				</div>
+				<!-- ####### FIM LINHA 6 - 2 COLUNAS -->
+
+				<!-- ####### INICIO LINHA 7 - 3 COLUNAS -->
+				<div id="LI7" class="row">
+					<!-- INICIO CAMPO BAIRRO -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputBairro" type="text" placeholder="Bairro"
+							style="width: 100%" size="40"
+							value="#{funcionarioBean.funcionario.bairro}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'BAIRRO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO BAIRRO -->
+
+					<!-- INICIO CAMPO CIDADE -->
+					<div class="col-xl-4 col-md-4 mb-4">
+						<br />
+						<p:inputText id="inputCidade" type="text" placeholder="Cidade"
+							style="width: 100%" size="40"
+							value="#{funcionarioBean.funcionario.cidade}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'CIDADE' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO CIDADE -->
+
+					<!-- INICIO CAMPO ESTADO -->
+					<div class="col-xl-2 col-md-2 mb-4">
+						<br />
+						<p:inputText id="inputEstado" type="text" placeholder="Estado"
+							style="width: 100%" size="40"
+							value="#{funcionarioBean.funcionario.estado}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'ESTADO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO ESTADO -->
+
+
+				</div>
+				<!-- ####### FIM LINHA 7 - 3 colunas -->
+
+				<h:inputHidden value="#{funcionarioBean.funcionario.dataFuncionario}" />
+				<br />
+			</p:panel>
+			<!-- FIM ENDEREÇO -->
+
+
+		</h:form> <br />
+		</section>
+		<!-- /.content -->
+
+	</ui:define>
+</ui:composition>

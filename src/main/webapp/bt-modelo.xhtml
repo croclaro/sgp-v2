@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" lang="en">
+
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<link rel="stylesheet"
+			href="resources/template/bower_components/bootstrap/dist/css/bootstrap.css" />
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet"
+			href="resources/template/bower_components/font-awesome/css/font-awesome.css" />
+
+		<!-- Ionicons -->
+		<link rel="stylesheet"
+			href="resources/template/bower_components/Ionicons/css/ionicons.css" />
+
+		<!-- Theme style -->
+		<link rel="stylesheet" href="resources/template/dist/css/AdminLTE.css" />
+
+		<!-- Theme style -->
+		<link rel="stylesheet" href="resources/template/dist/css/skins/skin-yellow.css" />
+
+		<!-- Morris chart -->
+		<link rel="stylesheet"
+			href="resources/template/bower_components/morris.js/morris.css" />
+
+		<!-- Google Font -->
+		<link rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+
+		<!-- BIBLIOTECA DE COMPONENTES OPCIONAIS -->
+		<!-- Morris chart -->
+		<link rel="stylesheet"
+			href="resources/template/bower_components/morris.js/morris.css" />
+		<!-- jvectormap -->
+		<link rel="stylesheet"
+			href="resources/template/bower_components/jvectormap/jquery-jvectormap.css" />
+		<!-- Date Picker -->
+		<link rel="stylesheet"
+			href="resources/template/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
+		<!-- Daterange picker -->
+		<link rel="stylesheet"
+			href="resources/template/bower_components/bootstrap-daterangepicker/daterangepicker.css" />
+		<!-- bootstrap wysihtml5 - text editor -->
+		<link rel="stylesheet"
+			href="resources/template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
+
+		<script src='https://kit.fontawesome.com/a076d05399.js'
+			crossorigin='anonymous'></script>
+
+		<script src="https://kit.fontawesome.com/f064db31f4.js"
+			crossorigin="anonymous"></script>
+		<title>SGP - SISTEMA GERENCIADOR DE PRODUTOS</title>
+	</h:head>
+
+	<h:body id="page-top" class="hold-transition skin-yellow sidebar-mini">
+		<!-- Page Wrapper -->
+		<div id="wrapper">
+
+			<!-- Main Header -->
+			<!-- ######################################################### -->
+			<!-- ############# INICIO CABECALHO PRINCIPAL ################ -->
+			<!-- ######################################################### -->
+			<header class="main-header"> <!-- Logo --> <!-- ######################################################### -->
+			<a href="bt-principal.xhtml" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b>S</b>GP</span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><b><h:outputText
+							value="#{autenticacaoBean.funcaoNome}" /></b></span>
+			</a> <nav class="navbar navbar-static-top" role="navigation"> <!-- ######################################################### -->
+			<!-- inicio BOTÃO PARA RECOLHER/EXIBIR BARRA LATERAL --> <!-- Sidebar toggle button-->
+			<a href="#" class="sidebar-toggle" data-toggle="push-menu"
+				role="button"> <span class="sr-only">Toggle navigation</span>
+			</a> <!-- END Sidebar toggle button--> <!-- fim BOTÃO PARA RECOLHER/EXIBIR BARRA LATERAL -->
+
+
+			<!-- ######################################################### --> <!-- INICIO MENU CABECALHO DIREITA -->
+			<!-- Navbar Right Menu -->
+			<div class="navbar-custom-menu">
+				<ul class="nav navbar-nav">
+
+					<!-- ######################################################### -->
+					<!-- INICIO MENU MENSAGENS -->
+					<!-- Messages: style can be found in dropdown.less-->
+					<li class="dropdown messages-menu">
+						<!-- BOTAO EXIBIR/RECOLHER MENU --> <!-- Menu toggle button --> <a
+						href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
+							class="fa fa-envelope-o"></i> <span class="label label-success">4</span>
+					</a> <!-- ######################################################### -->
+						<!-- INICIO ITENS MENU -->
+						<ul class="dropdown-menu">
+
+							<!-- item 1 CABECALHO DO MENU -->
+							<li class="header">Você tem 4 mensagens</li>
+
+							<!-- item 2 MENSAGENS -->
+							<!-- inner menu: contains the messages -->
+							<li>
+								<ul class="menu">
+									<!-- start message 1 criar lista de mensagens -->
+									<li><a href="#">
+											<div class="pull-left">
+												<!-- User Image -->
+												<p:graphicImage class="img-circle"
+													value="resources/dist/img/user2-160x160.jpg"
+													alt="User Image" />
+											</div> <!-- Message title and timestamp -->
+											<h4>
+												Time de Suporte<small><i class="fa fa-clock-o"></i>5
+													mins</small>
+											</h4> <!-- The message -->
+											<p>Avaliar relatório de vendas.</p>
+									</a></li>
+									<!-- end message 1 -->
+								</ul> <!-- /.menu -->
+							</li>
+							<!-- item 2 FIM MENSAGENS -->
+
+							<!-- item 3 RODAPÉ DO MENU -->
+							<li class="footer"><a href="#">Ver Todas as Mensagens...</a>
+							</li>
+						</ul> <!-- FIM ITENS MENU -->
+					</li>
+					<!-- /.messages-menu -->
+					<!-- FIM MENU MENSAGENS -->
+
+					<!-- ######################################################### -->
+					<!-- INICIO MENU TAREFAS -->
+					<!-- Tasks Menu -->
+					<li class="dropdown tasks-menu">
+						<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
+							class="label label-danger">9</span>
+					</a> <!-- ######################################################### -->
+						<!-- INICIO ITENS MENU TAREFAS -->
+						<ul class="dropdown-menu">
+							<li class="header">Você tem 9 atividades</li>
+							<li>
+								<!-- Inner menu: contains the tasks -->
+								<ul class="menu">
+									<!-- Task item -->
+									<li><a href="#"> <!-- Task title and progress text -->
+											<h3>
+												Design some buttons <small class="pull-right">20%</small>
+											</h3> <!-- The progress bar -->
+											<div class="progress xs">
+												<!-- Change the css width attribute to simulate progress -->
+												<div class="progress-bar progress-bar-aqua"
+													style="width: 20%" role="progressbar" aria-valuenow="20"
+													aria-valuemin="0" aria-valuemax="100">
+													<span class="sr-only">20% Complete</span>
+												</div>
+											</div>
+									</a></li>
+									<!-- end task item -->
+								</ul>
+							</li>
+							<li class="footer"><a href="#">View all tasks</a></li>
+						</ul> <!-- FIM ITENS MENU TAREFAS -->
+					</li>
+					<!-- Tasks Menu -->
+					<!-- FIM MENU TAREFAS -->
+
+					<!-- ######################################################### -->
+					<!-- INICIO MENU USUARIO -->
+					<!-- User Account Menu -->
+
+					<li class="dropdown user user-menu">
+						<!-- ######################################################### -->
+						<!-- BOTAO EXIBIR/RECOLHER MENU --> <!-- Menu Toggle Button --> <a
+						href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- The user image in the navbar-->
+							<img src="resources/template/dist/img/avatar5.png"
+							class="user-image" alt="User Image" /> <!-- hidden-xs hides the username on small devices so only the image appears. -->
+							<span class="hidden-xs"> <h:outputText
+									value="#{autenticacaoBean.usuarioNome}" />
+						</span>
+					</a> <!-- ######################################################### -->
+						<!-- INICIO ITENS MENU USUÁRIO -->
+						<ul class="dropdown-menu">
+
+							<!-- item 1 CABECALHO DO MENU -->
+							<li class="user-header"><img
+								src="resources/template/dist/img/avatar5.png" class="img-circle"
+								alt="User Image" />
+								<p>
+									<h:outputText
+										value="#{autenticacaoBean.usuarioNome}" />
+									Seu último acesso foi em <small> <h:outputText
+											value="#{autenticacaoBean.data}." />
+									</small>
+								</p></li>
+
+							<li class="user-body">
+								<div class="row">
+									<div class="col-xs-12 text-left">
+										<a href="con-usuario.xhtml"> <i class="fa fa-user fa-sm"></i>
+											 Perfil
+										</a>
+									</div>
+								</div> <!-- /.row -->
+							</li>
+							<!-- /.user-body -->
+
+							<!-- item 3 CORPO DO MENU -->
+							<li class="user-body">
+								<div class="row">
+									<div class="col-xs-12 text-left">
+										<i class="fa fa-cogs fa-sm fa-fw"></i> <a
+											href="con-usuario.xhtml"> Configurações</a>
+									</div>
+								</div> <!-- /.row -->
+							</li>
+							<!-- /.user-body -->
+
+							<!-- item 5 RODAPÉ DO MENU -->
+							<li class="user-footer">
+								<div>
+
+									<a href="bt-login.xhtml"
+										class="btn btn-warning btn-block btn-flat"> <i
+										class="fa fa-sign-out fa-sm fa-fw"></i> Sair
+									</a>
+								</div>
+							</li>
+
+						</ul> <!-- FIM ITENS MENU USUÁRIO -->
+
+					</li>
+					<!-- FIM MENU USUARIO -->
+					<!-- End User Account Menu -->
+
+				</ul>
+			</div>
+			<!-- END Navbar Right Menu --> <!-- FIM MENU CABECALHO DIREITA --> </nav> <!-- END Header Navbar -->
+			</header>
+			<!-- END Main Header -->
+			<!-- FIM CABECALHO PRINCIPAL -->
+
+
+			<!-- ######################################################### -->
+			<!-- INICIO BARRA LATERAL -->
+			<!-- Left side column. contains the logo and sidebar -->
+			<!-- ######################################################### -->
+			<aside class="main-sidebar"> <!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar"> <!-- ######################################################### -->
+			<!-- INICIO ITENS MENU LATERAL --> <!-- Sidebar Menu -->
+			<ul class="sidebar-menu" data-widget="tree">
+
+				<li class="header">GESTÃO</li>
+
+				<!-- ITEM MENU PAINEL DE CONTROLE -->
+				<li class="active"><a href="bt-principal.xhtml"><i
+						class="fa fa-tachometer"></i> <span>Painel de Controle</span></a></li>
+				<li class="header"></li>
+
+				
+				<li class="header">OPERAÇÃO</li>
+				<!-- Optionally, you can add icons to the links -->
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-banco.xhtml"><i class="fas fa-oil-can"></i>
+						<span>Banco</span></p:link></li>
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-beneficiario.xhtml"><i
+						class="fas fa-oil-can"></i> <span>Beneficiário</span></p:link></li>
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-cliente.xhtml"><i class="fas fa-oil-can"></i><span>
+							Cliente</span></p:link></li>
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO', 'AFILIADO'])}" href="con-fornecedor.xhtml"><i
+						class="fas fa-oil-can"></i> <span> Fornecedor</span></p:link></li>
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-funcionario.xhtml"><i
+						class="fas fa-oil-can"></i> <span>Funcionário</span></p:link></li>
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-funcao.xhtml"><i class="fas fa-oil-can"></i>
+						<span>Função</span></p:link></li>
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-produto.xhtml"><i class="fas fa-oil-can"></i>
+						<span>Produto</span></p:link></li>
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-usuario.xhtml"><i class="fas fa-oil-can"></i>
+						<span>Usuário</span></p:link></li>
+
+				<li class="header"></li>
+				<li class="header">CADASTROS</li>
+
+				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="#"><i
+						class="fas fa-hands-helping"></i> <span> Indicação</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span> </p:link>
+					<ul class="treeview-menu">
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="cad-fornecedor.xhtml">Fornecedor</p:link></li>
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="cad-afiliado.xhtml">Afiliado</p:link></li>
+
+					</ul></li>
+
+				<li class="header"></li>
+				<li class="header">RELATÓRIOS</li>
+
+				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-cartaoFornecedor.xhtml"><i
+						class="fa fa-credit-card"></i> <span>Cartão fornecedor</span></p:link></li>
+
+				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="#"><i
+						class="fa fa-address-card"></i> <span>Crachá</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span> </p:link>
+					<ul class="treeview-menu">
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-crachaFrente.xhtml">Crachá frente</p:link></li>
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-crachaVerso.xhtml">Crachá verso</p:link></li>
+					</ul></li>
+
+				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO', 'AFILIADO'])}" href="#"><i class="fa fa-flag"></i>
+						<span>Retiradas</span> <span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+					</span> </p:link>
+					<ul class="treeview-menu">
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-retiradas.xhtml">Retiradas Consolidadas</p:link>></li>
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-retiradas.xhtml">Retiradas por bairros</p:link></li>
+						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-retiradas.xhtml">Retiradas por mês</p:link></li>
+					</ul></li>
+
+
+
+			</ul>
+			<!-- /.sidebar-menu --> <!-- FIM ITENS MENU LATERAL --> </section> </aside>
+			<!-- FIM BARRA LATERAL -->
+
+
+			<!-- Content Wrapper -->
+			<!-- INICIO CONTEÚDO -->
+			<div class="content-wrapper">
+				<ui:insert name="bt-conteudo" />
+			</div>
+			<!-- FIM CONTEÚDO -->
+			<!-- End of Content Wrapper -->
+
+
+		</div>
+		<!-- End of Page Wrapper -->
+
+
+		<!-- REQUIRED JS SCRIPTS -->
+
+		<!-- Footer -->
+		<footer class="sticky-footer bg-white">
+		<div class="container my-auto">
+			<div class="copyright text-center my-auto">
+				<span>© Copyright 2017 SGP - Sistema Gerenciador de Produtos.</span>
+			</div>
+		</div>
+		</footer>
+		<!-- End of Footer -->
+
+
+		<!-- Bootstrap 3.3.7 -->
+		<!-- <script src="resources/template/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
+		<!-- Bootstrap 4.0.0 -->
+		<script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+		<!-- AdminLTE App -->
+		<script src="resources/template/dist/js/adminlte.min.js"></script>
+
+		<!-- Optionally, you can add Slimscroll and FastClick plugins.
+	     Both of these plugins are recommended to enhance the
+	     user experience. -->
+
+		<!-- Page level plugins -->
+		<script src="resources/vendor/chart.js/Chart.min.js"></script>
+
+		<!-- Page level custom scripts -->
+		<script src="resources/js/demo/chart-area-demo.js"></script>
+		<script src="resources/js/demo/chart-pie-demo.js"></script>
+
+
+		<!-- BIBLIOTECAS COMPLEMENTARES E OPCIONAIS -->
+
+	</h:body>
+</ui:composition>

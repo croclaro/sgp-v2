@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" lang="en">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!--	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
+	<meta name="description" content="" />
+	<meta name="author" content="" />	
+	
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="resources/template/bower_components/bootstrap/dist/css/bootstrap.css" />
+
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="resources/template/bower_components/font-awesome/css/font-awesome.css" />
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="resources/template/bower_components/Ionicons/css/ionicons.css" />
+	<!-- Google Font -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="resources/template/dist/css/AdminLTE.css" />
+	
+	<link rel="stylesheet" href="resources/template/dist/css/skins/skin-yellow.css" />
+	
+	<!-- iCheck -->
+  	<link rel="stylesheet" href="resources/template/plugins/iCheck/square/yellow.css" />
+
+	<!-- login style -->
+  	<link rel="stylesheet" href="resources/css/bt-login.css" />
+
+	<!-- Custom styles for this template
+	<link href="./resources/css/sb-admin-2.min.css" rel="stylesheet" />
+	-->
+	
+	<title>SGP - Sistema Gerenciador de Produtos</title>
+</h:head>
+
+<h:body class="bg-gradient-primary">
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:growl id="mensagem" />
+
+	<div class="container">
+	
+		<div class="card" >
+			<div class="row g-0">
+				<div class="col-md-6 ">
+					<img src="resources/img/LogoDisqueOleo.png" class="" style="max-width: 27rem; height: auto" alt="..." />
+				</div>
+				<div class="col-md-6 ">
+					<div class="card-body">
+				    	<h2 class="card-title">Seja bem vindo, cnpj e/ou cpf</h2>
+				    
+				    	<h:form id="formCadastro" class="user">
+
+							<div class="form-group">
+								<input type="emaillogin"
+									class="form-control form-control-user"
+									id="exampleInputEmail" aria-describedby="emailHelp"
+									placeholder="Digite o CPF ou Cnpj"
+									jsf:value="#{autenticacaoBean.usuario.funcionario.cpf}"
+									jsf:required="true"
+									jsf:requiredMessage="O campo CPF é obrigatório" />
+
+							</div>
+
+							<div class="form-group">
+								<p:password type="password"
+									class="form-control form-control-user"
+									id="exampleInputPassword" placeholder="Digite a senha"
+									value="#{autenticacaoBean.usuario.senha}" required="true"
+									requiredMessage="O campo Senha é obrigatório" />
+							</div>
+
+							<div class="form-group">
+								<div class="custom-control custom-checkbox small">
+									<input type="checkbox" class="custom-control-input"
+										id="customCheck" /> <label class="custom-control-label"
+										for="customCheck">Lembrar senha</label>
+								</div>
+							</div>
+							<p:commandButton
+								styleClass="btn btn-primary btn-user btn-block" value="Login"
+								update=":mensagem"
+								actionListener="#{autenticacaoBean.autenticar}" />
+							<!-- 	 update=":mensagem"   -->
+							<hr></hr>
+
+					</h:form>
+				    
+				    
+				    <p class="card-text">
+				    	<a class="mt-4 text-gray-100" href="bt-forgot-password.xhtml">Esqueceu a senha?</a>
+				    </p>
+				    <p class="card-text">
+					    <a class="mt-4 text-gray-100" href="bt-register.xhtml">Não é cadastrado?</a>
+				    </p>
+				    
+				    
+				  </div>
+				</div>
+			</div>
+		</div> <!-- card -->
+		
+		
+	</div>  <!-- container -->
+
+	<!-- Bootstrap core JavaScript-->
+	<!-- <script src="../resources/vendor/jquery/jquery.min.js"></script>  -->
+	<!-- Bootstrap 4.0.0 -->
+	<script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<!-- <script src="../resources/vendor/jquery-easing/jquery.easing.min.js"></script> -->
+
+	<!-- Custom scripts for all pages-->
+	<!-- <script src="../resources/js/sb-admin-2.min.js"></script>-->
+
+	<!-- AdminLTE App -->
+	<script src="resources/template/dist/js/adminlte.min.js"></script>
+
+</h:body>
+
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CrachaFrente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="98bc9fb1-d629-4c8d-bb72-2341797f8829">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IkZ1bmNpb25hcmlvIiBBUyAsMTExLDYxLDFlNWFjN2QxLTg0YjAtNDc4My1hNzc2LTJhYWJmOThj
+OTliODs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGP Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT "Funcionario".nome
+FROM "Funcionario"]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="543" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="-20" width="160" height="260" uuid="220e28d8-4ea6-4c9b-ac19-b7e32d3ca393"/>
+				<imageExpression><![CDATA["src/main/webapp/resources/images/CrachaFrente.jpg"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="-20" y="206" width="160" height="41" forecolor="#FFFFFF" backcolor="#F09D27" uuid="b38b8120-ce3a-482e-912a-9858c36dedd9"/>
+			</rectangle>
+			<image>
+				<reportElement x="32" y="102" width="67" height="75" uuid="ad27b9ff-fe7d-4895-92b3-ae9c6db967a8"/>
+				<imageExpression><![CDATA["src/main/webapp/resources/images/RodrigoPimentel3x4.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="-7" y="185" width="136" height="13" uuid="35f0f256-63c3-478a-9c91-f393483824df"/>
+				<textElement textAlignment="Center">
+					<font fontName="Microsoft Sans Serif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

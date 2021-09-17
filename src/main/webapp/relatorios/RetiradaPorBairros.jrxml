@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bairros" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1724d955-ea3a-4695-8e30-b550eb99a99a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGP Data Adapter"/>
+	<parameter name="CAMINHO_BANNER" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select sum(oleo) AS OLEO, sum(residuo) AS RESIDUO, dbo.Fornecedor.bairro AS BAIRRO from dbo.Retirada
+inner join dbo.Fornecedor
+on dbo.Retirada.fornecedor_codigo = dbo.Fornecedor.codigo
+group by dbo.Fornecedor.bairro
+order by dbo.Fornecedor.bairro asc]]>
+	</queryString>
+	<field name="OLEO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="OLEO"/>
+	</field>
+	<field name="RESIDUO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="RESIDUO"/>
+	</field>
+	<field name="BAIRRO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BAIRRO"/>
+	</field>
+	<variable name="SOMA_OLEO" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{OLEO}]]></variableExpression>
+	</variable>
+	<variable name="SOMA_RESIDUO" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{RESIDUO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="9" y="7" width="70" height="60" uuid="5a40a4d8-17cd-481c-ae4f-58b6a7aeaf28"/>
+				<imageExpression><![CDATA[$P{CAMINHO_BANNER}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="9" width="360" height="30" uuid="fe4036a6-8f80-4b10-9bec-7a752630894b"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Retirada de óleo usado por Bairros]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="420" y="50" width="100" height="20" uuid="8c660c6c-70d9-416d-8a48-7ed9a1ab7aa6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="11" forecolor="#FFFFFF" backcolor="#000000" uuid="070092e9-e96e-4092-976d-6ba56d507d6a"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement x="52" y="0" width="79" height="13" forecolor="#242424" uuid="2919f76d-ba26-4586-97c8-23388be145a6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="269f4ad5-ad48-4d85-a9c5-8120676b6ac5"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Óleo usado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="235" height="13" forecolor="#242424" uuid="2f465e4b-cab7-48bf-8063-7ab9ad728573">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b64add98-952a-4cc8-9ef9-6e0b8a041a80"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bairro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="0" width="100" height="13" forecolor="#242424" uuid="9fc92859-d3e6-43cc-a929-22eb4fd4c3ca">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6460ac3d-ea98-4216-a6cd-ac294339913b"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resíduo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="52" y="0" width="80" height="13" forecolor="#636363" uuid="8843990d-5fc8-4205-a7d5-cb4773ea5e43">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="269f4ad5-ad48-4d85-a9c5-8120676b6ac5"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{OLEO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="235" height="13" forecolor="#636363" uuid="77e6076e-fdb8-4606-95a0-0e891e6564fe">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b64add98-952a-4cc8-9ef9-6e0b8a041a80"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{BAIRRO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="189" y="0" width="100" height="13" forecolor="#636363" uuid="7d479fc0-ff42-4e95-9b4e-9c2321a2035b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6460ac3d-ea98-4216-a6cd-ac294339913b"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{RESIDUO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="430" splitType="Stretch">
+			<bar3DChart>
+				<chart isShowLegend="false" evaluationTime="Report">
+					<reportElement x="9" y="82" width="536" height="268" uuid="f5ae6ce8-25c2-493f-8c7d-eeea16129fd1"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{BAIRRO}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{BAIRRO}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{OLEO}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot backgroundAlpha="1.0" foregroundAlpha="1.0" labelRotation="51.0"/>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="51.0">
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" tickLabelMask="" verticalTickLabels="true" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+			<staticText>
+				<reportElement x="192" y="10" width="100" height="13" uuid="09c86f3b-e31b-4545-95e5-1d794a7236f8"/>
+				<text><![CDATA[Total Óleo usado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="24" width="100" height="13" uuid="b0243e54-a5e4-46c8-bd53-d585d5df5925"/>
+				<text><![CDATA[Total resíduo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="9" width="78" height="14" uuid="eadcdff0-c1b7-4095-b891-de4fc762eb18"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$V{SOMA_OLEO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="23" width="78" height="14" uuid="61181d11-0eb8-4250-9eeb-0133b605cd1b"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$V{SOMA_RESIDUO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

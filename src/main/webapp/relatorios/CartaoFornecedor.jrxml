@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CartaoFornecedor" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e9187ce-004c-4cdb-ae09-99f590022784">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGP Data Adapter"/>
+	<parameter name="CAMINHO_BANNER" class="java.lang.String"/>
+	<parameter name="NOME_FANTASIA" class="java.lang.String"/>
+	<parameter name="CNPJ" class="java.lang.String"/>
+	<parameter name="CPF" class="java.lang.String"/>
+	<parameter name="COD_BARRAS" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT "Fornecedor".cnpj,
+	"Fornecedor"."razaoSocial",
+	"Fornecedor"."codBarras",
+	"Fornecedor"."dataFornecedor",
+	"Fornecedor".cpf,
+	"Fornecedor"."nomeFantasia"
+FROM "Fornecedor"
+WHERE 
+	 "Fornecedor"."nomeFantasia" LIKE $P{NOME_FANTASIA} 
+	 AND "Fornecedor".cnpj LIKE $P{CNPJ} 
+	 AND "Fornecedor".cpf LIKE $P{CPF} 
+	 AND "Fornecedor"."codBarras" LIKE $P{COD_BARRAS}]]>
+	</queryString>
+	<field name="cnpj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cnpj"/>
+	</field>
+	<field name="razaoSocial" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="razaoSocial"/>
+	</field>
+	<field name="codBarras" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="codBarras"/>
+	</field>
+	<field name="dataFornecedor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dataFornecedor"/>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+	</field>
+	<field name="nomeFantasia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nomeFantasia"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="496" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<image>
+				<reportElement x="-20" y="-16" width="252" height="140" uuid="a671bae1-7596-4870-ac3c-f33fe06c5b25"/>
+				<imageExpression><![CDATA[$P{CAMINHO_BANNER}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="21" y="11" width="110" height="13" uuid="9f2d0634-769d-48b8-968b-6d056f2bbe65"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="46" y="-1" width="174" height="13" uuid="fe099f80-e10e-4aa2-8825-d98191a9512a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razaoSocial}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="-28" y="78" width="256" height="30" uuid="ebe989ab-d461-45f6-81f9-43ca0172e8f2"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{codBarras}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="-3" y="100" width="120" height="15" uuid="bb6d8734-6025-499d-affd-098d80015725"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codBarras}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-5" y="-13" width="80" height="13" uuid="c68ef93e-653c-4b73-be4d-65da3b339db4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nome Fantasia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="-1" width="80" height="13" uuid="deba42eb-5a21-415d-880f-3a178b361133">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Razão social:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="11" width="80" height="13" uuid="0686ddb1-0ffe-4072-ada1-ad2cd4a781da">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="23" width="80" height="13" uuid="929b5371-d6be-43b6-939d-87175870e60d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CPF:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="17" y="23" width="110" height="13" uuid="cda9e8f0-959f-440c-8897-141baabfe0f0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="-13" width="167" height="13" uuid="15193617-d73a-4a07-956a-ab1296e46dd0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeFantasia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

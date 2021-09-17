@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $%$%$%$%$%$%$%$$%% Desenvolvido por Celso Jr® &*&**&*&*&*&*&*&*&*&*&*& -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modelo.xhtml">
+
+
+	<ui:define name="bt-conteudo">
+
+		<!-- INICIO FORMULÁRIO DE CADASTRO -->
+		<p:growl id="mensagem" />
+
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+		<h1>Cadastro de Cliente</h1>
+		</section>
+
+		<!-- Main content -->
+		<section class="content container-fluid"> <!-- FORMULÁRIO DE CADASTRO -->
+
+		<h:form id="formCadastro" prependId="false">
+			<p:focus context="@form" />
+
+			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
+				<p:commandButton value="Salvar" action="#{clienteBean.salvar}"
+					update=":mensagem :formCadastro" icon="fa fa-floppy-o"
+					styleClass="btn-success" />
+
+				<p:commandButton value="Voltar" immediate="true"
+					action="con-cliente?faces-redirect=true" process="@this"
+					icon="fa fa-hand-o-left" styleClass="btn btn-sm" />
+
+			</p:panel>
+
+
+			<!-- INICIO DADOS PESSOAIS -->
+			<h3 class="mt-4 text-gray-100">Dados Pessoais</h3>
+			<p:panel id="pnlDadosPessoais" styleClass="box-warning card mt-2">
+
+				<!-- ####### INICIO LINHA 1 - 2 COLUNAS TAG col-md-(6 X 2 = ATÉ 12 COLUNAS) -->
+				<div id="LI1" class="row">
+					<!-- INICIO CAMPO RAZÃO SOCIAL -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputText id="inputRazaoSocial" type="text"
+							placeholder="Razão social" style="width: 100%" size="40"
+							value="#{clienteBean.cliente.razaoSocial}" required="true"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="O campo 'RAZÃO SOCIAL' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO RAZÃO SOCIAL -->
+
+					<!-- INICIO CAMPO NOME FANTASIA -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputText id="inputNomeFantasia" type="text"
+							placeholder="Nome fantasia" style="width: 100%" size="40"
+							value="#{clienteBean.cliente.nomeFantasia}" required="true"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="O campo 'NOME FANTASIA' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO NOME FANTASIA -->
+				</div>
+				<!-- ####### FIM LINHA 1 -->
+
+				<!-- ####### INICIO LINHA 2 - 3 COLUNAS  -->
+				<div id="LI2" class="row">
+					<!-- INICIO CAMPO CNPJ: -->
+					<div class="col-xl-5 col-md-5 mb-4">
+						<br />
+						<p:inputMask id="inputCNPJ" placeholder="Cnpj" style="width: 100%"
+							value="#{clienteBean.cliente.cnpj}" readonly="false"
+							converter="upperCaseConverter" mask="99.999.999/9999-99" />
+					</div>
+					<!-- FIM CAMPO NOME CNPJ -->
+
+					<!-- INICIO CAMPO CPF: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCPF" placeholder="CPF" style="width: 100%"
+							value="#{clienteBean.cliente.cpf}" readonly="false"
+							requiredMessage="" converter="upperCaseConverter"
+							mask="999.999.999-99" />
+					</div>
+					<!-- FIM CAMPO NOME CPF -->
+
+					<!-- INICIO CAMPO Licença de operação -->
+					<div class="col-xl-4 col-md-4 mb-4">
+						<br />
+						<p:inputText id="inputLicencaOperacao"
+							placeholder="Licença operação(LO)" style="width: 100%" size="30"
+							value="#{clienteBean.cliente.licencaOperacao}" readonly="false"
+							converter="upperCaseConverter" />
+					</div>
+					<!-- FIM CAMPO Licença de operação -->
+				</div>
+				<!-- ####### FIM LINHA 2 -->
+
+				<!-- ####### INICIO LINHA 3 - 2 COLUNAS-->
+				<div id="LI3" class="row">
+					<!-- INICIO CAMPO Número Ibama -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputText id="inputNumeroIbama" placeholder="Número ibama"
+							style="width: 100%" size="30"
+							value="#{clienteBean.cliente.numeroIbama}" readonly="false"
+							converter="upperCaseConverter" />
+					</div>
+					<!-- FIM CAMPO Número Ibama -->
+
+					<!-- INICIO CAMPO Inscrição Estadual -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputText id="inputInscricaoEstadual"
+							placeholder="Inscrição estadual" style="width: 100%" size="30"
+							value="#{clienteBean.cliente.inscricaoEstadual}" readonly="false"
+							converter="upperCaseConverter" />
+					</div>
+					<!-- FIM CAMPO Inscrição Estadual -->
+
+					<!-- INICIO CAMPO Email: -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputEmail" placeholder="Email"
+							style="width: 100%" size="12"
+							value="#{clienteBean.cliente.email}" required="true"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="O campo 'EMAIL' é obrigatório" mask="O campo 'EMAIL' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Email -->
+				</div>
+				<!-- ####### FIM LINHA 3 -->
+
+				<!-- ####### INICIO LINHA 4 - 4 COLUNAS-->
+				<div id="LI4" class="row">
+
+					<!-- INICIO CAMPO Telefone Fixo: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputTelFixo" placeholder="Telefone fixo"
+							style="width: 100%" size="15"
+							value="#{clienteBean.cliente.telFixo}" required="false"
+							readonly="false" converter="upperCaseConverter"
+							requiredMessage="" mask="(99)9999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Fixo -->
+
+					<!-- INICIO CAMPO Telefone Celular 1: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular1" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{clienteBean.cliente.celular1}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 1 -->
+
+					<!-- INICIO CAMPO Telefone Celular 2: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular2" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{clienteBean.cliente.celular2}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 2 -->
+
+					<!-- INICIO CAMPO Telefone Celular 3: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular3" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{clienteBean.cliente.celular3}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 3 -->
+
+				</div>
+				<!-- ####### FIM LINHA 4 -->
+
+			</p:panel>
+			<!-- FIM DADOS PESSOAIS -->
+
+			<!-- INICIO PAINEL ENDEREÇO -->
+			<h3 class="mt-4 text-gray-100">Endereço</h3>
+
+			<p:panel id="pnlEndereco" styleClass="box-warning card mt-2">
+
+				<!-- ####### INICIO LINHA 5 - 3 COLUNAS TAG col-md-(4 X 3 = ATÉ 12 COLUNAS) -->
+				<div id="LI5" class="row">
+
+					<!-- INICIO CAMPO CEP: -->
+					<div class="col-xl-2 col-md-2 mb-4">
+						<br />
+						<p:inputMask id="inputCEP" placeholder="CEP" style="width: 100%"
+							size="10" value="#{clienteBean.cliente.cep}" required="true"
+							readonly="false" requiredMessage="O campo 'CEP' é obrigatório"
+							mask="99999-999">
+							<p:ajax event="blur" listener="#{clienteBean.consultarCEP}"
+								process="@this" update=":mensagem :formCadastro:pnlEndereco" />
+						</p:inputMask>
+					</div>
+					<!-- FIM CAMPO CEP -->
+
+					<!-- INICIO CAMPO Logradouro -->
+					<div class="col-xl-7 col-md-7 mb-4">
+						<br />
+						<p:inputText id="inputLogradouro" type="text"
+							placeholder="Logradouro" style="width: 100%" size="60"
+							value="#{clienteBean.cliente.logradouro}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'LOGRADOURO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Logradouro -->
+
+					<!-- INICIO CAMPO Número -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputText id="inputNumero" type="text" placeholder="Número"
+							style="width: 100%" size="40"
+							value="#{clienteBean.cliente.numero}" required="true"
+							readonly="false" requiredMessage="O campo 'NÚMERO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Número -->
+
+				</div>
+				<!-- ####### FIM LINHA 5 - 3 COLUNAS TAG col-md-(4 X 3 = ATÉ 12 COLUNAS) -->
+
+				<!-- ####### INICIO LINHA 6 - 2 COLUNAS -->
+				<div id="LI6" class="row">
+
+					<!-- INICIO CAMPO COMLEMENTO -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputComplemento" type="text"
+							placeholder="Complemento" style="width: 100%" size="30"
+							value="#{clienteBean.cliente.complemento}" readonly="false" />
+					</div>
+					<!-- FIM CAMPO COMLEMENTO -->
+
+					<!-- INICIO CAMPO Ponto de Referência -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputPontoReferencia" type="text"
+							placeholder="Ponto de referência" style="width: 100%" size="30"
+							value="#{clienteBean.cliente.pontoReferencia}" readonly="false"
+							converter="upperCaseConverter" />
+					</div>
+					<!-- FIM CAMPO Ponto de Referência -->
+				</div>
+				<!-- ####### FIM LINHA 6 - 2 COLUNAS -->
+
+				<!-- ####### INICIO LINHA 7 - 3 COLUNAS -->
+				<div id="LI7" class="row">
+					<!-- INICIO CAMPO BAIRRO -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputBairro" type="text" placeholder="Bairro"
+							style="width: 100%" size="40"
+							value="#{clienteBean.cliente.bairro}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'BAIRRO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO BAIRRO -->
+
+					<!-- INICIO CAMPO CIDADE -->
+					<div class="col-xl-4 col-md-4 mb-4">
+						<br />
+						<p:inputText id="inputCidade" type="text" placeholder="Cidade"
+							style="width: 100%" size="40"
+							value="#{clienteBean.cliente.cidade}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'CIDADE' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO CIDADE -->
+
+					<!-- INICIO CAMPO ESTADO -->
+					<div class="col-xl-2 col-md-2 mb-4">
+						<br />
+						<p:inputText id="inputEstado" type="text" placeholder="Estado"
+							style="width: 100%" size="40"
+							value="#{clienteBean.cliente.estado}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'ESTADO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO ESTADO -->
+
+
+				</div>
+				<!-- ####### FIM LINHA 7 - 3 colunas -->
+
+			</p:panel>
+			<!-- FIM ENDEREÇO -->
+
+			<!-- INICIO PAINEL DADOS BANCÁRIOS -->
+			<h3 class="mt-4 text-gray-100">Dados Bancários</h3>
+
+			<p:panel id="pnlDadosBancarios" styleClass="box-warning card mt-2">
+
+				<!-- ####### INICIO LINHA 8 - 4 COLUNAS -->
+				<div id="LI8" class="row">
+					<!-- INICIO BANCO -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+
+						<p:selectOneMenu id="banco" filter="true" style="width: 100%"
+							value="#{clienteBean.cliente.banco}" required="true"
+							readonly="false" converter="omnifaces.SelectItemsConverter"
+							requiredMessage="O campo 'BANCO' é obrigatório">
+
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione um banco" />
+							<f:selectItems value="#{fornecedorBean.bancos}" var="banco"
+								itemValue="#{banco}" itemLabel="#{banco.nome}" />
+
+						</p:selectOneMenu>
+					</div>
+					<!-- FIM CAMPO BANCO -->
+
+					<!-- INICIO AGÊNCIA -->
+					<div class="col-xl-2 col-md-2 mb-4">
+						<br />
+
+						<p:inputText id="inputAgencia" type="text" placeholder="Agência"
+							style="width: 100%" size="6"
+							value="#{clienteBean.cliente.agencia}" required="true"
+							readonly="false"
+							requiredMessage="O campo 'AGÊNCIA' é obrigatório" />
+
+					</div>
+					<!-- FIM CAMPO AGÊNCIA -->
+
+					<!-- INICIO CONTA -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputText id="inputConta" type="text" placeholder="Conta"
+							style="width: 100%" size="10"
+							value="#{clienteBean.cliente.conta}" required="true"
+							readonly="false" requiredMessage="O campo 'CONTA' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO CONTA -->
+
+					<!-- INICIO VALOR -->
+					<div class="col-xl-4 col-md-4 mb-4">
+						<br />
+
+						<p:inputText id="inputValor" type="text" placeholder="Valor"
+							style="width: 100%" size="20"
+							value="#{clienteBean.cliente.valor}" required="true"
+							readonly="false" requiredMessage="O campo 'VALOR' é obrigatório"
+							converterMessage="Informe um valor válido para o campo VALOR"
+							validatorMessage="Informe um valor entre 0,01 e 9999,99 para o campo 'Preço'">
+							<f:validateDoubleRange minimum="0.01" maximum="9999.99" />
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+
+						</p:inputText>
+					</div>
+					<!-- FIM CAMPO VALOR -->
+
+				</div>
+				<!-- ####### FIM LINHA 8 - 4 -->
+
+				<h:inputHidden value="#{clienteBean.cliente.dataCliente}" />
+				<br />
+
+			</p:panel>
+			<!-- FIM PAINEL DADOS BANCÁRIOS -->
+
+		</h:form> <br />
+		</section>
+		<!-- /.content -->
+
+	</ui:define>
+</ui:composition>

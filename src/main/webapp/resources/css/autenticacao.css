@@ -1,0 +1,52 @@
+/* ==== INÃ�CIO RESET ==== */
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	border: none;
+	outline: none;
+	font-weight: 300;
+	box-sizing: border-box;
+	font-family: 'Lato', sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+body {
+	background-color: #ececec;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+}
+
+/* ==== FIM RESET ==== */
+
+.autenticacao{
+	width: 40%;
+	float: left;
+	background: blue;
+}
+
+
+
+@media screen and (min-width:1280px){
+.tudo {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 100% !important;
+}
+}

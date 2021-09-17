@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Teste" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="499faca5-8f1e-4dfb-9c8e-f2bf3d344b49">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="CAMINHO_BANNER" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select  SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4,2) IN('01')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4,2) in('02')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('03')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+FROM dbo.Retirada
+WHERE SUBSTRING(dataRetirada, 4,2) in('04')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('05')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('06')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('07')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('08')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('09')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('10')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('11')
+group by SUBSTRING(dataRetirada, 4,2) union
+select SUBSTRING(dataRetirada, 4,2) AS MES, SUM(oleo) AS OLEO, SUM(residuo) AS RESIDUO
+from dbo.Retirada
+where SUBSTRING(dataRetirada, 4, 2) in('12')
+group by SUBSTRING(dataRetirada, 4,2) 
+order by MES asc]]>
+	</queryString>
+	<field name="MES" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MES"/>
+	</field>
+	<field name="OLEO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="OLEO"/>
+	</field>
+	<field name="RESIDUO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="RESIDUO"/>
+	</field>
+	<variable name="SOMA_OLEO" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{OLEO}]]></variableExpression>
+	</variable>
+	<variable name="SOMA_RESIDUO" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{RESIDUO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="9" y="7" width="70" height="60" uuid="9c4684d8-4a1f-48fc-b1e8-5b4a3735c73a"/>
+				<imageExpression><![CDATA[$P{CAMINHO_BANNER}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="9" width="360" height="30" uuid="964f12d4-0b2a-41d9-8769-5100b6f4b5c1"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Retirada de óleo por mês / 2018]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="420" y="50" width="100" height="20" uuid="ab1a3a64-9534-4643-b69c-28035b4a4aac"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#000000" uuid="f58d44a6-b1f6-4f33-a81a-89a73e26cc14"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement x="60" y="0" width="100" height="13" forecolor="#242424" uuid="5f1439f7-234c-4524-8b62-f9225e99b758">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5a3ba140-d75a-4134-8dbf-c691e2429adf"/>
+				</reportElement>
+				<textElement textAlignment="Center" rotation="None">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[M�s]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="100" height="13" forecolor="#242424" uuid="520a25ec-8cbe-41ea-8f77-a2350e46a97e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2fabfeeb-8bc3-4841-84e3-1fbae8fc0db3"/>
+				</reportElement>
+				<textElement textAlignment="Center" rotation="None">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[�leo usado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="0" width="100" height="13" forecolor="#242424" uuid="4e641034-c78e-4553-97cf-8e7ff6017c34">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42518ae1-d972-4a1a-88d6-b9382c371a5a"/>
+				</reportElement>
+				<textElement textAlignment="Center" rotation="None">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Res�duo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="60" y="0" width="100" height="13" forecolor="#636363" uuid="8463c105-b2ca-4b8d-b917-5feb491cba90">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5a3ba140-d75a-4134-8dbf-c691e2429adf"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{MES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="100" height="13" forecolor="#636363" uuid="c722f4ad-5e37-4c95-aa69-aad34972ffa2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2fabfeeb-8bc3-4841-84e3-1fbae8fc0db3"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{OLEO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="100" height="13" forecolor="#636363" uuid="d9e22870-9fe6-462b-93d2-6893ac1e3a55">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42518ae1-d972-4a1a-88d6-b9382c371a5a"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{RESIDUO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="304" splitType="Stretch">
+			<bar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="2" y="60" width="550" height="220" uuid="60808aaf-99f6-4699-9a5c-d65a99c54e7a"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["�leo"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{MES}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{OLEO}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Residuo"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{MES}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{RESIDUO}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+			<staticText>
+				<reportElement x="192" y="10" width="100" height="13" uuid="690d2c7e-9bfd-4f90-9536-56f45af6f1f3"/>
+				<text><![CDATA[Total �leo usado]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="9" width="78" height="14" uuid="29b7187a-cb2d-415d-9485-860e733cfaab"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$V{SOMA_OLEO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="24" width="100" height="13" uuid="6be0dcb1-7888-43bc-9fc9-b2f401913bc6"/>
+				<text><![CDATA[Total res�duo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="23" width="78" height="14" uuid="98d7720e-fa7f-4b35-9570-f1195508a2b5"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$V{SOMA_RESIDUO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

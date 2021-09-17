@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TermoCessaoImagem" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e3a97d8d-9405-4be0-91e3-58e139236003">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IkZ1bmNpb25hcmlvIiBBUyAsNzAsOTAsZTBkNTA2YjEtYmRmNi00MjI4LTk2YWItZmZjNzhkODhl
+NTIxOw==]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGP Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT "Funcionario".bairro,
+	"Funcionario".celular1,
+	"Funcionario".celular2,
+	"Funcionario".celular3,
+	"Funcionario".cep,
+	"Funcionario".cidade,
+	"Funcionario".complemento,
+	"Funcionario".cpf,
+	"Funcionario".email,
+	"Funcionario".estado,
+	"Funcionario".logradouro,
+	"Funcionario".numero,
+	"Funcionario".nome
+FROM "Funcionario"]]>
+	</queryString>
+	<field name="bairro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bairro"/>
+	</field>
+	<field name="celular1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="celular1"/>
+	</field>
+	<field name="celular2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="celular2"/>
+	</field>
+	<field name="celular3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="celular3"/>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cep"/>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cidade"/>
+	</field>
+	<field name="complemento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="complemento"/>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+	</field>
+	<field name="logradouro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="logradouro"/>
+	</field>
+	<field name="numero" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="17" width="360" height="23" uuid="b91baf3d-8d71-49c0-9681-cf1bc7e3a607"/>
+				<text><![CDATA[TERMO DE CESSÃO DE LICENÇA DE USO DE IMAGEM]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="466" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="9" width="20" height="13" uuid="f20aba3e-9d9c-41ec-944a-5940c4a2f415"/>
+				<text><![CDATA[Eu, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="27" width="40" height="13" uuid="3e70131a-5772-47a6-8ebc-2369ee94a818"/>
+				<text><![CDATA[Nome: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="48" y="27" width="200" height="13" uuid="b2f309fd-111e-4145-a901-a8cd1bac1669">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c6e01df8-d5e9-4fcd-beb7-723fe44a61b3"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="45" width="160" height="13" uuid="cc23d697-54ff-42b7-b503-7da31bd62499"/>
+				<text><![CDATA[Nacionalidade (país onde nasceu): ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="45" width="76" height="13" uuid="4b859738-f8ab-4912-b612-2a68ab342597"/>
+				<text><![CDATA[Tipo sanguíneo: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="63" width="210" height="13" uuid="c94e91de-6a06-4db8-8abe-950e8264e95a"/>
+				<text><![CDATA[Naturalidade (cidade e estado onde nasceu):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="80" width="100" height="13" uuid="b8720c02-8a77-445a-880e-e622ed4aa018"/>
+				<text><![CDATA[Data nascimento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="80" width="60" height="13" uuid="29e9a9b1-3c77-4fbe-acfe-a6c9e6f545b0"/>
+				<text><![CDATA[Profissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="99" width="30" height="13" uuid="5829c5f3-a66f-45bc-ade2-4d0caa1f3d69"/>
+				<text><![CDATA[RG:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="97" width="30" height="13" uuid="512ef5e2-9689-4c3a-bbff-41a81f1d6038"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="97" width="27" height="13" uuid="502eff54-2b48-4328-9c73-ae2fd167476a"/>
+				<text><![CDATA[CPF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="119" width="50" height="13" uuid="012b23b1-0af0-46d7-956a-42bb22cfdd06"/>
+				<text><![CDATA[Endereço: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="119" width="234" height="13" uuid="35abca54-0f4e-47de-a6e6-20a8530c60a0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3783890-7397-4920-9280-c5d2846d5904"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{logradouro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="294" y="119" width="16" height="13" uuid="e3e8c4e7-c5d8-400e-a162-f9ec36755ec8"/>
+				<text><![CDATA[nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="119" width="50" height="13" uuid="318d7630-9933-49e8-b646-637d8dd4415d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fc1ce99d-7b9e-4efe-974f-aad514d34643"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="370" y="119" width="20" height="13" uuid="cc09c8af-f067-49fc-b807-1f3ba487eb37"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="119" width="30" height="13" uuid="e2d113e1-437e-429b-bed2-22c960a46448"/>
+				<text><![CDATA[apt:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="138" width="60" height="13" uuid="b2a81c3e-e222-485e-b133-7e4095f30382"/>
+				<text><![CDATA[Bairro: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="138" width="40" height="13" uuid="47c03c98-a3d4-436a-9146-979ffc16128b"/>
+				<text><![CDATA[Cidade: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="138" width="39" height="13" uuid="9b2c9750-b2f3-42f8-a198-736a20b635a8"/>
+				<text><![CDATA[Estado: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="48" y="138" width="122" height="13" uuid="6c06e275-4049-4122-8724-640d8e7cea3f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f8dd0b53-5835-4605-a0e0-964ccebca323"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="138" width="110" height="13" uuid="4c985802-d713-4b6c-a11c-db7d4d90c63f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ae37c5c-551b-4631-a123-b9b7cec4841b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="230" width="100" height="13" uuid="71f39288-965b-43e2-a027-290c42a0b3a3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="de10efd5-0655-4b12-a95d-881248b47718"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="156" width="60" height="13" uuid="f1ece181-1aa5-4abd-b45c-e8e92e475af8"/>
+				<text><![CDATA[Telefones: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="156" width="74" height="13" uuid="f161c4fd-bb15-4537-9117-3d76e66ca418">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a45cdfa3-f004-4046-b924-99d8adf9c12a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{celular1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="156" width="100" height="13" uuid="c657ac9f-aa4f-4cde-969d-5075dc68db4f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f32c1444-8412-4083-b0a4-0319097a4480"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{celular2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="156" width="100" height="13" uuid="fb984bd0-12c4-4717-842e-b5b72d2ee359">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="16c8e496-130f-42fb-a9a3-9a45b6f330ac"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{celular3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="174" width="38" height="13" uuid="8d735795-45e6-4d64-af2f-7c1c5df37d63"/>
+				<text><![CDATA[Email: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="48" y="174" width="100" height="13" uuid="d23bc968-c583-46cd-98dd-c22b60ff45f5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b6c0cd2f-d0d8-4e28-b48d-5870b92a3c13"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="190" width="134" height="13" uuid="6bf60262-f61d-4036-b265-3f5f8874a251"/>
+				<text><![CDATA[Nome de guerra/ Apelido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="208" width="134" height="13" uuid="3133359e-493f-4393-b6d0-22f6e8fa61fb"/>
+				<text><![CDATA[Cargo ocupado nesse evento: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="230" width="525" height="111" uuid="03d62624-667a-4146-a533-e14813a82612"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[autorizo e cedo, por meio do presente Termo, à BeachBoxing Brasil Representações, Produções e Marketing ltda., CNPJ 25.318.506/0001-74, doravante denominada “BeachBoxing”, e para a Federação de Boxe de Praia de Boxe de Praia no Brasil, CNPJ 24.103.992/0001-40, doravante denominada “FEBOP”, a licença irrestrita do uso de meu nome, voz, apelido, assinatura e imagem para fins de participação durante as lutas e/ou em promoções e anúncios relacionados à “BeachBoxing”, declarando, para os devidos fins, não ter nada a reclamar da BeachBoxing Brasil Representações, Produções e Marketing ltda., CNPJ 25.318.506/0001-74, e nem da Federação de Boxe de Praia de Boxe de Praia no Brasil, CNPJ 24.103.992/0001-40, a título de remuneração, direito de arena, royalties e/ou prêmios.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="400" width="339" height="35" uuid="93fdf38d-5c21-4905-b91d-e1a5efc87679"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[______________________________________________
+ASSINATURA
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="350" width="70" height="13" uuid="f1ff49d8-f0b1-4be9-a724-b70244755a01"/>
+				<text><![CDATA[Rio de Janeiro,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="350" width="24" height="13" uuid="62cea0a3-ff31-4119-9ddc-941c71b11fa1"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="350" width="58" height="13" uuid="1f08eee5-4585-47da-ba13-9b53d95276d5"/>
+				<text><![CDATA[de 201]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="359" y="138" width="100" height="13" uuid="c3c8f501-f7c6-4e68-a698-88eb54e72837">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="954f6a6e-d243-4ba6-a4df-c4e151b81b2f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="119" width="100" height="13" uuid="84590383-f621-40df-bf15-924ce902d9a7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="04811c92-da15-40b9-92ee-c359a198de66"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="97" width="100" height="13" uuid="9fe678ad-eaee-48e0-ac83-062f42629c89">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad9e2639-ffcb-478b-8a36-69b1a334020a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="214" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

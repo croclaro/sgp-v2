@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $%$%$%$%$%$%$%$$%% Desenvolvido por Celso Jr® &*&**&*&*&*&*&*&*&*&*&*& -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modelo.xhtml">
+
+	<ui:define name="bt-conteudo">
+
+		<!-- INICIO FORMULÁRIO DE CADASTRO -->
+		<p:growl id="mensagem" />
+
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+		<h1>SGP - SISTEMA GERENCIADOR DE PRODUTOS</h1>
+		</section>
+
+		<!-- Main content -->
+		<section class="content container-fluid" > <!-- FORMULÁRIO DE CADASTRO -->
+
+		<h:form id="formCadastro">
+
+			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
+				<p:commandButton value="Salvar"
+					actionListener="#{produtoBean.salvar}"
+					update=":mensagem :formCadastro:pnlDados" icon="fa fa-floppy-o"
+					styleClass="btn-success" />
+
+				<p:commandButton value="Voltar" immediate="true"
+					action="con-produto?faces-redirect=true" process="@this"
+					icon="fa fa-hand-o-left" styleClass="btn btn-sm" />
+
+			</p:panel>
+			<h3 class="mt-4 text-gray-100">Cadastro de produto</h3>
+			<!-- INICIO CADASTRO DE BANCOS -->
+
+
+			<p:panel id="pnlDados" styleClass="box-warning card mt-2">
+
+				<!-- ####### INICIO LINHA 1 - 2 COLUNAS TAG col-md-(6 X 2 = ATÉ 12 COLUNAS) -->
+				<div id="LI1" class="row">
+
+					<!-- INICIO CAMPO NOME DO BANCO -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+
+						<p:inputText placeholder="Nome do produto" style="width: 100%"
+							size="40" value="#{produtoBean.produto.descricao}"
+							converter="upperCaseConverter" required="true"
+							requiredMessage="O campo 'NOME DO PRODUTO' é obrigatório">
+							<p:ajax event="blur" update="@this" />
+						</p:inputText>
+
+						<h:inputHidden value="#{produtoBean.produto.dataCadastro}" />
+					</div>
+					<!-- FIM CAMPO NOME DO BANCO -->
+
+				</div>
+				<!-- ####### FIM LINHA 1 - 2 COLUNAS TAG col-md-(6 X 2 = ATÉ 12 COLUNAS) -->
+
+			</p:panel>
+
+		</h:form> </section>
+		<!-- /.content -->
+
+
+	</ui:define>
+</ui:composition>

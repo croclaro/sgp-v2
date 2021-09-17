@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Retirada" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b3fdc50-7561-4e52-b937-6eb2dcccb9df">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="166"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="828"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGP Data Adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="CAMINHO_BANNER" class="java.lang.String"/>
+	<parameter name="NOME_FANTASIA" class="java.lang.String"/>
+	<parameter name="NOME_FUNCIONARIO" class="java.lang.String"/>
+	<parameter name="PRODUTO_DESCRICAO" class="java.lang.String"/>
+	<parameter name="NOME_BAIRRO" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT "Retirada"."dataRetirada",
+	"Retirada"."formaPagamento",
+	"Retirada".oleo,
+	"Retirada".residuo,
+	"Produto".descricao,
+	"Funcionario".nome,
+	"Fornecedor"."nomeFantasia",
+	"Fornecedor".bairro
+FROM "Retirada"
+	INNER JOIN "Produto" ON 
+	 "Retirada".produto_codigo = "Produto".codigo 
+	INNER JOIN "Funcionario" ON 
+	 "Retirada".funcionario_codigo = "Funcionario".codigo 
+	INNER JOIN "Fornecedor" ON 
+	 "Retirada".fornecedor_codigo = "Fornecedor".codigo 
+WHERE 
+	 "Fornecedor"."nomeFantasia" LIKE $P{NOME_FANTASIA} 
+	 AND "Funcionario".nome LIKE $P{NOME_FUNCIONARIO} 
+	 AND "Produto".descricao LIKE $P{PRODUTO_DESCRICAO} 
+	 AND "Fornecedor".bairro LIKE $P{NOME_BAIRRO}]]>
+	</queryString>
+	<field name="dataRetirada" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dataRetirada"/>
+	</field>
+	<field name="formaPagamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="formaPagamento"/>
+	</field>
+	<field name="oleo" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="oleo"/>
+	</field>
+	<field name="residuo" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="residuo"/>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricao"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
+	<field name="nomeFantasia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nomeFantasia"/>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bairro"/>
+	</field>
+	<variable name="SOMA_OLEO" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{oleo}]]></variableExpression>
+	</variable>
+	<variable name="SOMA_RESIDUO" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{residuo}]]></variableExpression>
+	</variable>
+	<variable name="MES" class="java.lang.String" calculation="Count">
+		<variableExpression><![CDATA[$F{dataRetirada}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="13" y="-4" width="70" height="60" uuid="b654c338-6a63-4196-9095-bbe372e7e3d9"/>
+				<imageExpression><![CDATA[$P{CAMINHO_BANNER}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="330" y="4" width="290" height="30" uuid="0ede233c-c876-4c7b-bef8-9ceeab91d3b4"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Retirada de óleo usado]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="630" y="40" width="100" height="20" uuid="658a1810-8095-4e00-a86a-7496439a4b0f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="-8" width="800" height="11" forecolor="#FFFFFF" backcolor="#000000" uuid="d5c7c37e-8a87-4605-9a27-e71220b2e1f3"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="13" forecolor="#262626" uuid="e19e6342-e7fe-425b-acc9-607c68f7b990">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6da3b86a-fe8c-42fa-aeef-26f85d6e35c3"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome fantasia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="-1" width="195" height="14" forecolor="#262626" uuid="1ef73ff8-dbde-4077-b645-95b18838f609">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2ad1dfb7-c129-4cb3-acc6-83da0fd0fb45"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Funcionário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="0" width="61" height="13" forecolor="#262626" uuid="7d170eb4-4e88-45e0-be4e-746ee9a01c93">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="33d0d93f-e59b-4829-ae00-b42d3bf989d8"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="0" width="50" height="13" forecolor="#262626" uuid="0d250b77-0735-49f5-b1ed-ef10637074d3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3b73b57b-fc9c-4b18-ba0d-a169943e420e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde óleo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="60" height="13" forecolor="#262626" uuid="79d0996c-8fa4-4cb3-ba50-9cf8d0ea09a9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1a99f97f-7e59-432a-8080-69344684cd97"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde resíduo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="714" y="0" width="85" height="13" forecolor="#262626" uuid="8374a953-ddd7-4bbe-92e1-91bf6b2ea739">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="478c9bae-8382-4b8b-8527-9c60c04f04d5"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de retirada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="564" y="0" width="146" height="13" forecolor="#262626" uuid="57f17dc1-8fc7-48ab-ae94-52d704fc1d41">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa88e8b0-d729-42c0-aff1-b4af1bee0412"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bairro]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="180" height="13" forecolor="#636363" uuid="5efdb40c-d146-4b6d-9e22-ca5480ecc2d3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6da3b86a-fe8c-42fa-aeef-26f85d6e35c3"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeFantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="-1" width="195" height="14" forecolor="#636363" uuid="9d675717-4676-45aa-8bea-624198960e5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2ad1dfb7-c129-4cb3-acc6-83da0fd0fb45"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="0" width="61" height="13" forecolor="#636363" uuid="5d3101fb-cd25-409e-8ec7-56825b8fe839">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="33d0d93f-e59b-4829-ae00-b42d3bf989d8"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="447" y="0" width="50" height="13" forecolor="#636363" uuid="17137dcc-481e-4eaa-b4da-44fae20a57c1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3b73b57b-fc9c-4b18-ba0d-a169943e420e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{oleo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="60" height="13" forecolor="#636363" uuid="2bf9e6fd-3505-4928-9518-0ad4d612ddcc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1a99f97f-7e59-432a-8080-69344684cd97"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{residuo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="714" y="0" width="85" height="13" forecolor="#636363" uuid="7cf7a3fb-2c4a-4886-ae06-06d599ffe8d7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="478c9bae-8382-4b8b-8527-9c60c04f04d5"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataRetirada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="564" y="0" width="146" height="13" forecolor="#636363" uuid="dd64a310-8f5e-46f4-856a-9a57acfedcec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa88e8b0-d729-42c0-aff1-b4af1bee0412"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band height="370" splitType="Stretch">
+			<staticText>
+				<reportElement x="393" y="5" width="81" height="13" uuid="9be66cf8-771f-47d6-a22c-107d6f57fc06"/>
+				<text><![CDATA[Total óleo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="474" y="5" width="80" height="13" uuid="1ca19f78-c942-484a-a8d1-449d4d755c53"/>
+				<textFieldExpression><![CDATA[$V{SOMA_OLEO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="393" y="21" width="81" height="13" uuid="7ee92876-4e7b-4dec-96b7-168d4089ec8b"/>
+				<text><![CDATA[Total resíduo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="474" y="21" width="100" height="13" uuid="98517527-2cec-4593-b917-dbf8e0a0821f"/>
+				<textFieldExpression><![CDATA[$V{SOMA_RESIDUO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
