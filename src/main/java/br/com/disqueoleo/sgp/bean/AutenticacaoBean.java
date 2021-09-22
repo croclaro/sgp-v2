@@ -30,9 +30,7 @@ import br.com.disqueoleo.sgp.enums.TipoUsuario;
 @ManagedBean
 @SessionScoped
 public class AutenticacaoBean implements Serializable {
-	private Usuario usuario;
-	private Fornecedor fornecedor;
-	private Afiliado afiliado;
+	private Usuario usuario;	
 	private Usuario usuarioLogado;
 	private Usuario status;
 
@@ -67,23 +65,7 @@ public class AutenticacaoBean implements Serializable {
 	public void setStatus(Usuario status) {
 		this.status = status;
 	}
-
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
-	public Afiliado getAfiliado() {
-		return afiliado;
-	}
-
-	public void setAfiliado(Afiliado afiliado) {
-		this.afiliado = afiliado;
-	}
-
+	
 	public String getData() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
@@ -99,7 +81,7 @@ public class AutenticacaoBean implements Serializable {
 			usuarioNome = usuarioLogado.getAfiliado().getNomeCompleto();
 		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			usuarioNome = usuarioLogado.getFornecedor().getNomeFantasia();
-		} if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
 			usuarioNome = usuarioLogado.getFuncionario().getNome();
 		} else {
 			usuarioNome = "ERRO";
@@ -117,7 +99,7 @@ public class AutenticacaoBean implements Serializable {
 			funcaoNome = usuarioLogado.getAfiliado().getNomeCompleto();
 		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			funcaoNome = "";
-		} if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
 			funcaoNome = usuarioLogado.getFuncionario().getFuncao().getNomeFuncao();
 		} else {
 			funcaoNome = "ERRO";

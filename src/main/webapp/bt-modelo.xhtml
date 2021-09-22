@@ -187,7 +187,7 @@
 							<img src="resources/template/dist/img/avatar5.png"
 							class="user-image" alt="User Image" /> <!-- hidden-xs hides the username on small devices so only the image appears. -->
 							<span class="hidden-xs"> <h:outputText
-									value="#{autenticacaoBean.usuarioNome}" />
+									value="#{autenticacaoBean.funcaoNome}" />
 						</span>
 					</a> <!-- ######################################################### -->
 						<!-- INICIO ITENS MENU USUÁRIO -->
@@ -199,6 +199,7 @@
 								alt="User Image" />
 								<p>
 									<h:outputText value="#{autenticacaoBean.usuarioNome}" />
+									<br></br>
 									Seu último acesso foi em <small> <h:outputText
 											value="#{autenticacaoBean.data}." />
 									</small>
