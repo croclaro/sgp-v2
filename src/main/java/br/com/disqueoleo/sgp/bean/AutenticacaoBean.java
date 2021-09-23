@@ -98,7 +98,7 @@ public class AutenticacaoBean implements Serializable {
 		if(usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
 			funcaoNome = usuarioLogado.getAfiliado().getNomeCompleto();
 		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
-			funcaoNome = "";
+			funcaoNome = usuarioLogado.getFornecedor().getRazaoSocial();
 		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
 			funcaoNome = usuarioLogado.getFuncionario().getFuncao().getNomeFuncao();
 		} else {

@@ -199,8 +199,7 @@
 								alt="User Image" />
 								<p>
 									<h:outputText value="#{autenticacaoBean.usuarioNome}" />
-									<br></br>
-									Seu último acesso foi em <small> <h:outputText
+									<br></br> Seu último acesso foi em <small> <h:outputText
 											value="#{autenticacaoBean.data}." />
 									</small>
 								</p></li>
@@ -336,16 +335,15 @@
 					</p:link>
 					<ul class="treeview-menu">
 						<li><p:link
-								rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"
-								href="cad-fornecedor.xhtml">Fornecedor</p:link></li>
+								rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR'])}"
+								href="con-afiliado.xhtml">Afiliado</p:link></li>
 						<li><p:link
 								rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"
-								href="cad-afiliado.xhtml">Afiliado</p:link></li>
-
+								href="con-fornecedor.xhtml">Fornecedor</p:link></li>
 					</ul></li>
 
-				<li class="header"></li>
-				<li class="header">RELATÓRIOS</li>
+				<li class="treeview"></li>
+				<li class="treeview">RELATÓRIOS</li>
 
 				<li><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
