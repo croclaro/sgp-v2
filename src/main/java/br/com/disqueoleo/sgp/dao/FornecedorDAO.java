@@ -5,12 +5,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.disqueoleo.sgp.domain.Fornecedor;
-import br.com.disqueoleo.sgp.domain.Usuario;
-import br.com.disqueoleo.sgp.enums.TipoUsuario;
 import br.com.disqueoleo.sgp.util.HibernateUtil;
 
 public class FornecedorDAO extends GenericoDAO<Fornecedor> {
@@ -49,30 +46,5 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
 		} finally {
 			sessao.close();
 		}
-	}
-	
-	public Long buscarFornecedores(Usuario usuario) {
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
-		try {
-			Criteria consulta = sessao.createCriteria(Fornecedor.class);
-
-			if (usuario.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
-				consulta.createAlias("fornecedor", "f");
-				consulta.add(Restrictions.eq("f.codigo", usuario.getFornecedor().getCodigo()));
-			} else if (usuario.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
-				consulta.createAlias("funcionario", "f");
-				consulta.add(Restrictions.eq("f.codigo", usuario.getFuncionario().getCodigo()));
-			}
-
-			consulta.setProjection(Projections.count("codBarras"));
-
-			Long resultado = (Long) consulta.uniqueResult();
-
-			return resultado == null ? 0 : resultado;
-		} catch (RuntimeException erro) {
-			throw erro;
-		} finally {
-			sessao.close();
-		}
-	}
+	}	
 }

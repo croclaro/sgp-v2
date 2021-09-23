@@ -38,8 +38,7 @@ public class AutenticacaoBean implements Serializable {
 	private String data;	
 	private String usuarioNome;
 	private String funcaoNome;
-	private Long residuos;
-	private Long fornecedores;
+	private Long residuos;	
 	private Long oleos;
 
 	public Usuario getUsuario() {
@@ -120,17 +119,7 @@ public class AutenticacaoBean implements Serializable {
 	
 	public void setResiduos(Long residuos) {
 		this.residuos = residuos;
-	}
-
-	public Long getFornecedores() {
-		FornecedorDAO fornecedorDAO = new FornecedorDAO();
-		fornecedores = fornecedorDAO.buscarFornecedores(usuarioLogado);
-		return fornecedores;
-	}
-
-	public void setFornecedores(Long fornecedores) {
-		this.fornecedores= fornecedores;
-	}
+	}	
 
 	public Long getOleos() {
 		RetiradaDao retiradaDao = new RetiradaDao();
