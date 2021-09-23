@@ -260,7 +260,7 @@
 			<!-- INICIO ITENS MENU LATERAL --> <!-- Sidebar Menu -->
 			<ul class="sidebar-menu" data-widget="tree">
 
-				<li class="header">GESTÃO</li>
+				<li class="treeview">GESTÃO</li>
 
 				<!-- ITEM MENU PAINEL DE CONTROLE -->
 				<li class="active"><a href="bt-principal.xhtml"><i
@@ -268,7 +268,7 @@
 				<li class="header"></li>
 
 
-				<li class="header">OPERAÇÃO</li>
+				<li class="treeview">OPERAÇÃO</li>
 				<!-- Optionally, you can add icons to the links -->
 				<li><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
@@ -322,7 +322,7 @@
 				<li class="treeview"><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link></li>
 				<li class="treeview"><p:link
-						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link>CADASTROS</li>
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link><span>CADASTRAR</span></li>
 
 				<li class="treeview"><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"
@@ -343,7 +343,8 @@
 					</ul></li>
 
 				<li class="treeview"></li>
-				<li class="treeview">RELATÓRIOS</li>
+				<li class="header"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"></p:link>RELATÓRIOS</li>
 
 				<li><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
@@ -370,8 +371,7 @@
 					</ul></li>
 
 				<li class="treeview"><p:link
-						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO', 'AFILIADO'])}"
-						href="#">
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}" href="#">
 						<i class="fa fa-flag"></i>
 						<span>Retiradas</span>
 						<span class="pull-right-container"> <i
@@ -381,17 +381,15 @@
 					<ul class="treeview-menu">
 						<li><p:link
 								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
-								href="rel-retiradas.xhtml">Retiradas Consolidadas</p:link>></li>
+								href="rel-retiradas.xhtml">Consolidadas</p:link></li>
 						<li><p:link
 								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
-								href="rel-retiradas.xhtml">Retiradas por bairros</p:link></li>
+								href="rel-retiradas.xhtml">Por Bairros</p:link></li>
+
 						<li><p:link
 								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
-								href="rel-retiradas.xhtml">Retiradas por mês</p:link></li>
+								href="rel-retiradas.xhtml">Por Bairros</p:link></li>
 					</ul></li>
-
-
-
 			</ul>
 			<!-- /.sidebar-menu --> <!-- FIM ITENS MENU LATERAL --> </section> </aside>
 			<!-- FIM BARRA LATERAL -->
