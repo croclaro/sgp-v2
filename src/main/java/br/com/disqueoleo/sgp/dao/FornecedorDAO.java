@@ -46,5 +46,5 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
 		} finally {
 			sessao.close();
 		}
-	}	
+	}		
 }

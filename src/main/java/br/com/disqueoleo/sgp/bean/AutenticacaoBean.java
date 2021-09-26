@@ -30,15 +30,15 @@ import br.com.disqueoleo.sgp.enums.TipoUsuario;
 @ManagedBean
 @SessionScoped
 public class AutenticacaoBean implements Serializable {
-	private Usuario usuario;	
+	private Usuario usuario;
 	private Usuario usuarioLogado;
 	private Usuario status;
 
 	@SuppressWarnings("unused")
-	private String data;	
+	private String data;
 	private String usuarioNome;
 	private String funcaoNome;
-	private Long residuos;	
+	private Long residuos;
 	private Long oleos;
 
 	public Usuario getUsuario() {
@@ -64,7 +64,7 @@ public class AutenticacaoBean implements Serializable {
 	public void setStatus(Usuario status) {
 		this.status = status;
 	}
-	
+
 	public String getData() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
@@ -74,52 +74,52 @@ public class AutenticacaoBean implements Serializable {
 	public void setData(String data) {
 		this.data = data;
 	}
-	
+
 	public String getUsuarioNome() {
-		if(usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
 			usuarioNome = usuarioLogado.getAfiliado().getNomeCompleto();
-		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			usuarioNome = usuarioLogado.getFornecedor().getNomeFantasia();
-		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
 			usuarioNome = usuarioLogado.getFuncionario().getNome();
 		} else {
 			usuarioNome = "ERRO";
 		}
-		
+
 		return usuarioNome;
 	}
-	
+
 	public void setUsuarioNome(String usuarioNome) {
 		this.usuarioNome = usuarioNome;
 	}
-	
+
 	public String getFuncaoNome() {
-		if(usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
 			funcaoNome = usuarioLogado.getAfiliado().getNomeCompleto();
-		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			funcaoNome = usuarioLogado.getFornecedor().getRazaoSocial();
-		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
 			funcaoNome = usuarioLogado.getFuncionario().getFuncao().getNomeFuncao();
 		} else {
 			funcaoNome = "ERRO";
 		}
-		
+
 		return funcaoNome;
 	}
-	
+
 	public void setFuncaoNome(String funcaoNome) {
 		this.funcaoNome = funcaoNome;
 	}
-	
+
 	public Long getResiduos() {
 		RetiradaDao retiradaDao = new RetiradaDao();
 		residuos = retiradaDao.buscarResiduos(usuarioLogado);
 		return residuos;
 	}
-	
+
 	public void setResiduos(Long residuos) {
 		this.residuos = residuos;
-	}	
+	}
 
 	public Long getOleos() {
 		RetiradaDao retiradaDao = new RetiradaDao();
@@ -133,8 +133,8 @@ public class AutenticacaoBean implements Serializable {
 
 	@PostConstruct
 	public void iniciar() {
-		usuario = new Usuario();		
-		usuario.setFuncionario(new Funcionario());	
+		usuario = new Usuario();
+		usuario.setFuncionario(new Funcionario());
 		usuario.setFornecedor(new Fornecedor());
 		usuario.setAfiliado(new Afiliado());
 	}
@@ -145,10 +145,10 @@ public class AutenticacaoBean implements Serializable {
 			AfiliadosDAO afiliadosDAO = new AfiliadosDAO();
 			FornecedorDAO fornecedorDAO = new FornecedorDAO();
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-			
+
 			TipoUsuario tipoUsuario = null;
-			
-			// Descobre o tipo do usuário que esta tentando efetuar a autenticação 
+
+			// Descobre o tipo do usuário que esta tentando efetuar a autenticação
 			Afiliado afiliado = afiliadosDAO.buscarPorCPFOuEmail(usuario.getLogin());
 			if (afiliado != null) {
 				tipoUsuario = TipoUsuario.AFILIADO;
@@ -165,18 +165,21 @@ public class AutenticacaoBean implements Serializable {
 					}
 				}
 			}
-			
+
 			// Efetua a autenticação
 			if (tipoUsuario == TipoUsuario.AFILIADO) {
-				usuarioLogado = usuarioDAO.autenticarAFiliado(usuario.getLogin(), usuario.getSenha(), usuario.getStatus());
+				usuarioLogado = usuarioDAO.autenticarAFiliado(usuario.getLogin(), usuario.getSenha(),
+						usuario.getStatus());
 			} else if (tipoUsuario == TipoUsuario.FORNECEDOR) {
-				usuarioLogado = usuarioDAO.autenticarFornecedor(usuario.getLogin(), usuario.getSenha(), usuario.getStatus());
+				usuarioLogado = usuarioDAO.autenticarFornecedor(usuario.getLogin(), usuario.getSenha(),
+						usuario.getStatus());
 			} else if (tipoUsuario == TipoUsuario.FUNCIONARIO) {
-				usuarioLogado = usuarioDAO.autenticarFuncionario(usuario.getLogin(), usuario.getSenha(), usuario.getStatus());
+				usuarioLogado = usuarioDAO.autenticarFuncionario(usuario.getLogin(), usuario.getSenha(),
+						usuario.getStatus());
 			} else {
 				usuarioLogado = null;
 			}
-			
+
 			// Verifica se o usuário foi autenticado
 			if (usuarioLogado == null) {
 				Messages.addGlobalError("CPF e/ou senha incorretos");
@@ -216,7 +219,7 @@ public class AutenticacaoBean implements Serializable {
 		usuarioLogado = null;
 		return "bt-login.xhtml?faces-redirect=true";
 	}
-	
+
 	public boolean temPerfis(List<String> permissoes) {
 		for (String permissao : permissoes) {
 			if (usuarioLogado.getTipoUsuario().toString().equals(permissao)) {

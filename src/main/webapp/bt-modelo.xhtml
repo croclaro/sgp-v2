@@ -207,26 +207,15 @@
 							<li class="user-body">
 								<div class="row">
 									<div class="col-xs-12 text-left">
-										<a href="con-usuario.xhtml"> <i class="fa fa-user fa-sm"></i>
-											Perfil
+										<a href="con-dadosPessoais.xhtml"> <i
+											class="fa fa-user fa-sm"></i> Dados pessoais
 										</a>
 									</div>
 								</div> <!-- /.row -->
 							</li>
 							<!-- /.user-body -->
 
-							<!-- item 3 CORPO DO MENU -->
-							<li class="user-body">
-								<div class="row">
-									<div class="col-xs-12 text-left">
-										<i class="fa fa-cogs fa-sm fa-fw"></i> <a
-											href="con-usuario.xhtml"> Configurações</a>
-									</div>
-								</div> <!-- /.row -->
-							</li>
-							<!-- /.user-body -->
 
-							<!-- item 5 RODAPÉ DO MENU -->
 							<li class="user-footer">
 								<div>
 
@@ -270,6 +259,12 @@
 
 				<li class="treeview">OPERAÇÃO</li>
 				<!-- Optionally, you can add icons to the links -->
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR'])}"
+						href="con-afiliado.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Afiliado</span>
+					</p:link></li>
 				<li><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
 						href="con-banco.xhtml">
@@ -321,26 +316,6 @@
 
 				<li class="treeview"><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link></li>
-				<li class="treeview"><p:link
-						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link><span>CADASTRAR</span></li>
-
-				<li class="treeview"><p:link
-						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"
-						href="#">
-						<i class="fas fa-hands-helping"></i>
-						<span> Indicação</span>
-						<span class="pull-right-container"> <i
-							class="fa fa-angle-left pull-right"></i>
-						</span>
-					</p:link>
-					<ul class="treeview-menu">
-						<li><p:link
-								rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR'])}"
-								href="con-afiliado.xhtml">Afiliado</p:link></li>
-						<li><p:link
-								rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"
-								href="con-fornecedor.xhtml">Fornecedor</p:link></li>
-					</ul></li>
 
 				<li class="treeview"></li>
 				<li class="header"><p:link
