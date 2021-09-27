@@ -64,9 +64,7 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 		} finally {
 			sessao.close();
 		}
-	}
-	
-	
+	}	
 
 	@SuppressWarnings({ "serial", "rawtypes", "unchecked" })
 	public List<RetiradaDTO> buscarPorAnoEMes(Integer ano, Integer mes) {

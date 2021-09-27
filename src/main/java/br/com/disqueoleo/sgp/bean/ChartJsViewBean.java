@@ -234,7 +234,7 @@ public class ChartJsViewBean implements Serializable {
 		ChartData data = new ChartData();
 		List<String> labels = new ArrayList<>();
 
-		List<RetiradaDTO> retiradas = retiradaDao.buscarPorAnoEMes(ano, mes);
+		List<RetiradaDTO> retiradas = retiradaDao.buscarPorAnoEMesEUsuario(ano, mes, autenticacaoBean.getUsuarioLogado());
 		List<Number> valuesOleo = new ArrayList<>();
 		List<Number> valuesResiduos = new ArrayList<>();
 
@@ -277,7 +277,7 @@ public class ChartJsViewBean implements Serializable {
 	public void createBarModel() {
 		ChartData data = new ChartData();
 		List<String> labels = new ArrayList<>();
-		List<RetiradaDTO> retiradas = retiradaDao.buscarPorAnoEMes(ano, mes);
+		List<RetiradaDTO> retiradas = retiradaDao.buscarPorAnoEMesEUsuario(ano, mes, autenticacaoBean.getUsuarioLogado());
 		List<Number> valuesOleo = new ArrayList<>();
 		List<Number> valuesResiduos = new ArrayList<>();
 
@@ -416,7 +416,7 @@ public class ChartJsViewBean implements Serializable {
 	public void createBarModel2() {
 		ChartData data = new ChartData();
 		List<String> labels = new ArrayList<>();
-		List<RetiradaDTO> retiradas = retiradaDao.buscarPorAnoEMes(ano, mes);
+		List<RetiradaDTO> retiradas = retiradaDao.buscarPorAnoEMesEUsuario(ano, mes, autenticacaoBean.getUsuarioLogado());
 		List<Number> valuesOleo = new ArrayList<>();
 		List<Number> valuesResiduos = new ArrayList<>();
 
