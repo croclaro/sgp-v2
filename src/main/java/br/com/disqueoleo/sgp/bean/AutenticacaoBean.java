@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-import br.com.disqueoleo.sgp.dao.AfiliadosDAO;
+import br.com.disqueoleo.sgp.dao.AfiliadoDAO;
 import br.com.disqueoleo.sgp.dao.FornecedorDAO;
 import br.com.disqueoleo.sgp.dao.FuncionarioDAO;
 import br.com.disqueoleo.sgp.dao.RetiradaDao;
@@ -142,14 +142,14 @@ public class AutenticacaoBean implements Serializable {
 	public void autenticar() {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			AfiliadosDAO afiliadosDAO = new AfiliadosDAO();
+			AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
 			FornecedorDAO fornecedorDAO = new FornecedorDAO();
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
 			TipoUsuario tipoUsuario = null;
 
 			// Descobre o tipo do usuário que esta tentando efetuar a autenticação
-			Afiliado afiliado = afiliadosDAO.buscarPorCPFOuEmail(usuario.getLogin());
+			Afiliado afiliado = afiliadoDAO.buscarPorCPFOuEmail(usuario.getLogin());
 			if (afiliado != null) {
 				tipoUsuario = TipoUsuario.AFILIADO;
 			} else {
