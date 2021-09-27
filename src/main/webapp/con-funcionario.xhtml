@@ -30,11 +30,12 @@
 					action="/cad-funcionario?faces-redirect=true" update="@form"
 					icon="fa fa-plus-square" styleClass="btn-warning" />
 
-				<p:commandButton value="Gerar Relatório"
-					actionListener="#{imprimirBean.cartaoFornecedor}"
+				<p:commandButton value="Gerar Relatório" ajax="false"
 					icon="fa fa-file-pdf-o"
-					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-					update=":mensagem :formListagem:tabela" ajax="false" />
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+					<p:dataExporter type="pdf" target=":formConsulta:tabela"
+						fileName="funcionarios" />
+				</p:commandButton>
 
 
 			</p:panel>
@@ -103,7 +104,7 @@
 
 					<!-- INICIO COLUNA COM BOTÕES  -->
 					<p:column style="width:11rem;text-align: center"
-						headerText="Opções">
+						headerText="Opções" exportable="false">
 
 						<p:commandButton icon="ui-icon-pencil"
 							actionListener="#{consultaFuncionariosBean.editar}"
