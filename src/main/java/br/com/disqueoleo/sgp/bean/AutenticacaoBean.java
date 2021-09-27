@@ -40,9 +40,20 @@ public class AutenticacaoBean implements Serializable {
 	private String funcaoNome;
 	private Long residuos;
 	private Long oleos;
+	private Long fornecedores;
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public Long getFornecedores() {
+		RetiradaDao retiradaDao = new RetiradaDao();
+		fornecedores = retiradaDao.buscarFornecedores(usuarioLogado);
+		return fornecedores;
+	}
+
+	public void setFornecedores(Long fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 
 	public void setUsuario(Usuario usuario) {
