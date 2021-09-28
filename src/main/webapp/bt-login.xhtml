@@ -24,6 +24,11 @@
 
 <h:body class="">
 
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage library="images" name="loadingDisqueOleo.gif" />
+	</p:dialog>
+
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
 	<p:growl id="mensagem" />
