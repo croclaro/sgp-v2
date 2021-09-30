@@ -41,7 +41,7 @@ public class AutenticacaoBean implements Serializable {
 	private Long residuos;
 	private Long oleos;
 	private Long fornecedores;
-
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
