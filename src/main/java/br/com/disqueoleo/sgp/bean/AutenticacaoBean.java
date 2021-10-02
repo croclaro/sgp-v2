@@ -41,9 +41,27 @@ public class AutenticacaoBean implements Serializable {
 	private Long residuos;
 	private Long oleos;
 	private Long fornecedores;
-	
+	private String nomeIndicacao;
+
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public String getNomeIndicacao() {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+			nomeIndicacao = "Indicação";
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+			nomeIndicacao = "Indicação";
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+			nomeIndicacao = "Fornecedor";
+		} else {
+			nomeIndicacao = "Erro";
+		}
+		return nomeIndicacao;
+	}
+
+	public void setNomeIndicacao(String nomeIndicacao) {
+		this.nomeIndicacao = nomeIndicacao;
 	}
 
 	public Long getFornecedores() {
