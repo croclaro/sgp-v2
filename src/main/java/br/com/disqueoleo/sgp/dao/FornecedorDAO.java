@@ -11,17 +11,11 @@ import br.com.disqueoleo.sgp.domain.Fornecedor;
 import br.com.disqueoleo.sgp.util.HibernateUtil;
 
 public class FornecedorDAO extends GenericoDAO<Fornecedor> {
-	public Fornecedor buscarPorCPFOuCNPJOuEmail(String cpfOuCNPJOuEmail) {
+	public Fornecedor buscarPorCPFOuCNPJ(String cpfOuCNPJ) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try {
 			Criteria consulta = sessao.createCriteria(Fornecedor.class);
-			consulta.add(
-				Restrictions.or(
-					Restrictions.eq("cpf", cpfOuCNPJOuEmail),
-					Restrictions.eq("cnpj", cpfOuCNPJOuEmail),
-					Restrictions.eq("email", cpfOuCNPJOuEmail)
-				)
-			);
+			consulta.add(Restrictions.or(Restrictions.eq("cpf", cpfOuCNPJ), Restrictions.eq("cnpj", cpfOuCNPJ)));
 			Fornecedor resultado = (Fornecedor) consulta.uniqueResult();
 			return resultado;
 		} catch (RuntimeException erro) {
@@ -30,7 +24,7 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
 			sessao.close();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Fornecedor> buscarPorAfiliado(Long afiliadoCodigo) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
@@ -46,5 +40,5 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
 		} finally {
 			sessao.close();
 		}
-	}		
+	}
 }

@@ -182,7 +182,7 @@ public class AutenticacaoBean implements Serializable {
 			if (afiliado != null) {
 				tipoUsuario = TipoUsuario.AFILIADO;
 			} else {
-				Fornecedor fornecedor = fornecedorDAO.buscarPorCPFOuCNPJOuEmail(usuario.getLogin());
+				Fornecedor fornecedor = fornecedorDAO.buscarPorCPFOuCNPJ(usuario.getLogin());
 				if (fornecedor != null) {
 					tipoUsuario = TipoUsuario.FORNECEDOR;
 				} else {
