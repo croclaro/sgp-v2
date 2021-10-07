@@ -43,7 +43,7 @@
 						<br />
 						<p:inputText id="inputNomeCompleto" type="text"
 							style="width: 100%" size="40"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.nome}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" converter="upperCaseConverter" />
 					</div>
 					<!-- FIM CAMPO RAZÃO SOCIAL -->
@@ -51,7 +51,7 @@
 					<div class="col-xl-4 col-md-4 mb-4">
 						<br />
 						<p:inputMask id="inputCPF" style="width: 100%"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.cpf}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							readonly="true" converter="upperCaseConverter"
 							mask="999.999.999-99" />
 					</div>
@@ -61,7 +61,7 @@
 						<br />
 						<p:inputText id="inputEmail" placeholder="Email"
 							style="width: 100%" size="12"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.email}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" converter="upperCaseConverter"
 							requiredMessage="" mask="O campo 'EMAIL' é obrigatório" />
 					</div>
@@ -77,7 +77,7 @@
 						<br />
 						<p:inputMask id="inputTelFixo" placeholder="Telefone fixo"
 							style="width: 100%" size="15"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.telFixo}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="false" converter="upperCaseConverter"
 							requiredMessage="" mask="(99)9999-9999" />
 					</div>
@@ -88,7 +88,7 @@
 						<br />
 						<p:inputMask id="inputCelular1" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.celular1}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							readonly="false" converter="upperCaseConverter"
 							mask="(99)99999-9999" />
 					</div>
@@ -99,7 +99,7 @@
 						<br />
 						<p:inputMask id="inputCelular2" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.celular2}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							readonly="true" converter="upperCaseConverter"
 							mask="(99)99999-9999" />
 					</div>
@@ -110,7 +110,7 @@
 						<br />
 						<p:inputMask id="inputCelular3" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.celular3}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							readonly="true" converter="upperCaseConverter"
 							mask="(99)99999-9999" />
 					</div>
@@ -134,7 +134,7 @@
 					<div class="col-xl-2 col-md-2 mb-4">
 						<br />
 						<p:inputMask id="inputCEP" placeholder="CEP" style="width: 100%"
-							size="10" value="#{autenticacaoBean.usuarioLogado.funcionario.cep}"
+							size="10" value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" mask="99999-999">
 							<p:ajax event="blur" listener="#{clienteBean.consultarCEP}"
 								process="@this" update=":mensagem :formCadastro:pnlEndereco" />
@@ -147,7 +147,7 @@
 						<br />
 						<p:inputText id="inputLogradouro" type="text"
 							placeholder="Logradouro" style="width: 100%" size="60"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.logradouro}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" converter="upperCaseConverter" />
 					</div>
 					<!-- FIM CAMPO Logradouro -->
@@ -157,7 +157,7 @@
 						<br />
 						<p:inputText id="inputNumero" type="text" placeholder="Número"
 							style="width: 100%" size="40"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.numero}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" />
 					</div>
 					<!-- FIM CAMPO Número -->
@@ -173,7 +173,7 @@
 						<br />
 						<p:inputText id="inputComplemento" type="text"
 							placeholder="Complemento" style="width: 100%" size="30"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.complemento}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							readonly="true" />
 					</div>
 					<!-- FIM CAMPO COMLEMENTO -->
@@ -197,7 +197,7 @@
 						<br />
 						<p:inputText id="inputBairro" type="text" placeholder="Bairro"
 							style="width: 100%" size="40"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.bairro}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" converter="upperCaseConverter" />
 					</div>
 					<!-- FIM CAMPO BAIRRO -->
@@ -207,7 +207,7 @@
 						<br />
 						<p:inputText id="inputCidade" type="text" placeholder="Cidade"
 							style="width: 100%" size="40"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.cidade}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" converter="upperCaseConverter" />
 					</div>
 					<!-- FIM CAMPO CIDADE -->
@@ -217,7 +217,7 @@
 						<br />
 						<p:inputText id="inputEstado" type="text" placeholder="Estado"
 							style="width: 100%" size="40"
-							value="#{autenticacaoBean.usuarioLogado.funcionario.estado}"
+							value="#{autenticacaoBean.dadosPessoais}"
 							required="true" readonly="true" converter="upperCaseConverter" />
 					</div>
 					<!-- FIM CAMPO ESTADO -->

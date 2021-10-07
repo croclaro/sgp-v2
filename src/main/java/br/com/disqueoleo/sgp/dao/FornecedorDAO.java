@@ -26,12 +26,12 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Fornecedor> buscarPorAfiliado(Long afiliadoCodigo) {
+	public List<Fornecedor> buscarPorAfiliado(Long fornecedorCodigo) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try {
 			Criteria consulta = sessao.createCriteria(Fornecedor.class);
-			consulta.createAlias("afiliado", "a");
-			consulta.add(Restrictions.eq("a.codigo", afiliadoCodigo));
+			consulta.createAlias("fornecedor", "a");
+			consulta.add(Restrictions.eq("a.codigo", fornecedorCodigo));
 			consulta.addOrder(Order.asc("razaoSocial"));
 			List<Fornecedor> resultado = consulta.list();
 			return resultado;

@@ -25,10 +25,10 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 			if (usuario.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 				consulta.createAlias("fornecedor", "f");
 				consulta.add(Restrictions.eq("f.codigo", usuario.getFornecedor().getCodigo()));
-			} else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
-				consulta.createAlias("afiliado", "a");
-				consulta.add(Restrictions.eq("a.codigo", usuario.getAfiliado().getCodigo()));
-			}
+			} //else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
+				//consulta.createAlias("afiliado", "a");
+				//consulta.add(Restrictions.eq("a.codigo", usuario.getAfiliado().getCodigo()));
+			//}
 
 			consulta.setProjection(Projections.sum("residuo"));
 
@@ -50,10 +50,10 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 			if (usuario.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 				consulta.createAlias("fornecedor", "f");
 				consulta.add(Restrictions.eq("f.codigo", usuario.getFornecedor().getCodigo()));
-			} else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
-				consulta.createAlias("afiliado", "a");
-				consulta.add(Restrictions.eq("a.codigo", usuario.getAfiliado().getCodigo()));
-			}
+			} //else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
+				//consulta.createAlias("afiliado", "a");
+				//consulta.add(Restrictions.eq("a.codigo", usuario.getAfiliado().getCodigo()));
+			//}
 
 			consulta.setProjection(Projections.sum("oleo"));
 
@@ -75,10 +75,10 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 			if (usuario.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 				consulta.createAlias("fornecedor", "f");
 				consulta.add(Restrictions.eq("f.codigo", usuario.getFornecedor().getCodigo()));
-			} else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
-				consulta.createAlias("afiliado", "a");
-				consulta.add(Restrictions.eq("a.codigo", usuario.getAfiliado().getCodigo()));
-			}
+			} //else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
+				//consulta.createAlias("afiliado", "a");
+				//consulta.add(Restrictions.eq("a.codigo", usuario.getAfiliado().getCodigo()));
+			//}
 
 			consulta.setProjection(Projections.count("codBarras"));
 
@@ -182,9 +182,9 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 
 		if (usuario.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			sql.append("		WHERE fornecedor_codigo = :fornecedor ");
-		} else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
-			sql.append("		WHERE afiliado_codigo = :afiliado ");
-		}
+		} //else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
+			//sql.append("		WHERE afiliado_codigo = :afiliado ");
+		//}
 
 		sql.append("	) TEMP ");
 		sql.append("GROUP BY ");
@@ -211,9 +211,9 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 
 			if (usuario.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 				consulta.setLong("fornecedor", usuario.getFornecedor().getCodigo());
-			} else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
-				consulta.setLong("afiliado", usuario.getAfiliado().getCodigo());
-			}
+			} //else if (usuario.getTipoUsuario() == TipoUsuario.AFILIADO) {
+				//consulta.setLong("afiliado", usuario.getAfiliado().getCodigo());
+			//}
 
 			if (ano != null) {
 				consulta.setInteger("ano", ano);

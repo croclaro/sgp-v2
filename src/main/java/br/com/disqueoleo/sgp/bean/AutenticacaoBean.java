@@ -42,6 +42,7 @@ public class AutenticacaoBean implements Serializable {
 	private Long oleos;
 	private Long fornecedores;
 	private String nomeIndicacao;
+	private String dadosPessoais;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -114,8 +115,40 @@ public class AutenticacaoBean implements Serializable {
 		} else {
 			usuarioNome = "ERRO";
 		}
-
 		return usuarioNome;
+	}
+
+	public String getDadosPessoais() {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+			dadosPessoais = usuarioLogado.getAfiliado().getNomeCompleto();
+			dadosPessoais = usuarioLogado.getAfiliado().getCpf();
+			dadosPessoais = usuarioLogado.getAfiliado().getEmail();
+			dadosPessoais = usuarioLogado.getAfiliado().getTelFixo();
+			dadosPessoais = usuarioLogado.getAfiliado().getCelular1();
+			dadosPessoais = usuarioLogado.getAfiliado().getCelular2();
+			dadosPessoais = usuarioLogado.getAfiliado().getCelular3();
+			dadosPessoais = usuarioLogado.getAfiliado().getCep();
+			dadosPessoais = usuarioLogado.getAfiliado().getLogradouro();
+			dadosPessoais = usuarioLogado.getAfiliado().getNumero().toString();
+			dadosPessoais = usuarioLogado.getAfiliado().getPontoReferencia();
+			dadosPessoais = usuarioLogado.getAfiliado().getBairro();
+			dadosPessoais = usuarioLogado.getAfiliado().getCidade();
+			dadosPessoais = usuarioLogado.getAfiliado().getEstado();
+
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+			dadosPessoais = usuarioLogado.getFornecedor().getRazaoSocial();
+			dadosPessoais = usuarioLogado.getFornecedor().getCnpj();
+			dadosPessoais = usuarioLogado.getFornecedor().getRazaoSocial();
+			dadosPessoais = usuarioLogado.getFornecedor().getRazaoSocial();
+
+		} else {
+			dadosPessoais = "Erro";
+		}
+		return dadosPessoais;
+	}
+
+	public void setDadosPessoais(String dadosPessoais) {
+		this.dadosPessoais = dadosPessoais;
 	}
 
 	public void setUsuarioNome(String usuarioNome) {
