@@ -192,8 +192,8 @@ public class AfiliadoBean implements Serializable {
 		}
 	}
 
-	public void enviarEmailAfiliado() {		
-		
+	public void enviarEmailAfiliado() {
+
 		Properties props = new Properties();
 		/** Parâmetros de conexão com servidor Gmail */
 		props.put("mail.smtp.host", "mail.sgp-disqueoleo.com.br");
@@ -216,12 +216,12 @@ public class AfiliadoBean implements Serializable {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("admin@sgp-disqueoleo.com.br"));
 			// Remetente
-			
+
 			Address[] toUser = InternetAddress.parse(getAfiliado().getEmail());
-			
+
 			message.setRecipients(Message.RecipientType.TO, toUser);
 			message.setSubject("SGP - Sistema Gerenciador de Produtos");// Assunto
-			message.setText("Seu email foi enviado por: " +getAfiliado().getNomeCompleto());
+			message.setText("Seu email foi enviado por: " + getAfiliado().getNomeCompleto());
 
 			/** Método para enviar a mensagem criada */
 			Transport.send(message);

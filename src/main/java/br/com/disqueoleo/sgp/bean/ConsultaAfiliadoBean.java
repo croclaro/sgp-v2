@@ -59,7 +59,7 @@ public class ConsultaAfiliadoBean implements Serializable {
 	@PostConstruct
 	public void listar() {
 		try {
-			AfiliadoDAO afiliadoDAO  = new AfiliadoDAO();
+			AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
 			afiliados = afiliadoDAO.listar();
 
 		} catch (RuntimeException erro) {
@@ -74,7 +74,7 @@ public class ConsultaAfiliadoBean implements Serializable {
 
 	public void salvar() {
 		try {
-			AfiliadoDAO afiliadoDAO  = new AfiliadoDAO();
+			AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
 			afiliadoDAO.merge(afiliado);
 
 			cadastrar();
