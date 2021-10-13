@@ -8,7 +8,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modelo.xhtml">
 
 	<ui:define name="bt-conteudo">
-		
+
 		<!-- INICIO FORMULÁRIO DE CONSULTA -->
 		<p:growl id="mensagem" />
 
@@ -18,18 +18,19 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content container-fluid"> <h:form id="formConsulta">
+		<section class="content container-fluid"> <h:form
+			id="formConsulta">
 
 			<!-- INICIO PAINEL DE BOTÕES -->
 			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
 
 				<p:commandButton value="Novo"
 					action="/cad-fornecedor?faces-redirect=true" update="@form"
-					icon="fa fa-plus-square" styleClass="btn-warning" />				
+					icon="fa fa-plus-square" styleClass="btn-warning" />
 
 				<p:commandButton value="Gerar Relatório" ajax="false"
-				icon="fa fa-file-pdf-o"
-					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" >
+					icon="fa fa-file-pdf-o"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 					<p:dataExporter type="pdf" target=":formConsulta:tabela"
 						fileName="fornecedores" />
 				</p:commandButton>

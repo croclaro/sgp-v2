@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-import br.com.disqueoleo.sgp.dao.AfiliadosDAO;
+import br.com.disqueoleo.sgp.dao.AfiliadoDAO;
 import br.com.disqueoleo.sgp.dao.FornecedorDAO;
 import br.com.disqueoleo.sgp.dao.FuncionarioDAO;
 import br.com.disqueoleo.sgp.dao.RetiradaDao;
@@ -31,21 +31,48 @@ import br.com.disqueoleo.sgp.enums.TipoUsuario;
 @SessionScoped
 public class AutenticacaoBean implements Serializable {
 	private Usuario usuario;
-	private Fornecedor fornecedor;
-	private Afiliado afiliado;
 	private Usuario usuarioLogado;
 	private Usuario status;
 
 	@SuppressWarnings("unused")
-	private String data;	
+	private String data;
 	private String usuarioNome;
 	private String funcaoNome;
 	private Long residuos;
-	private Long fornecedores;
 	private Long oleos;
+	private Long fornecedores;
+	private String nomeIndicacao;
+	private String dadosPessoais;
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public String getNomeIndicacao() {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+			nomeIndicacao = "Indicação";
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+			nomeIndicacao = "Indicação";
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+			nomeIndicacao = "Fornecedor";
+		} else {
+			nomeIndicacao = "Erro";
+		}
+		return nomeIndicacao;
+	}
+
+	public void setNomeIndicacao(String nomeIndicacao) {
+		this.nomeIndicacao = nomeIndicacao;
+	}
+
+	public Long getFornecedores() {
+		RetiradaDao retiradaDao = new RetiradaDao();
+		fornecedores = retiradaDao.buscarFornecedores(usuarioLogado);
+		return fornecedores;
+	}
+
+	public void setFornecedores(Long fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 
 	public void setUsuario(Usuario usuario) {
@@ -68,22 +95,6 @@ public class AutenticacaoBean implements Serializable {
 		this.status = status;
 	}
 
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
-	public Afiliado getAfiliado() {
-		return afiliado;
-	}
-
-	public void setAfiliado(Afiliado afiliado) {
-		this.afiliado = afiliado;
-	}
-
 	public String getData() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
@@ -93,61 +104,83 @@ public class AutenticacaoBean implements Serializable {
 	public void setData(String data) {
 		this.data = data;
 	}
-	
+
 	public String getUsuarioNome() {
-		if(usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
 			usuarioNome = usuarioLogado.getAfiliado().getNomeCompleto();
-		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			usuarioNome = usuarioLogado.getFornecedor().getNomeFantasia();
-		} if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
 			usuarioNome = usuarioLogado.getFuncionario().getNome();
 		} else {
 			usuarioNome = "ERRO";
 		}
-		
 		return usuarioNome;
 	}
-	
+
+	public String getDadosPessoais() {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+			dadosPessoais = usuarioLogado.getAfiliado().getNomeCompleto();
+			dadosPessoais = usuarioLogado.getAfiliado().getCpf();
+			dadosPessoais = usuarioLogado.getAfiliado().getEmail();
+			dadosPessoais = usuarioLogado.getAfiliado().getTelFixo();
+			dadosPessoais = usuarioLogado.getAfiliado().getCelular1();
+			dadosPessoais = usuarioLogado.getAfiliado().getCelular2();
+			dadosPessoais = usuarioLogado.getAfiliado().getCelular3();
+			dadosPessoais = usuarioLogado.getAfiliado().getCep();
+			dadosPessoais = usuarioLogado.getAfiliado().getLogradouro();
+			dadosPessoais = usuarioLogado.getAfiliado().getNumero().toString();
+			dadosPessoais = usuarioLogado.getAfiliado().getPontoReferencia();
+			dadosPessoais = usuarioLogado.getAfiliado().getBairro();
+			dadosPessoais = usuarioLogado.getAfiliado().getCidade();
+			dadosPessoais = usuarioLogado.getAfiliado().getEstado();
+
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+			dadosPessoais = usuarioLogado.getFornecedor().getRazaoSocial();
+			dadosPessoais = usuarioLogado.getFornecedor().getCnpj();
+			dadosPessoais = usuarioLogado.getFornecedor().getRazaoSocial();
+			dadosPessoais = usuarioLogado.getFornecedor().getRazaoSocial();
+
+		} else {
+			dadosPessoais = "Erro";
+		}
+		return dadosPessoais;
+	}
+
+	public void setDadosPessoais(String dadosPessoais) {
+		this.dadosPessoais = dadosPessoais;
+	}
+
 	public void setUsuarioNome(String usuarioNome) {
 		this.usuarioNome = usuarioNome;
 	}
-	
+
 	public String getFuncaoNome() {
-		if(usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
 			funcaoNome = usuarioLogado.getAfiliado().getNomeCompleto();
-		} else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
-			funcaoNome = "";
-		} if(usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+			funcaoNome = usuarioLogado.getFornecedor().getRazaoSocial();
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
 			funcaoNome = usuarioLogado.getFuncionario().getFuncao().getNomeFuncao();
 		} else {
 			funcaoNome = "ERRO";
 		}
-		
+
 		return funcaoNome;
 	}
-	
+
 	public void setFuncaoNome(String funcaoNome) {
 		this.funcaoNome = funcaoNome;
 	}
-	
+
 	public Long getResiduos() {
 		RetiradaDao retiradaDao = new RetiradaDao();
 		residuos = retiradaDao.buscarResiduos(usuarioLogado);
 		return residuos;
 	}
-	
+
 	public void setResiduos(Long residuos) {
 		this.residuos = residuos;
-	}
-
-	public Long getFornecedores() {
-		FornecedorDAO fornecedorDAO = new FornecedorDAO();
-		fornecedores = fornecedorDAO.buscarFornecedores(usuarioLogado);
-		return fornecedores;
-	}
-
-	public void setFornecedores(Long fornecedores) {
-		this.fornecedores= fornecedores;
 	}
 
 	public Long getOleos() {
@@ -162,8 +195,8 @@ public class AutenticacaoBean implements Serializable {
 
 	@PostConstruct
 	public void iniciar() {
-		usuario = new Usuario();		
-		usuario.setFuncionario(new Funcionario());	
+		usuario = new Usuario();
+		usuario.setFuncionario(new Funcionario());
 		usuario.setFornecedor(new Fornecedor());
 		usuario.setAfiliado(new Afiliado());
 	}
@@ -171,18 +204,18 @@ public class AutenticacaoBean implements Serializable {
 	public void autenticar() {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			AfiliadosDAO afiliadosDAO = new AfiliadosDAO();
+			AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
 			FornecedorDAO fornecedorDAO = new FornecedorDAO();
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-			
+
 			TipoUsuario tipoUsuario = null;
-			
-			// Descobre o tipo do usuário que esta tentando efetuar a autenticação 
-			Afiliado afiliado = afiliadosDAO.buscarPorCPFOuEmail(usuario.getLogin());
+
+			// Descobre o tipo do usuário que esta tentando efetuar a autenticação
+			Afiliado afiliado = afiliadoDAO.buscarPorCPFOuEmail(usuario.getLogin());
 			if (afiliado != null) {
 				tipoUsuario = TipoUsuario.AFILIADO;
 			} else {
-				Fornecedor fornecedor = fornecedorDAO.buscarPorCPFOuCNPJOuEmail(usuario.getLogin());
+				Fornecedor fornecedor = fornecedorDAO.buscarPorCPFOuCNPJ(usuario.getLogin());
 				if (fornecedor != null) {
 					tipoUsuario = TipoUsuario.FORNECEDOR;
 				} else {
@@ -194,18 +227,21 @@ public class AutenticacaoBean implements Serializable {
 					}
 				}
 			}
-			
+
 			// Efetua a autenticação
 			if (tipoUsuario == TipoUsuario.AFILIADO) {
-				usuarioLogado = usuarioDAO.autenticarAFiliado(usuario.getLogin(), usuario.getSenha(), usuario.getStatus());
+				usuarioLogado = usuarioDAO.autenticarAFiliado(usuario.getLogin(), usuario.getSenha(),
+						usuario.getStatus());
 			} else if (tipoUsuario == TipoUsuario.FORNECEDOR) {
-				usuarioLogado = usuarioDAO.autenticarFornecedor(usuario.getLogin(), usuario.getSenha(), usuario.getStatus());
+				usuarioLogado = usuarioDAO.autenticarFornecedor(usuario.getLogin(), usuario.getSenha(),
+						usuario.getStatus());
 			} else if (tipoUsuario == TipoUsuario.FUNCIONARIO) {
-				usuarioLogado = usuarioDAO.autenticarFuncionario(usuario.getLogin(), usuario.getSenha(), usuario.getStatus());
+				usuarioLogado = usuarioDAO.autenticarFuncionario(usuario.getLogin(), usuario.getSenha(),
+						usuario.getStatus());
 			} else {
 				usuarioLogado = null;
 			}
-			
+
 			// Verifica se o usuário foi autenticado
 			if (usuarioLogado == null) {
 				Messages.addGlobalError("CPF e/ou senha incorretos");
@@ -245,7 +281,7 @@ public class AutenticacaoBean implements Serializable {
 		usuarioLogado = null;
 		return "bt-login.xhtml?faces-redirect=true";
 	}
-	
+
 	public boolean temPerfis(List<String> permissoes) {
 		for (String permissao : permissoes) {
 			if (usuarioLogado.getTipoUsuario().toString().equals(permissao)) {

@@ -29,12 +29,12 @@
 					action="/cad-usuario?faces-redirect=true" update="@form"
 					icon="fa fa-plus-square" styleClass="btn-warning" />
 
-				<p:commandButton value="Gerar Relatório"
-					actionListener="#{imprimirBean.cartaoFornecedor}"
+				<p:commandButton value="Gerar Relatório" ajax="false"
 					icon="fa fa-file-pdf-o"
-					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-					update=":mensagem :formListagem:tabela" ajax="false" />
-
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+					<p:dataExporter type="pdf" target=":formConsulta:tabela"
+						fileName="usuarios" />
+				</p:commandButton>
 
 			</p:panel>
 			<!-- FIM PAINEL DE BOTÕES -->
@@ -69,9 +69,20 @@
 						<h:outputText value="#{usuario.funcionario.nome}" />
 					</p:column>
 
+					<p:column headerText="Razão social"
+						sortBy="#{usuario.fornecedor.razaoSocial}"
+						filterBy="#{usuario.fornecedor.razaoSocial}">
+						<h:outputText value="#{usuario.fornecedor.razaoSocial}" />
+					</p:column>
+
 					<p:column headerText="CPF" sortBy="#{usuario.funcionario.cpf}"
 						filterBy="#{usuario.funcionario.cpf}">
 						<h:outputText value="#{usuario.funcionario.cpf}" />
+					</p:column>
+
+					<p:column headerText="Cnpj" sortBy="#{usuario.fornecedor.cnpj}"
+						filterBy="#{usuario.fornecedor.cnpj}">
+						<h:outputText value="#{usuario.fornecedor.cnpj}" />
 					</p:column>
 
 					<p:column headerText="Tipo" sortBy="#{usuario.tipo}"
@@ -87,7 +98,7 @@
 
 					<!-- INICIO COLUNA COM BOTÕES  -->
 					<p:column style="width:11rem;text-align: center"
-						headerText="Opções">
+						headerText="Opções" exportable="false">
 
 						<p:commandButton icon="ui-icon-pencil"
 							actionListener="#{consultaUsuariosBean.editar}"

@@ -31,7 +31,8 @@
 				<!-- ======================================== -->
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="fas fa-oil-can"></i></span>
+						<span class="info-box-icon bg-aqua"><i
+							class="fas fa-oil-can"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">Retiradas</span> <span
@@ -48,8 +49,7 @@
 				<!-- ======================================== -->
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-red"><i
-							class="fa fa-recycle"></i></span>
+						<span class="info-box-icon bg-red"><i class="fa fa-recycle"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">Resíduos</span> <span
@@ -73,8 +73,8 @@
 							class="fa fa-users"></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">Fornecedores</span> <span
-								class="info-box-number"></span>
+							<span class="info-box-text">#{autenticacaoBean.nomeIndicacao}</span> <span
+								class="info-box-number">#{autenticacaoBean.fornecedores}</span>
 						</div>
 						<!-- /.info-box-content -->
 					</div>
@@ -151,8 +151,8 @@
 						<p:selectOneMenu value="#{chartJsViewBean.ano}" autoWidth="true">
 							<f:selectItem value="#{null}" itemLabel="Ano" />
 							<f:selectItems value="#{chartJsViewBean.anos}" />
-							<p:ajax event="change" listener="#{chartJsViewBean.createBarModel}"
-								update="pinos" />
+							<p:ajax event="change"
+								listener="#{chartJsViewBean.createBarModel}" update="pinos" />
 						</p:selectOneMenu>
 
 						<p:selectOneMenu value="#{chartJsViewBean.mes}">
@@ -170,8 +170,8 @@
 							<f:selectItem itemValue="11" itemLabel="Novembro" />
 							<f:selectItem itemValue="12" itemLabel="Dezembro" />
 
-							<p:ajax event="change" listener="#{chartJsViewBean.createBarModel}"
-								update="pinos" />
+							<p:ajax event="change"
+								listener="#{chartJsViewBean.createBarModel}" update="pinos" />
 						</p:selectOneMenu>
 						<p:barChart id="pinos" model="#{chartJsViewBean.barModel}"
 							style="width: 100%; height: 300px;" />
@@ -189,8 +189,8 @@
 						<p:selectOneMenu value="#{chartJsViewBean.ano}" autoWidth="true">
 							<f:selectItem value="#{null}" itemLabel="Ano" />
 							<f:selectItems value="#{chartJsViewBean.anos}" />
-							<p:ajax event="change" listener="#{chartJsViewBean.createBarModel2}"
-								update="pinos1" />
+							<p:ajax event="change"
+								listener="#{chartJsViewBean.createBarModel2}" update="pinos1" />
 						</p:selectOneMenu>
 
 						<p:selectOneMenu value="#{chartJsViewBean.mes}">

@@ -33,7 +33,8 @@
 		<link rel="stylesheet" href="resources/template/dist/css/AdminLTE.css" />
 
 		<!-- Theme style -->
-		<link rel="stylesheet" href="resources/template/dist/css/skins/skin-yellow.css" />
+		<link rel="stylesheet"
+			href="resources/template/dist/css/skins/skin-yellow-light.css" />
 
 		<!-- Morris chart -->
 		<link rel="stylesheet"
@@ -186,7 +187,7 @@
 							<img src="resources/template/dist/img/avatar5.png"
 							class="user-image" alt="User Image" /> <!-- hidden-xs hides the username on small devices so only the image appears. -->
 							<span class="hidden-xs"> <h:outputText
-									value="#{autenticacaoBean.usuarioNome}" />
+									value="#{autenticacaoBean.funcaoNome}" />
 						</span>
 					</a> <!-- ######################################################### -->
 						<!-- INICIO ITENS MENU USUÁRIO -->
@@ -197,9 +198,8 @@
 								src="resources/template/dist/img/avatar5.png" class="img-circle"
 								alt="User Image" />
 								<p>
-									<h:outputText
-										value="#{autenticacaoBean.usuarioNome}" />
-									Seu último acesso foi em <small> <h:outputText
+									<h:outputText value="#{autenticacaoBean.usuarioNome}" />
+									<br></br> Seu último acesso foi em <small> <h:outputText
 											value="#{autenticacaoBean.data}." />
 									</small>
 								</p></li>
@@ -207,26 +207,15 @@
 							<li class="user-body">
 								<div class="row">
 									<div class="col-xs-12 text-left">
-										<a href="con-usuario.xhtml"> <i class="fa fa-user fa-sm"></i>
-											 Perfil
+										<a href="con-dadosPessoais.xhtml"> <i
+											class="fa fa-user fa-sm"></i> Dados pessoais
 										</a>
 									</div>
 								</div> <!-- /.row -->
 							</li>
 							<!-- /.user-body -->
 
-							<!-- item 3 CORPO DO MENU -->
-							<li class="user-body">
-								<div class="row">
-									<div class="col-xs-12 text-left">
-										<i class="fa fa-cogs fa-sm fa-fw"></i> <a
-											href="con-usuario.xhtml"> Configurações</a>
-									</div>
-								</div> <!-- /.row -->
-							</li>
-							<!-- /.user-body -->
 
-							<!-- item 5 RODAPÉ DO MENU -->
 							<li class="user-footer">
 								<div>
 
@@ -260,75 +249,122 @@
 			<!-- INICIO ITENS MENU LATERAL --> <!-- Sidebar Menu -->
 			<ul class="sidebar-menu" data-widget="tree">
 
-				<li class="header">GESTÃO</li>
+				<li class="treeview">GESTÃO</li>
 
 				<!-- ITEM MENU PAINEL DE CONTROLE -->
 				<li class="active"><a href="bt-principal.xhtml"><i
 						class="fa fa-tachometer"></i> <span>Painel de Controle</span></a></li>
 				<li class="header"></li>
 
-				
-				<li class="header">OPERAÇÃO</li>
+
+				<li class="treeview">OPERAÇÃO</li>
 				<!-- Optionally, you can add icons to the links -->
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-banco.xhtml"><i class="fas fa-oil-can"></i>
-						<span>Banco</span></p:link></li>
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}" href="con-beneficiario.xhtml"><i
-						class="fas fa-oil-can"></i> <span>Beneficiário</span></p:link></li>
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-cliente.xhtml"><i class="fas fa-oil-can"></i><span>
-							Cliente</span></p:link></li>
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO', 'AFILIADO'])}" href="con-fornecedor.xhtml"><i
-						class="fas fa-oil-can"></i> <span> Fornecedor</span></p:link></li>
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-funcionario.xhtml"><i
-						class="fas fa-oil-can"></i> <span>Funcionário</span></p:link></li>
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-funcao.xhtml"><i class="fas fa-oil-can"></i>
-						<span>Função</span></p:link></li>
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-produto.xhtml"><i class="fas fa-oil-can"></i>
-						<span>Produto</span></p:link></li>
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="con-usuario.xhtml"><i class="fas fa-oil-can"></i>
-						<span>Usuário</span></p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR'])}"
+						href="con-afiliado.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Afiliado</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-banco.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Banco</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-beneficiario.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Beneficiário</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-cliente.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span> Cliente</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO', 'AFILIADO'])}"
+						href="con-fornecedor.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span> Fornecedor</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-funcionario.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Funcionário</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-funcao.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Função</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-produto.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Produto</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-usuario.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Usuário</span>
+					</p:link></li>
 
-				<li class="header"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link></li>
-				<li class="header"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link>CADASTROS</li>
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link></li>
 
-				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}" href="#"><i
-						class="fas fa-hands-helping"></i> <span> Indicação</span> <span
-						class="pull-right-container"> <i
+				<li class="treeview"></li>
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"></p:link>RELATÓRIOS</li>
+
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="rel-cartaoFornecedor.xhtml">
+						<i class="fa fa-credit-card"></i>
+						<span>Cartão fornecedor</span>
+					</p:link></li>
+
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}" href="#">
+						<i class="fa fa-address-card"></i>
+						<span>Crachá</span>
+						<span class="pull-right-container"> <i
 							class="fa fa-angle-left pull-right"></i>
-					</span> </p:link>
+						</span>
+					</p:link>
 					<ul class="treeview-menu">
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}" href="cad-fornecedor.xhtml">Fornecedor</p:link></li>
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}" href="cad-afiliado.xhtml">Afiliado</p:link></li>
-
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-crachaFrente.xhtml">Crachá frente</p:link></li>
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-crachaVerso.xhtml">Crachá verso</p:link></li>
 					</ul></li>
 
-				<li class="header"></li>
-				<li class="header">RELATÓRIOS</li>
-
-				<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-cartaoFornecedor.xhtml"><i
-						class="fa fa-credit-card"></i> <span>Cartão fornecedor</span></p:link></li>
-
-				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="#"><i
-						class="fa fa-address-card"></i> <span>Crachá</span> <span
-						class="pull-right-container"> <i
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}" href="#">
+						<i class="fa fa-flag"></i>
+						<span>Retiradas</span>
+						<span class="pull-right-container"> <i
 							class="fa fa-angle-left pull-right"></i>
-					</span> </p:link>
+						</span>
+					</p:link>
 					<ul class="treeview-menu">
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-crachaFrente.xhtml">Crachá frente</p:link></li>
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-crachaVerso.xhtml">Crachá verso</p:link></li>
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-retiradas.xhtml">Consolidadas</p:link></li>
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-retiradas.xhtml">Por Bairros</p:link></li>
+
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-retiradas.xhtml">Por Bairros</p:link></li>
 					</ul></li>
-
-				<li class="treeview"><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO', 'AFILIADO'])}" href="#"><i class="fa fa-flag"></i>
-						<span>Retiradas</span> <span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-					</span> </p:link>
-					<ul class="treeview-menu">
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-retiradas.xhtml">Retiradas Consolidadas</p:link>></li>
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-retiradas.xhtml">Retiradas por bairros</p:link></li>
-						<li><p:link rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'FUNCIONARIO'])}" href="rel-retiradas.xhtml">Retiradas por mês</p:link></li>
-					</ul></li>
-
-
-
 			</ul>
 			<!-- /.sidebar-menu --> <!-- FIM ITENS MENU LATERAL --> </section> </aside>
 			<!-- FIM BARRA LATERAL -->

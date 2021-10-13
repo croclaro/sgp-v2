@@ -24,6 +24,11 @@
 
 <h:body class="">
 
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage library="images" name="loadingDisqueOleo.gif" />
+	</p:dialog>
+
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
 	<p:growl id="mensagem" />
@@ -33,7 +38,7 @@
 		<div class="card">
 			<div class="row g-0">
 				<div class="col-md-6 ">
-					<img src="resources/img/LogoDisqueOleo.png" class=""
+					<img src="resources/img/LogoDisqueOleo.png" class="text-center flex-grow-1 bg-login-image"
 						style="max-width: 27rem; height: auto" alt="..." />
 				</div>
 				<div class="col-md-6 ">
@@ -80,12 +85,6 @@
 							<a class="mt-4 text-gray-100" href="bt-forgot-password.xhtml">Esqueceu
 								a senha?</a>
 						</p>
-						<p class="card-text">
-							<a class="mt-4 text-gray-100" href="bt-register.xhtml">Não é
-								cadastrado?</a>
-						</p>
-
-
 					</div>
 				</div>
 			</div>
