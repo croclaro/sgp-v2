@@ -30,6 +30,9 @@ import br.com.disqueoleo.sgp.domain.Afiliado;
 import br.com.disqueoleo.sgp.domain.Banco;
 import br.com.disqueoleo.sgp.domain.CEP;
 
+
+//ATUALIZADO MASTER ....
+
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
