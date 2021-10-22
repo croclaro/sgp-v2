@@ -37,8 +37,7 @@ public class AutenticacaoListener implements PhaseListener {
 				}
 			}
 
-		}//fim ehPaginaPublica
-	
+		}//fim ehPaginaPublica	
 	}
 
 	@Override

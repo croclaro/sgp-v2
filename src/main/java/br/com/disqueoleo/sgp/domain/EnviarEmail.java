@@ -71,7 +71,6 @@ public class EnviarEmail {
 		/** Ativa Debug para sessão */
 		session.setDebug(true);
 		try {
-
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("admin@sgp-disqueoleo.com.br"));
 			// Remetente
