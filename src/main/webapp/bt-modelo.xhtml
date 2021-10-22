@@ -263,7 +263,7 @@
 						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR'])}"
 						href="con-afiliado.xhtml">
 						<i class="fas fa-oil-can"></i>
-						<span>Afiliado</span>
+						<span>Afiliado indicado</span>
 					</p:link></li>
 				<li><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
@@ -288,6 +288,12 @@
 						href="con-fornecedor.xhtml">
 						<i class="fas fa-oil-can"></i>
 						<span> Fornecedor</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['AFILIADO', 'FORNECEDOR'])}"
+						href="con-fornecedorIndicado.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span> Fornecedor indicado</span>
 					</p:link></li>
 				<li><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
