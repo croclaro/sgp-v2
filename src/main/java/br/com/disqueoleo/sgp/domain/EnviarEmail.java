@@ -64,7 +64,7 @@ public class EnviarEmail {
 
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("admin@sgp-disqueoleo.com.br", "C3lso1359");
+				return new PasswordAuthentication("admin@sgp-disqueoleo.com.br", "C3lso1359@#");
 			}
 		});
 

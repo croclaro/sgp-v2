@@ -25,7 +25,8 @@
 			<p:focus context="@form" />
 
 			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
-				<p:commandButton value="Salvar" action="#{fornecedorBean.salvar}"
+				<p:commandButton value="Salvar"
+					action="#{fornecedorIndicacaoBean.salvar}"
 					update=":mensagem :formCadastro" icon="fa fa-floppy-o"
 					styleClass="btn-success" />
 
@@ -47,8 +48,8 @@
 						<br />
 						<p:inputText id="inputRazaoSocial" type="text"
 							placeholder="Razão social" style="width: 100%" size="40"
-							value="#{fornecedorBean.fornecedor.razaoSocial}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							value="#{fornecedorIndicacaoBean.fornecedor.razaoSocial}"
+							required="true" readonly="false" converter="upperCaseConverter"
 							requiredMessage="O campo 'RAZÃO SOCIAL' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO RAZÃO SOCIAL -->
@@ -62,8 +63,9 @@
 					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
 						<br />
 						<p:inputMask id="inputCNPJ" placeholder="Cnpj" style="width: 100%"
-							value="#{fornecedorBean.fornecedor.cnpj}" readonly="false"
-							converter="upperCaseConverter" mask="99.999.999/9999-99" />
+							value="#{fornecedorIndicacaoBean.fornecedor.cnpj}"
+							readonly="false" converter="upperCaseConverter"
+							mask="99.999.999/9999-99" />
 					</div>
 					<!-- FIM CAMPO NOME CNPJ -->
 
@@ -71,8 +73,9 @@
 					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
 						<br />
 						<p:inputMask id="inputCPF" placeholder="CPF" style="width: 100%"
-							value="#{fornecedorBean.fornecedor.cpf}" readonly="false"
-							converter="upperCaseConverter" mask="999.999.999-99" />
+							value="#{fornecedorIndicacaoBean.fornecedor.cpf}"
+							readonly="false" converter="upperCaseConverter"
+							mask="999.999.999-99" />
 					</div>
 					<!-- FIM CAMPO NOME CPF -->
 
@@ -89,8 +92,8 @@
 						<br />
 						<p:inputText id="inputEmail" placeholder="Email"
 							style="width: 100%" size="12"
-							value="#{fornecedorBean.fornecedor.email}" readonly="false"
-							converter="upperCaseConverter" required="true"
+							value="#{fornecedorIndicacaoBean.fornecedor.email}"
+							readonly="false" converter="upperCaseConverter" required="true"
 							requiredMessage="O campo 'EMAIL' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO Email -->
@@ -105,8 +108,9 @@
 						<br />
 						<p:inputMask id="inputTelFixo" placeholder="Telefone fixo"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.telFixo}" readonly="false"
-							converter="upperCaseConverter" mask="(99)9999-9999" />
+							value="#{fornecedorIndicacaoBean.fornecedor.telFixo}"
+							readonly="false" converter="upperCaseConverter"
+							mask="(99)9999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Fixo -->
 
@@ -115,8 +119,9 @@
 						<br />
 						<p:inputMask id="inputCelular1" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.celular1}" readonly="false"
-							converter="upperCaseConverter" mask="(99)99999-9999" />
+							value="#{fornecedorIndicacaoBean.fornecedor.celular1}"
+							readonly="false" converter="upperCaseConverter"
+							mask="(99)99999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Celular 1 -->
 
@@ -125,8 +130,9 @@
 						<br />
 						<p:inputMask id="inputCelular2" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.celular2}" readonly="false"
-							converter="upperCaseConverter" mask="(99)99999-9999" />
+							value="#{fornecedorIndicacaoBean.fornecedor.celular2}"
+							readonly="false" converter="upperCaseConverter"
+							mask="(99)99999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Celular 2 -->
 
@@ -135,14 +141,17 @@
 						<br />
 						<p:inputMask id="inputCelular3" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.celular3}" readonly="false"
-							converter="upperCaseConverter" mask="(99)99999-9999" />
+							value="#{fornecedorIndicacaoBean.fornecedor.celular3}"
+							readonly="false" converter="upperCaseConverter"
+							mask="(99)99999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Celular 3 -->
 
 				</div>
 				<!-- ####### FIM LINHA 4 -->
-
+				<h:inputHidden
+					value="#{fornecedorIndicacaoBean.fornecedor.dataFornecedor}" />
+				<br />
 			</p:panel>
 			<!-- FIM DADOS PESSOAIS -->
 

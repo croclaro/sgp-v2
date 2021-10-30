@@ -6,19 +6,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
 
 import org.omnifaces.util.Messages;
 
-import com.google.gson.Gson;
-
-import br.com.disqueoleo.sgp.dao.BancoDAO;
 import br.com.disqueoleo.sgp.dao.FornecedorDAO;
-import br.com.disqueoleo.sgp.domain.Banco;
-import br.com.disqueoleo.sgp.domain.CEP;
 import br.com.disqueoleo.sgp.domain.EnviarEmail;
 import br.com.disqueoleo.sgp.domain.Fornecedor;
 import br.com.disqueoleo.sgp.domain.ValidaCNPJ;
@@ -27,10 +18,9 @@ import br.com.disqueoleo.sgp.domain.ValidaCPF;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class FornecedorBean implements Serializable {
+public class FornecedorIndicacaoBean implements Serializable {
 	private Fornecedor fornecedor;
-	private List<Fornecedor> fornecedores;
-	private List<Banco> bancos;
+	private List<Fornecedor> fornecedores;	
 	private EnviarEmail enviarEmail;
 
 	// MÉTODO GETTER AND SETTERS ...
@@ -50,15 +40,7 @@ public class FornecedorBean implements Serializable {
 
 	public void setFornecedores(List<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
-	}
-
-	public List<Banco> getBancos() {
-		return bancos;
-	}
-
-	public void setBancos(List<Banco> bancos) {
-		this.bancos = bancos;
-	}
+	}	
 
 	public EnviarEmail getEnviarEmail() {
 		return enviarEmail;
@@ -72,13 +54,10 @@ public class FornecedorBean implements Serializable {
 	public void cadastrar() {
 		try {
 			fornecedor = new Fornecedor();
-			enviarEmail = new EnviarEmail();
-
-			BancoDAO bancoDAO = new BancoDAO();
-			bancos = bancoDAO.listar();
+			enviarEmail = new EnviarEmail();			
 
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao gerar o fornecedor");
+			Messages.addFlashGlobalError("Ocorreu um erro ao gerar o fornecedor indicado");
 			erro.printStackTrace();
 		}
 	}
@@ -100,13 +79,10 @@ public class FornecedorBean implements Serializable {
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
-				enviarEmail.enviarEmailFornecedor();
+				enviarEmail.enviarEmailFornecedor();				
 
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
-
-				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
+				Messages.addGlobalInfo("Fornecedor indicado salvo com sucesso!!!");
+				Messages.addGlobalInfo("Você receberá um email para terminar o cadastro.");
 
 			} else if (ValidaCPF.isCPF(fornecedor.getCpf()) == false
 					&& (fornecedor.getCpf() != "" && (fornecedor.getCnpj() == ""))) {
@@ -117,10 +93,7 @@ public class FornecedorBean implements Serializable {
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
-				enviarEmail.enviarEmailFornecedor();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
+				enviarEmail.enviarEmailFornecedor();				
 
 				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
 				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
@@ -130,10 +103,7 @@ public class FornecedorBean implements Serializable {
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
-				enviarEmail.enviarEmailFornecedor();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
+				enviarEmail.enviarEmailFornecedor();				
 
 				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
 				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
@@ -143,9 +113,7 @@ public class FornecedorBean implements Serializable {
 
 				cadastrar();
 				enviarEmail.enviarEmailFornecedor();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
+				
 
 				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
 				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
@@ -154,10 +122,7 @@ public class FornecedorBean implements Serializable {
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
-				enviarEmail.enviarEmailFornecedor();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
+				enviarEmail.enviarEmailFornecedor();				
 
 				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
 				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
@@ -167,54 +132,5 @@ public class FornecedorBean implements Serializable {
 			Messages.addGlobalError("Erro ao cadastrar o Fornecedor");
 			erro.printStackTrace();
 		}
-	}
-
-	public void consultarCEP() {
-		String cepSemMascara = fornecedor.getCep().replace(".", "").replace("-", "").replace("_", "");
-		String cepSemMascara1 = fornecedor.getCep().replace(".", "").replace("-", "").replace("_", "");
-
-		String url = "http://cep.republicavirtual.com.br/web_cep.php?cep=" + cepSemMascara + "&formato=json";
-		String url1 = "http://cep.republicavirtual.com.br/web_cep.php?cep=" + cepSemMascara1 + "&formato=json";
-
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target(url);
-		WebTarget target1 = client.target(url1);
-
-		Response response = target.request().get();
-		String json = response.readEntity(String.class);
-
-		Response response1 = target1.request().get();
-		String json1 = response1.readEntity(String.class);
-
-		Gson gson = new Gson();
-		CEP cep = gson.fromJson(json, CEP.class);
-
-		Gson gson1 = new Gson();
-		CEP cep1 = gson1.fromJson(json1, CEP.class);
-
-		if (cep.getResultado().equals("0")) {
-			fornecedor.setBairro(null);
-			fornecedor.setCidade(null);
-			fornecedor.setLogradouro(null);
-			fornecedor.setEstado(null);
-			Messages.addGlobalWarn("O campo CEP é inválido");
-		} else if (cep1.getResultado().equals("0")) {
-			fornecedor.setBairro(null);
-			fornecedor.setCidade(null);
-			fornecedor.setLogradouro(null);
-			fornecedor.setEstado(null);
-
-			Messages.addGlobalWarn("O campo CEP é inválido");
-		} else {
-			fornecedor.setBairro(cep.getBairro());
-			fornecedor.setCidade(cep.getCidade());
-			fornecedor.setLogradouro(cep.getTipo_logradouro() + " " + cep.getLogradouro());
-			fornecedor.setEstado(cep.getUf());
-
-			fornecedor.setBairro(cep1.getBairro());
-			fornecedor.setCidade(cep1.getCidade());
-			fornecedor.setLogradouro(cep1.getTipo_logradouro() + " " + cep1.getLogradouro());
-			fornecedor.setEstado(cep1.getUf());
-		}
-	}
+	}	
 }
