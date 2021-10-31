@@ -21,12 +21,12 @@
 		<section class="content container-fluid"> <p:growl id="msgs"
 			showDetail="true" skipDetailIfEqualsSummary="true" /> <h:form
 			id="formListagem">
-
+			
 			<!-- INICIO PAINEL DE BOTÕES -->
 			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
 
 				<p:commandButton value="Gerar verso crachá"
-					actionListener="#{imprimirBean.crachaVerso}"
+					actionListener="#{imprimirBean.retiradaOleo}"
 					icon="fa fa-file-pdf-o"
 					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
 					update=":mensagem :formListagem:tabela" ajax="false" />
@@ -36,37 +36,54 @@
 			<!-- FIM PAINEL DE BOTÕES -->
 
 			<!-- INICIO CONSULTA DE CLIENTE -->
-			<h3 class="mt-4 text-gray-100">Crachá verso</h3>
+			<h3 class="mt-4 text-gray-100">Retiradas consolidadas</h3>
 
 			<!-- INICIO PAINEL DE CONSULTA -->
 			<p:panel id="pnlDados" styleClass="box-warning card mt-2">
 
-				<p:dataTable id="tabela" var="funcionario"
-					value="#{consultaFuncionariosBean.funcionarios}" reflow="true"
-					rows="6" paginator="true" paginatorPosition="bottom"
+				<p:dataTable id="tabela" var="retirada"
+					value="#{consultaRetiradasBean.retiradas}" reflow="true" rows="6"
+					paginator="true" paginatorPosition="bottom"
 					emptyMessage="Nenhum registro encontrado."
 					styleClass="products-table">
 
-					<p:column headerText="Nome Funcionário"
-						sortBy="#{funcionario.nome}" filterBy="#{funcionario.nome}">
-						<h:outputText value="#{funcionario.nome}" />
+					<p:column headerText="Nome fantasia"
+						sortBy="#{retirada.fornecedor.nomeFantasia}"
+						filterBy="#{retirada.fornecedor.nomeFantasia}">
+						<h:outputText value="#{retirada.fornecedor.nomeFantasia}" />
 					</p:column>
 
-					<p:column headerText="CPF" sortBy="#{funcionario.cpf}"
-						filterBy="#{funcionario.cpf}">
-						<h:outputText value="#{funcionario.cpf}" />
+					<p:column headerText="Funcionário"
+						sortBy="#{retirada.funcionario.nome}"
+						filterBy="#{retirada.funcionario.nome}">
+						<h:outputText value="#{retirada.funcionario.nome}" />
 					</p:column>
 
-					<p:column headerText="Cargo">
-						<h:outputText value="#{funcionario.funcao.nomeFuncao}" />
+					<p:column headerText="Produto"
+						sortBy="#{retirada.produto.descricao}"
+						filterBy="#{retirada.produto.descricao}">
+						<h:outputText value="#{retirada.produto.descricao}" />
 					</p:column>
 
-					<p:column headerText="Fator RH">
-						<h:outputText value="#{funcionario.tipoSanguineo.tipoSanguineo}" />
+					<p:column headerText="Óleo">
+						<h:outputText value="#{retirada.oleo}" />
 					</p:column>
 
-					<p:column headerText="Código de Barras">
-						<h:outputText value="#{funcionario.codBarras}" />
+					<p:column headerText="Resíduo">
+						<h:outputText value="#{retirada.residuo}" />
+					</p:column>
+
+					<p:column headerText="Bairro"
+						sortBy="#{retirada.fornecedor.bairro}"
+						filterBy="#{retirada.fornecedor.bairro}">
+
+						<h:outputText value="#{retirada.fornecedor.bairro}" />
+					</p:column>
+
+					<p:column headerText="Data da retirada"
+						sortBy="#{retirada.dataRetirada}"
+						filterBy="#{retirada.dataRetirada}">
+						<h:outputText value="#{retirada.dataRetirada}" />
 					</p:column>
 				</p:dataTable>
 			</p:panel>

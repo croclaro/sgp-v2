@@ -33,10 +33,10 @@ public class ConsultaFornecedoresBean implements Serializable {
 	private Fornecedor fornecedor;
 	private List<Fornecedor> fornecedores;
 	private List<Banco> bancos;
-	
+
 	@ManagedProperty("#{autenticacaoBean}")
 	private AutenticacaoBean autenticacaoBean;
-	
+
 	public void setAutenticacaoBean(AutenticacaoBean autenticacaoBean) {
 		this.autenticacaoBean = autenticacaoBean;
 	}
@@ -69,10 +69,15 @@ public class ConsultaFornecedoresBean implements Serializable {
 	public void listar() {
 		try {
 			FornecedorDAO fornecedorDAO = new FornecedorDAO();
-			
+
 			if (autenticacaoBean.getUsuarioLogado().getTipoUsuario() == TipoUsuario.AFILIADO) {
-				fornecedores = fornecedorDAO.buscarPorAfiliado(autenticacaoBean.getUsuarioLogado().getAfiliado().getCodigo());
-			} else {
+				fornecedores = fornecedorDAO
+						.buscarPorAfiliado(autenticacaoBean.getUsuarioLogado().getAfiliado().getCodigo());
+			} else if(autenticacaoBean.getUsuarioLogado().getTipoUsuario() == TipoUsuario.AFILIADO) {
+				fornecedores = fornecedorDAO
+						.buscarPorFornecedor(autenticacaoBean.getUsuarioLogado().getFornecedor().getCodigo());
+				
+			}else {
 				fornecedores = fornecedorDAO.listar();
 			}
 		} catch (RuntimeException erro) {

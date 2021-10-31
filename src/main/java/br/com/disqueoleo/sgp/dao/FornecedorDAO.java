@@ -8,6 +8,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.disqueoleo.sgp.domain.Fornecedor;
+import br.com.disqueoleo.sgp.domain.Retirada;
 import br.com.disqueoleo.sgp.util.HibernateUtil;
 
 public class FornecedorDAO extends GenericoDAO<Fornecedor> {
@@ -30,6 +31,23 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try {
 			Criteria consulta = sessao.createCriteria(Fornecedor.class);
+			consulta.createAlias("fornecedor", "a");
+			consulta.add(Restrictions.eq("a.codigo", fornecedorCodigo));
+			consulta.addOrder(Order.asc("razaoSocial"));
+			List<Fornecedor> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> buscarPorFornecedor(Long fornecedorCodigo) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(Retirada.class);
 			consulta.createAlias("fornecedor", "a");
 			consulta.add(Restrictions.eq("a.codigo", fornecedorCodigo));
 			consulta.addOrder(Order.asc("razaoSocial"));
