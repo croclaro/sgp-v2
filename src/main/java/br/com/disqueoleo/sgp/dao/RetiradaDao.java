@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.ResultTransformer;
@@ -313,6 +314,23 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 			});
 
 			List<RetiradaDTO> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Retirada> buscarPorRetirada(Long fornecedorCodigo) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(Retirada.class);
+			consulta.createAlias("fornecedor", "a");
+			consulta.add(Restrictions.eq("a.codigo", fornecedorCodigo));
+			consulta.addOrder(Order.asc("razaoSocial"));
+			List<Retirada> resultado = consulta.list();
 			return resultado;
 		} catch (RuntimeException erro) {
 			throw erro;

@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="166"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="828"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGP Data Adapter"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -88,7 +88,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="20"/>
 				</textElement>
-				<text><![CDATA[Retirada de óleo usado]]></text>
+				<text><![CDATA[Retirada de Ã³leo usado]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="630" y="40" width="100" height="20" uuid="658a1810-8095-4e00-a86a-7496439a4b0f"/>
@@ -124,7 +124,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Funcionário]]></text>
+				<text><![CDATA[FuncionÃ¡rio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="383" y="0" width="61" height="13" forecolor="#262626" uuid="7d170eb4-4e88-45e0-be4e-746ee9a01c93">
@@ -142,7 +142,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Qtde óleo]]></text>
+				<text><![CDATA[Qtde Ã³leo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="500" y="0" width="60" height="13" forecolor="#262626" uuid="79d0996c-8fa4-4cb3-ba50-9cf8d0ea09a9">
@@ -151,7 +151,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Qtde resíduo]]></text>
+				<text><![CDATA[Qtde resÃ­duo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="714" y="0" width="85" height="13" forecolor="#262626" uuid="8374a953-ddd7-4bbe-92e1-91bf6b2ea739">
@@ -247,7 +247,7 @@ WHERE
 		<band height="370" splitType="Stretch">
 			<staticText>
 				<reportElement x="393" y="5" width="81" height="13" uuid="9be66cf8-771f-47d6-a22c-107d6f57fc06"/>
-				<text><![CDATA[Total óleo]]></text>
+				<text><![CDATA[Total Ã³leo]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="474" y="5" width="80" height="13" uuid="1ca19f78-c942-484a-a8d1-449d4d755c53"/>
@@ -255,7 +255,7 @@ WHERE
 			</textField>
 			<staticText>
 				<reportElement x="393" y="21" width="81" height="13" uuid="7ee92876-4e7b-4dec-96b7-168d4089ec8b"/>
-				<text><![CDATA[Total resíduo]]></text>
+				<text><![CDATA[Total resÃ­duo]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="474" y="21" width="100" height="13" uuid="98517527-2cec-4593-b917-dbf8e0a0821f"/>

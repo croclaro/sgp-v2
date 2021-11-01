@@ -17,8 +17,10 @@ import org.omnifaces.util.Messages;
 
 import br.com.disqueoleo.sgp.dao.BancoDAO;
 import br.com.disqueoleo.sgp.dao.FornecedorDAO;
+import br.com.disqueoleo.sgp.dao.RetiradaDao;
 import br.com.disqueoleo.sgp.domain.Banco;
 import br.com.disqueoleo.sgp.domain.Fornecedor;
+import br.com.disqueoleo.sgp.domain.Retirada;
 import br.com.disqueoleo.sgp.enums.TipoUsuario;
 import br.com.disqueoleo.sgp.util.HibernateUtil;
 import net.sf.jasperreports.engine.JRException;
@@ -32,6 +34,7 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 public class ConsultaFornecedoresBean implements Serializable {
 	private Fornecedor fornecedor;
 	private List<Fornecedor> fornecedores;
+	private List<Retirada> retiradas;
 	private List<Banco> bancos;
 
 	@ManagedProperty("#{autenticacaoBean}")
@@ -65,19 +68,28 @@ public class ConsultaFornecedoresBean implements Serializable {
 		this.bancos = bancos;
 	}
 
+	public List<Retirada> getRetiradas() {
+		return retiradas;
+	}
+
+	public void setRetiradas(List<Retirada> retiradas) {
+		this.retiradas = retiradas;
+	}
+
 	@PostConstruct
 	public void listar() {
 		try {
 			FornecedorDAO fornecedorDAO = new FornecedorDAO();
+			RetiradaDao retiradaDao = new RetiradaDao();
 
 			if (autenticacaoBean.getUsuarioLogado().getTipoUsuario() == TipoUsuario.AFILIADO) {
 				fornecedores = fornecedorDAO
 						.buscarPorAfiliado(autenticacaoBean.getUsuarioLogado().getAfiliado().getCodigo());
-			} else if(autenticacaoBean.getUsuarioLogado().getTipoUsuario() == TipoUsuario.AFILIADO) {
-				fornecedores = fornecedorDAO
-						.buscarPorFornecedor(autenticacaoBean.getUsuarioLogado().getFornecedor().getCodigo());
-				
-			}else {
+			} else if (autenticacaoBean.getUsuarioLogado().getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+				retiradas = retiradaDao
+						.buscarPorRetirada(autenticacaoBean.getUsuarioLogado().getFornecedor().getCodigo());
+
+			} else {
 				fornecedores = fornecedorDAO.listar();
 			}
 		} catch (RuntimeException erro) {
