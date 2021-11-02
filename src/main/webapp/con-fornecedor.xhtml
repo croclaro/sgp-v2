@@ -26,12 +26,19 @@
 
 				<p:commandButton value="Novo"
 					action="/cad-fornecedor?faces-redirect=true" update="@form"
-					icon="fa fa-plus-square" styleClass="btn-warning" />
+					icon="fa fa-plus-square" styleClass="btn-primary" />
 
-				<p:commandButton value="Gerar Relatório" ajax="false"
+				<p:commandButton value="Gerar PDF" ajax="false"
 					icon="fa fa-file-pdf-o"
-					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-					<p:dataExporter type="pdf" target=":formConsulta:tabela"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+					<p:dataExporter type="pdf" target=":formConsulta:tabela" 
+						fileName="fornecedores" />
+				</p:commandButton>
+				
+				<p:commandButton value="Gerar Excel" ajax="false"
+					icon="fa fa-file-excel-o"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+					<p:dataExporter type="xls" target=":formConsulta:tabela" 
 						fileName="fornecedores" />
 				</p:commandButton>
 

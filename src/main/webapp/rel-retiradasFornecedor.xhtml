@@ -25,11 +25,19 @@
 			<!-- INICIO PAINEL DE BOTÕES -->
 			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
 
-				<p:commandButton value="Gerar verso crachá"
-					actionListener="#{imprimirBean.retiradaOleo}"
+				<p:commandButton value="Gerar PDF" ajax="false"
 					icon="fa fa-file-pdf-o"
-					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-					update=":mensagem :formListagem:tabela" ajax="false" />
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+					<p:dataExporter type="pdf" target=":formConsulta:tabela" 
+						fileName="RetiradasFornecedores" />
+				</p:commandButton>
+				
+				<p:commandButton value="Gerar Excel" ajax="false"
+					icon="fa fa-file-excel-o"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+					<p:dataExporter type="xls" target=":formConsulta:tabela" 
+						fileName="RetiradasFornecedores" />
+				</p:commandButton>
 
 
 			</p:panel>
