@@ -329,7 +329,7 @@ public class RetiradaDao extends GenericoDAO<Retirada> {
 			Criteria consulta = sessao.createCriteria(Retirada.class);
 			consulta.createAlias("fornecedor", "a");
 			consulta.add(Restrictions.eq("a.codigo", fornecedorCodigo));
-			consulta.addOrder(Order.asc("razaoSocial"));
+			consulta.addOrder(Order.asc("codigo"));
 			List<Retirada> resultado = consulta.list();
 			return resultado;
 		} catch (RuntimeException erro) {

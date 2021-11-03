@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
@@ -20,6 +21,7 @@ import br.com.disqueoleo.sgp.domain.Fornecedor;
 import br.com.disqueoleo.sgp.domain.Funcionario;
 import br.com.disqueoleo.sgp.domain.Produto;
 import br.com.disqueoleo.sgp.domain.Retirada;
+import br.com.disqueoleo.sgp.enums.TipoUsuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -31,6 +33,17 @@ public class ConsultaRetiradasBean implements Serializable {
 	private List<Produto> produtos;
 	private List<Funcionario> funcionarios;
 	private List<Retirada> retiradas;
+
+	@ManagedProperty("#{autenticacaoBean}")
+	private AutenticacaoBean autenticacaoBean;
+
+	public AutenticacaoBean getAutenticacaoBean() {
+		return autenticacaoBean;
+	}
+
+	public void setAutenticacaoBean(AutenticacaoBean autenticacaoBean) {
+		this.autenticacaoBean = autenticacaoBean;
+	}
 
 	public Retirada getRetirada() {
 		return retirada;
@@ -84,7 +97,12 @@ public class ConsultaRetiradasBean implements Serializable {
 	public void listar() {
 		try {
 			RetiradaDao retiradaDao = new RetiradaDao();
-			retiradas = retiradaDao.listar();
+			if (autenticacaoBean.getUsuarioLogado().getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+				retiradas = retiradaDao
+						.buscarPorRetirada(autenticacaoBean.getUsuarioLogado().getFornecedor().getCodigo());
+			} else {
+				retiradas = retiradaDao.listar();
+			}
 
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar as retiradas.");
@@ -160,5 +178,5 @@ public class ConsultaRetiradasBean implements Serializable {
 		} catch (RuntimeException erro) {
 			erro.printStackTrace();
 		}
-	}	
+	}
 }
