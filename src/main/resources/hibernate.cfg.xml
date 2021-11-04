@@ -12,7 +12,7 @@
 		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
 		<property name="connection.url">jdbc:sqlserver://dbsq0015.whservidor.com;databaseName=disqueoleo1</property>
 		<property name="connection.username">disqueoleo1</property>
-		<property name="connection.password">@gor@b@nco</property>
+		<property name="connection.password">@gor@b@nco1</property>
 
 		<!-- Pool de Conexões -->
 		<property name="hibernate.c3p0.min_size">5</property>
