@@ -85,4 +85,21 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
 			sessao.close();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> buscarPorDadosFornecedor(Long fornecedorCodigo) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(Fornecedor.class);
+			consulta.createAlias("fornecedor", "a");
+			consulta.add(Restrictions.eq("a.codigo", fornecedorCodigo));
+			consulta.addOrder(Order.asc("razaoSocial"));
+			List<Fornecedor> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
 }

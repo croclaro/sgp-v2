@@ -45,6 +45,14 @@ public class ConsultaBancosBean implements Serializable {
 		return banco;
 	}
 
+	public void setBanco(Banco banco) {
+		this.banco = banco;
+	}
+
+	public List<Banco> getBancos() {
+		return bancos;
+	}
+
 	public ExcelOptions getExcelOpt() {
 		return excelOpt;
 	}
@@ -61,14 +69,6 @@ public class ConsultaBancosBean implements Serializable {
 		this.pdfOpt = pdfOpt;
 	}
 
-	public void setBanco(Banco banco) {
-		this.banco = banco;
-	}
-
-	public List<Banco> getBancos() {
-		return bancos;
-	}
-
 	public void setBancos(List<Banco> bancos) {
 		this.bancos = bancos;
 	}
@@ -78,7 +78,7 @@ public class ConsultaBancosBean implements Serializable {
 		try {
 
 			BancoDAO bancoDAO = new BancoDAO();
-			bancos = bancoDAO.listar();
+			bancos = bancoDAO.listar();	
 			customizationOptions();
 
 		} catch (RuntimeException erro) {
@@ -92,7 +92,7 @@ public class ConsultaBancosBean implements Serializable {
 			banco = new Banco();
 			BancoDAO bancoDAO = new BancoDAO();
 			bancos = bancoDAO.listar();
-			
+
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao cadastrar o banco!!!");
 			erro.printStackTrace();
@@ -141,7 +141,7 @@ public class ConsultaBancosBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-
+	
 	public void customizationOptions() {
 		excelOpt = new ExcelOptions();
 		excelOpt.setFacetBgColor("#F88017");
@@ -190,5 +190,4 @@ public class ConsultaBancosBean implements Serializable {
 
 		pdf.add(Image.getInstance(logo));		
 	}
-
 }
