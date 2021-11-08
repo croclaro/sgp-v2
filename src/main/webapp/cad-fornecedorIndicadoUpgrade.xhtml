@@ -28,7 +28,13 @@
 				<p:commandButton value="Salvar" action="#{fornecedorBean.salvar}"
 					update=":mensagem :formCadastro" icon="fa fa-floppy-o"
 					styleClass="btn-success" />
+
+				<p:commandButton value="Voltar" immediate="true"
+					action="con-fornecedor?faces-redirect=true" process="@this"
+					icon="fa fa-hand-o-left" styleClass="btn btn-sm" />
+
 			</p:panel>
+
 
 			<!-- INICIO DADOS PESSOAIS -->
 			<h3 class="mt-4 text-gray-100">Dados Pessoais</h3>
@@ -36,6 +42,17 @@
 
 				<!-- ####### INICIO LINHA 1 - 2 COLUNAS TAG col-md-(6 X 2 = ATÉ 12 COLUNAS) -->
 				<div id="LI1" class="row">
+					<!-- INICIO CAMPO RAZÃO SOCIAL -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputText id="inputRazaoSocial" type="text"
+							placeholder="Razão social" style="width: 100%" size="40"
+							value="#{fornecedorBean.fornecedor.razaoSocial}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'RAZÃO SOCIAL' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO RAZÃO SOCIAL -->
+
 					<!-- INICIO CAMPO NOME FANTASIA -->
 					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
 						<br />
@@ -60,8 +77,26 @@
 
 				<!-- ####### INICIO LINHA 2 - 3 COLUNAS  -->
 				<div id="LI2" class="row">
-					<!-- INICIO CAMPO Licença de operação -->
+					<!-- INICIO CAMPO CNPJ: -->
+					<div class="col-xl-5 col-md-5 mb-4">
+						<br />
+						<p:inputMask id="inputCNPJ" placeholder="Cnpj" style="width: 100%"
+							value="#{fornecedorBean.fornecedor.cnpj}" readonly="true"
+							converter="upperCaseConverter" mask="99.999.999/9999-99" />
+					</div>
+					<!-- FIM CAMPO NOME CNPJ -->
+
+					<!-- INICIO CAMPO CPF: -->
 					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCPF" placeholder="CPF" style="width: 100%"
+							value="#{fornecedorBean.fornecedor.cpf}" readonly="true"
+							converter="upperCaseConverter" mask="999.999.999-99" />
+					</div>
+					<!-- FIM CAMPO NOME CPF -->
+
+					<!-- INICIO CAMPO Licença de operação -->
+					<div class="col-xl-4 col-md-4 mb-4">
 						<br />
 						<p:inputText id="inputLicencaOperacao"
 							placeholder="Licença operação(L.O)" style="width: 100%" size="30"
@@ -69,11 +104,11 @@
 							readonly="false" converter="upperCaseConverter" />
 					</div>
 					<!-- FIM CAMPO Licença de operação -->
+				</div>
+				<!-- ####### FIM LINHA 2 -->
 
-					<!-- ####### FIM LINHA 2 -->
-
-					<!-- ####### INICIO LINHA 3 - 2 COLUNAS-->
-
+				<!-- ####### INICIO LINHA 3 - 2 COLUNAS-->
+				<div id="LI3" class="row">
 					<!-- INICIO CAMPO Número Ibama -->
 					<div class="col-xl-3 col-md-3 mb-4">
 						<br />
@@ -85,7 +120,7 @@
 					<!-- FIM CAMPO Número Ibama -->
 
 					<!-- INICIO CAMPO Inscrição Estadual -->
-					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+					<div class="col-xl-3 col-md-3 mb-4">
 						<br />
 						<p:inputText id="inputInscricaoEstadual"
 							placeholder="Inscrição estadual" style="width: 100%" size="30"
@@ -93,8 +128,18 @@
 							readonly="false" converter="upperCaseConverter" />
 					</div>
 					<!-- FIM CAMPO Inscrição Estadual -->
-				</div>
 
+					<!-- INICIO CAMPO Email: -->
+					<div class="col-xl-6 col-md-6 mb-4">
+						<br />
+						<p:inputText id="inputEmail" placeholder="Email"
+							style="width: 100%" size="12"
+							value="#{fornecedorBean.fornecedor.email}" readonly="true"
+							converter="upperCaseConverter" required="true"
+							requiredMessage="O campo 'EMAIL' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Email -->
+				</div>
 				<!-- ####### FIM LINHA 3 -->
 
 				<!-- ####### INICIO LINHA 4 - 4 COLUNAS-->
@@ -105,7 +150,7 @@
 						<br />
 						<p:inputMask id="inputTelFixo" placeholder="Tefone fixo"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.telFixo}" readonly="false"
+							value="#{fornecedorBean.fornecedor.telFixo}" readonly="true"
 							converter="upperCaseConverter" mask="(99)9999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Fixo -->
@@ -115,7 +160,7 @@
 						<br />
 						<p:inputMask id="inputCelular1" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.celular1}" readonly="false"
+							value="#{fornecedorBean.fornecedor.celular1}" readonly="true"
 							converter="upperCaseConverter" mask="(99)99999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Celular 1 -->
@@ -125,7 +170,7 @@
 						<br />
 						<p:inputMask id="inputCelular2" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.celular2}" readonly="false"
+							value="#{fornecedorBean.fornecedor.celular2}" readonly="true"
 							converter="upperCaseConverter" mask="(99)99999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Celular 2 -->
@@ -135,7 +180,7 @@
 						<br />
 						<p:inputMask id="inputCelular3" placeholder="Celular"
 							style="width: 100%" size="15"
-							value="#{fornecedorBean.fornecedor.celular3}" readonly="false"
+							value="#{fornecedorBean.fornecedor.celular3}" readonly="true"
 							converter="upperCaseConverter" mask="(99)99999-9999" />
 					</div>
 					<!-- FIM CAMPO Telefone Celular 3 -->
@@ -173,7 +218,7 @@
 						<p:inputText id="inputLogradouro" type="text"
 							placeholder="Logradouro" style="width: 100%" size="60"
 							value="#{fornecedorBean.fornecedor.logradouro}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'LOGRADOURO' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO Logradouro -->
@@ -224,7 +269,7 @@
 						<p:inputText id="inputBairro" type="text" placeholder="Bairro"
 							style="width: 100%" size="40"
 							value="#{fornecedorBean.fornecedor.bairro}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'BAIRRO' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO BAIRRO -->
@@ -235,7 +280,7 @@
 						<p:inputText id="inputCidade" type="text" placeholder="Cidade"
 							style="width: 100%" size="40"
 							value="#{fornecedorBean.fornecedor.cidade}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'CIDADE' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO CIDADE -->
@@ -246,16 +291,21 @@
 						<p:inputText id="inputEstado" type="text" placeholder="Estado"
 							style="width: 100%" size="40"
 							value="#{fornecedorBean.fornecedor.estado}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'ESTADO' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO ESTADO -->
+
+
 				</div>
 				<!-- ####### FIM LINHA 7 - 3 colunas -->
+
 			</p:panel>
 			<!-- FIM ENDEREÇO -->
+
 			<!-- INICIO PAINEL DADOS BANCÁRIOS -->
 			<h3 class="mt-4 text-gray-100">Dados Bancários</h3>
+
 			<p:panel id="pnlDadosBancarios" styleClass="box-warning card mt-2">
 
 				<!-- ####### INICIO LINHA 8 - 4 COLUNAS -->
@@ -263,6 +313,7 @@
 					<!-- INICIO BANCO -->
 					<div class="col-xl-3 col-md-3 mb-4">
 						<br />
+
 						<p:selectOneMenu id="banco" filter="true" style="width: 100%"
 							value="#{fornecedorBean.fornecedor.banco}" required="true"
 							readonly="false" converter="omnifaces.SelectItemsConverter"
@@ -272,6 +323,7 @@
 								itemLabel="Selecione um banco" />
 							<f:selectItems value="#{fornecedorBean.bancos}" var="banco"
 								itemValue="#{banco}" itemLabel="#{banco.nome}" />
+
 						</p:selectOneMenu>
 					</div>
 					<!-- FIM CAMPO BANCO -->
@@ -318,57 +370,7 @@
 
 				</div>
 				<!-- ####### FIM LINHA 8 - 4 -->
-
-				<h:inputHidden value="#{fornecedorBean.fornecedor.dataFornecedor}" />
-				<br />
-			</p:panel>
-			<!-- FIM PAINEL DADOS BANCÁRIOS -->
-
-			<!-- INICIO PAINEL DADOS LOGIN -->
-			<h3 class="mt-4 text-gray-100">Login</h3>
-			<p:panel id="pnlDadosBancarios" styleClass="box-warning card mt-2">
-
-				<!-- ####### INICIO LINHA 8 - 4 COLUNAS -->
-				<div id="LI8" class="row">
-					<!-- INICIO CAMPO SENHA -->
-					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
-						<br />
-						<p:password id="inputSenha" placeholder="Digite a senha"
-							style="width: 100%" size="12"
-							value="#{usuarioBean.usuario.senha}" required="true"
-							requiredMessage="O campo 'SENHA' é obrigatório"
-							validatorMessage="Informe uma senha de no mínimo 8 caracteres">
-							<f:validateLength minimum="8" />
-						</p:password>
-
-					</div>
-					<!-- FIM CAMPO SENHA -->
-
-					<!-- INICIO CAMPO CONFIRME A SENHA -->
-					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
-						<br />
-						<p:password id="inputConfSenha" placeholder="Confirme a senha"
-							style="width: 100%" size="12"
-							value="#{usuarioBean.usuario.confSenha}" required="true"
-							requiredMessage="O campo 'SENHA' é obrigatório">
-						</p:password>
-					</div>
-					<!-- FIM CAMPO CONFIRME A SENHA -->
-				</div>
-				<!-- ####### FIM LINHA 8 - 4 -->
-
-				<!-- ####### INICIO LINHA 8 - 4 COLUNAS -->
-				<div id="LI8" class="row">
-					<!-- INICIO CAMPO SENHA -->
-					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
-						<br />
-						<p:inputText type="checkbox" class="custom-control-input"
-							id="customCheck" />
-						<div class="g-recaptcha"
-							data-sitekey="6Lcugt8ZAAAAAGJLrCRhBsdBzMOYjbRxYFb_l-u8"></div>
-					</div>
-				</div>
-
+				
 				<h:inputHidden value="#{fornecedorBean.fornecedor.dataFornecedor}" />
 				<br />
 			</p:panel>

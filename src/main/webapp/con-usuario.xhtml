@@ -33,14 +33,16 @@
 					icon="fa fa-file-pdf-o"
 					styleClass="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
 					<p:dataExporter type="pdf" target=":formConsulta:tabela" 
-						fileName="usuarios" />
+						fileName="usuarios" preProcessor="#{relatoriosBean.preProcessPDF}"
+						/>
 				</p:commandButton>
 				
 				<p:commandButton value="Gerar Excel" ajax="false"
 					icon="fa fa-file-excel-o"
 					styleClass="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
 					<p:dataExporter type="xls" target=":formConsulta:tabela" 
-						fileName="usuarios" />
+						fileName="usuarios" postProcessor="#{relatoriosBean.postProcessXLS}"
+						/>
 				</p:commandButton>
 
 			</p:panel>
