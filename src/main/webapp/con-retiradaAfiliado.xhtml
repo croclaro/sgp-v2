@@ -7,8 +7,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modelo.xhtml">
 
-
-
 	<ui:define name="bt-conteudo">
 
 		<!-- INICIO FORMULÁRIO DE CONSULTA -->
@@ -20,18 +18,27 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content container-fluid"> <h:form
-			id="formListagem">
+		<section class="content container-fluid"> <p:growl id="msgs"
+			showDetail="true" skipDetailIfEqualsSummary="true" /> <h:form
+			id="formConsulta">
 			<!-- INICIO PAINEL DE BOTÕES -->
 			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
 
-				<p:commandButton value="Gerar Relatório"
-					actionListener="#{imprimirBean.retiradaOleo}"
-					 icon="fa fa-file-pdf-o"
-					styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-					update=":mensagem :formListagem:tabela" ajax="false" />
+				<p:commandButton value="Gerar PDF" ajax="false"
+					icon="fa fa-file-pdf-o"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+					<p:dataExporter type="pdf" encoding="iso-8859-1"
+						target=":formConsulta:tabela" fileName="retiradas"
+						preProcessor="#{relatoriosBean.preProcessPDF}" />
+				</p:commandButton>
 
-
+				<p:commandButton value="Gerar Excel" ajax="false"
+					icon="fa fa-file-excel-o"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+					<p:dataExporter type="xls" encoding="iso-8859-1"
+						target=":formConsulta:tabela" fileName="retiradas"
+						postProcessor="#{relatoriosBean.postProcessXLS}" />
+				</p:commandButton>
 			</p:panel>
 			<!-- FIM PAINEL DE BOTÕES -->
 

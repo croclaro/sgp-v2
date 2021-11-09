@@ -32,7 +32,7 @@
 				<p:commandButton value="Gerar PDF" ajax="false"
 					icon="fa fa-file-pdf-o"
 					styleClass="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-					<p:dataExporter type="pdf" target=":formConsulta:tabela" 
+					<p:dataExporter type="pdf" encoding="iso-8859-1" target=":formConsulta:tabela" 
 						fileName="usuarios" preProcessor="#{relatoriosBean.preProcessPDF}"
 						/>
 				</p:commandButton>
@@ -40,7 +40,7 @@
 				<p:commandButton value="Gerar Excel" ajax="false"
 					icon="fa fa-file-excel-o"
 					styleClass="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-					<p:dataExporter type="xls" target=":formConsulta:tabela" 
+					<p:dataExporter type="xls" encoding="iso-8859-1" target=":formConsulta:tabela" 
 						fileName="usuarios" postProcessor="#{relatoriosBean.postProcessXLS}"
 						/>
 				</p:commandButton>
