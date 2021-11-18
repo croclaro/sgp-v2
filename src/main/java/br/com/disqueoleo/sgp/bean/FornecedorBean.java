@@ -140,7 +140,7 @@ public class FornecedorBean implements Serializable {
 					usuario.setToken(token);
 
 					Usuario usuarioSalvo = usuarioDAO.merge(usuario);
-					usuarioSalvo.setSenhaSemCriptografia(usuario.getSenhaSemCriptografia())
+					usuarioSalvo.setSenhaSemCriptografia(usuario.getSenhaSemCriptografia());
 					
 					enviarEmail.enviarEmailUsuario(usuarioSalvo);
 					
