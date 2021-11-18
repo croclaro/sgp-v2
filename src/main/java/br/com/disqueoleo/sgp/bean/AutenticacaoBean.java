@@ -293,6 +293,7 @@ public class AutenticacaoBean implements Serializable {
 	}
 
 	public String sair() {
+		Faces.invalidateSession();
 		usuarioLogado = null;
 		return "bt-login.xhtml?faces-redirect=true";
 	}
