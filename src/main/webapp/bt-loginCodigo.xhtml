@@ -31,6 +31,7 @@
 
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
+		
 	<p:growl id="mensagem" />
 
 	<div class="container">
@@ -51,11 +52,10 @@
 							<div class="form-group">
 								<input type="codigo" class="form-control form-control-user"
 									id="codigo" aria-describedby="emailHelp"
-									placeholder="Digite o código"
-									jsf:value="#{autenticacaoBean.usuario.login}"
+									placeholder="Digite o token"
+									jsf:value="#{autenticacaoBean.usuario.token}"
 									jsf:required="true"
-									jsf:requiredMessage="O campo Código é obrigatório" />
-
+									jsf:requiredMessage="O campo Token é obrigatório" />
 							</div>
 
 							<div class="form-group">
@@ -63,7 +63,7 @@
 									id="exampleInputEmail" aria-describedby="emailHelp"
 									placeholder="Digite o CPF, Cnpj ou Email"
 									jsf:value="#{autenticacaoBean.usuario.login}"
-									jsf:required="true" readonly="true"
+									jsf:required="true" 
 									jsf:requiredMessage="O campo CPF é obrigatório" />
 
 							</div>
@@ -79,8 +79,8 @@
 							<div class="form-group">
 								<p:password type="password"
 									class="form-control form-control-user" id="confSenha"
-									placeholder="Confirme a senha"
-									value="#{autenticacaoBean.usuario.senha}" required="true"
+									placeholder="Digite a nova senha"
+									value="#{autenticacaoBean.usuario.senhaSemCriptografia}" required="true"
 									requiredMessage="O campo Confirme a Senha é obrigatório" />
 							</div>
 

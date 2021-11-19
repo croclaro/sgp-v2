@@ -31,6 +31,24 @@ public class UsuarioDAO extends GenericoDAO<Usuario> {
 		}
 	}
 	
+	public Usuario buscarPorToken(String token) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+
+		try {
+			Criteria consulta = sessao.createCriteria(Usuario.class);
+			
+			consulta.add(Restrictions.eq("token", token));
+
+			Usuario resultado = (Usuario) consulta.uniqueResult();
+
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
+	
 	public Usuario autenticarFuncionario (String cpfOuEmail, String senha, Boolean status) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 

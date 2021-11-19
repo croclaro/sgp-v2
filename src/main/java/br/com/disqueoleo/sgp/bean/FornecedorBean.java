@@ -1,6 +1,8 @@
 package br.com.disqueoleo.sgp.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,16 +13,21 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import com.google.gson.Gson;
 
 import br.com.disqueoleo.sgp.dao.BancoDAO;
 import br.com.disqueoleo.sgp.dao.FornecedorDAO;
+import br.com.disqueoleo.sgp.dao.UsuarioDAO;
 import br.com.disqueoleo.sgp.domain.Banco;
 import br.com.disqueoleo.sgp.domain.CEP;
 import br.com.disqueoleo.sgp.domain.EnviarEmail;
 import br.com.disqueoleo.sgp.domain.Fornecedor;
+import br.com.disqueoleo.sgp.domain.Usuario;
 import br.com.disqueoleo.sgp.domain.ValidaCNPJ;
 import br.com.disqueoleo.sgp.domain.ValidaCPF;
 
@@ -82,31 +89,71 @@ public class FornecedorBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
+	
+	public void upgrade() {
+		String codigo = Faces.getRequestParameter("codigo");
+		
+		if (codigo == null) {
+			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+		}
+		
+		FornecedorDAO fornecedorDAO = new FornecedorDAO();
+		fornecedor = fornecedorDAO.buscar(Long.valueOf(codigo));
+		
+		if (fornecedor == null) {
+			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+		}
+	}
 
 	public void salvar() {
 		try {
-			if (fornecedor.getCnpj() == "" && (fornecedor.getCpf() == "")) {
+			if (fornecedor.getCnpj().isEmpty()  && (fornecedor.getCpf().isEmpty())) {
 				Messages.addGlobalError("CPF ou CNPJ não podem ficar em branco");
-			} else if (fornecedor.getCpf() != "" && (fornecedor.getCnpj() != "")) {
-				Messages.addGlobalError("Digite um CPF ou CNPJ");
-			} else if (fornecedor.getTelFixo() == "" && (fornecedor.getCelular1() == "")) {
+			} else if (fornecedor.getTelFixo().isEmpty() && (fornecedor.getCelular1().isEmpty())) {
 				Messages.addGlobalError("Você precisa digitar pelo menos um telefone para prosseguir.");
 			} else if (ValidaCNPJ.isCNPJ(fornecedor.getCnpj()) == false
-					&& (fornecedor.getCnpj() != "" && (fornecedor.getCpf() == ""))) {
+					&& (!fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty()))) {
 				Messages.addGlobalError("O Cnpj " + fornecedor.getCnpj() + " está incorreto.");
-			} else if (fornecedor.getCnpj() != "" && (fornecedor.getCpf() == "")) {
+			} else if (!fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty())) {
 
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
-				fornecedorDAO.merge(fornecedor);
+				Fornecedor fornecedorSalvo = fornecedorDAO.merge(fornecedor);
 
+				if(fornecedor.getCodigo() == null ) {
+					enviarEmail.enviarEmailFornecedor(fornecedorSalvo);
+				} else {
+					UsuarioDAO usuarioDAO = new UsuarioDAO();
+					
+					Usuario usuario = new Usuario();
+					usuario.setFornecedor(fornecedorSalvo);
+					
+					usuario.setDataUsuario(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(new Date()));
+					
+					String senha = RandomStringUtils.randomAlphanumeric(6);
+					SimpleHash hash = new SimpleHash("md5", senha);
+					usuario.setSenha(hash.toHex());
+					usuario.setSenhaSemCriptografia(senha);
+					
+					usuario.setStatus(true);
+					
+					String token = RandomStringUtils.randomNumeric(6);
+					usuario.setToken(token);
+
+					Usuario usuarioSalvo = usuarioDAO.merge(usuario);
+					usuarioSalvo.setSenhaSemCriptografia(usuario.getSenhaSemCriptografia());
+					
+					enviarEmail.enviarEmailUsuario(usuarioSalvo);
+					
+					Faces.navigate("bt-loginCodigo.xhtml?faces-redirect=true");
+				}
+				
 				cadastrar();
-				enviarEmail.enviarEmailFornecedor();
 
 				BancoDAO bancoDAO = new BancoDAO();
 				bancos = bancoDAO.listar();
 
-				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
+				Messages.addFlashGlobalInfo ("Fornecedor salvo com sucesso!!!");
+				Messages.addFlashGlobalInfo ("Você receberá um email para cadastrar o seu login");
 
 			} else if (ValidaCPF.isCPF(fornecedor.getCpf()) == false
 					&& (fornecedor.getCpf() != "" && (fornecedor.getCnpj() == ""))) {

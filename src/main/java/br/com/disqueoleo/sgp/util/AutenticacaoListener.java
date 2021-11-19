@@ -18,7 +18,11 @@ public class AutenticacaoListener implements PhaseListener {
 
 		boolean ehPaginaDeAutenticacao = paginaAtual.contains("bt-login.xhtml");
 		
-		boolean ehPaginaPublica = paginaAtual.contains("bt-forgot-password.xhtml") || paginaAtual.contains("bt-register.xhtml");
+		boolean ehPaginaPublica = 
+				paginaAtual.contains("bt-forgot-password.xhtml") || 
+				paginaAtual.contains("bt-register.xhtml") ||
+				paginaAtual.contains("cad-fornecedorIndicadoUpgrade.xhtml") ||
+				paginaAtual.contains("bt-loginCodigo.xhtml");
 
 		if (!ehPaginaPublica) {
 			

@@ -49,6 +49,9 @@ public class Usuario extends Generico {
 	@Transient
 	private String login;
 	
+	@Column(nullable = true)
+	private String token;
+	
 	@Transient
 	private TipoUsuario tipoUsuario;
 
@@ -169,5 +172,13 @@ public class Usuario extends Generico {
 	
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+	}
+	
+	public String getToken() {
+		return token;
+	}
+	
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

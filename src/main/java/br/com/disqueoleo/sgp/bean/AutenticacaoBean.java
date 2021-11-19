@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -106,7 +107,9 @@ public class AutenticacaoBean implements Serializable {
 	}
 
 	public String getUsuarioNome() {
-		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+		if (usuarioLogado == null) {
+			usuarioNome = "";
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
 			usuarioNome = usuarioLogado.getAfiliado().getNomeCompleto();
 		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			usuarioNome = usuarioLogado.getFornecedor().getNomeFantasia();
@@ -156,7 +159,9 @@ public class AutenticacaoBean implements Serializable {
 	}
 
 	public String getFuncaoNome() {
-		if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+		if (usuarioLogado == null) {
+			funcaoNome = "";
+		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
 			funcaoNome = usuarioLogado.getAfiliado().getNomeCompleto();
 		} else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
 			funcaoNome = usuarioLogado.getFornecedor().getRazaoSocial();
@@ -226,7 +231,7 @@ public class AutenticacaoBean implements Serializable {
 						tipoUsuario = TipoUsuario.INVALIDO;
 					}
 				}
-			}
+			}			
 
 			// Efetua a autenticação
 			if (tipoUsuario == TipoUsuario.AFILIADO) {
@@ -240,6 +245,16 @@ public class AutenticacaoBean implements Serializable {
 						usuario.getStatus());
 			} else {
 				usuarioLogado = null;
+			}
+			
+			// Se tiver o token trocar a senha
+			if (usuario.getToken() != null) {
+				Usuario usuarioComToken = usuarioDAO.buscarPorToken(usuario.getToken());
+				
+				SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
+				usuarioComToken.setSenha(hash.toHex());
+				
+				usuarioDAO.merge(usuarioComToken);
 			}
 
 			// Verifica se o usuário foi autenticado
@@ -278,16 +293,20 @@ public class AutenticacaoBean implements Serializable {
 	}
 
 	public String sair() {
+		Faces.invalidateSession();
 		usuarioLogado = null;
 		return "bt-login.xhtml?faces-redirect=true";
 	}
 
 	public boolean temPerfis(List<String> permissoes) {
-		for (String permissao : permissoes) {
-			if (usuarioLogado.getTipoUsuario().toString().equals(permissao)) {
-				return true;
+		if (usuarioLogado != null) {
+			for (String permissao : permissoes) {
+				if (usuarioLogado.getTipoUsuario().toString().equals(permissao)) {
+					return true;
+				}
 			}
 		}
+		
 		return false;
 	}
 }
