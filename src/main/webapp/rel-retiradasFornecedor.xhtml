@@ -20,22 +20,24 @@
 		<!-- Main content -->
 		<section class="content container-fluid"> <h:form
 			id="formConsulta">
-			
+
 			<!-- INICIO PAINEL DE BOTÕES -->
 			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
 
 				<p:commandButton value="Gerar PDF" ajax="false"
 					icon="fa fa-file-pdf-o"
 					styleClass="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-					<p:dataExporter type="pdf" target=":formConsulta:tabela" 
-						fileName="RetiradasFornecedores" />
+					<p:dataExporter type="pdf" encoding="iso-8859-1"
+						target=":formConsulta:tabela" fileName="RetiradasFornecedores"
+						preProcessor="#{relatoriosBean.preProcessPDF}" />
 				</p:commandButton>
-				
+
 				<p:commandButton value="Gerar Excel" ajax="false"
 					icon="fa fa-file-excel-o"
 					styleClass="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-					<p:dataExporter type="xls" target=":formConsulta:tabela" 
-						fileName="RetiradasFornecedores" />
+					<p:dataExporter type="xls" encoding="iso-8859-1"
+						target=":formConsulta:tabela" fileName="RetiradasFornecedores"
+						postProcessor="#{relatoriosBean.postProcessXLS}" />
 				</p:commandButton>
 
 
