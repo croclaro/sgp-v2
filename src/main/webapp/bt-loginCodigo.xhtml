@@ -78,10 +78,18 @@
 
 							<div class="form-group">
 								<p:password type="password"
-									class="form-control form-control-user" id="confSenha"
+									class="form-control form-control-user" id="novaSenha"
 									placeholder="Digite a nova senha"
 									value="#{autenticacaoBean.usuario.senhaSemCriptografia}" required="true"
-									requiredMessage="O campo Confirme a Senha é obrigatório" />
+									requiredMessage="Digite a nova senha" />
+							</div>
+							
+							<div class="form-group">
+								<p:password type="password"
+									class="form-control form-control-user" id="confSenha"
+									placeholder="Confirme a nova senha"
+									value="#{autenticacaoBean.usuario.confSenha}" required="true"
+									requiredMessage="Confirme a nova senha" />
 							</div>
 
 							<div class="form-group">
