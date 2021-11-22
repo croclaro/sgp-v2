@@ -5,9 +5,14 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modeloUpdate.xhtml">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="bt-modeloUpdate.xhtml">
 
-
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewAction action="#{afiliadoBean.upgrade}" />
+		</f:metadata>
+	</ui:define>
 	<ui:define name="bt-conteudo">
 
 		<!-- INICIO FORMULÁRIO DE CADASTRO -->
@@ -30,7 +35,105 @@
 					styleClass="btn-success" />
 
 			</p:panel>
+			<!-- INICIO DADOS PESSOAIS -->
+			<h3 class="mt-4 text-gray-100">Dados Pessoais</h3>
+			<p:panel id="pnlDadosPessoais" styleClass="box-warning card mt-2">
 
+				<!-- ####### INICIO LINHA 1 - 2 COLUNAS TAG col-md-(6 X 2 = ATÉ 12 COLUNAS) -->
+				<div id="LI1" class="row">
+					<!-- INICIO CAMPO NOME COMPLETO -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputText id="inputNomeCompleto" type="text"
+							placeholder="Nome completo" style="width: 100%" size="40"
+							value="#{afiliadoBean.afiliado.nomeCompleto}" required="true"
+							readonly="true" converter="upperCaseConverter"
+							requiredMessage="O campo 'NOME COMPLETO' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO RAZÃO SOCIAL -->
+
+					<!-- INICIO CAMPO Email: -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputText id="inputEmail" placeholder="Email"
+							style="width: 100%" size="12"
+							value="#{afiliadoBean.afiliado.email}" readonly="true"
+							converter="upperCaseConverter" required="false"
+							requiredMessage="O campo 'EMAIL' é obrigatório" />
+					</div>
+					<!-- FIM CAMPO Email -->
+				</div>
+				<!-- ####### FIM LINHA 1 -->
+
+				<!-- ####### INICIO LINHA 2 - 3 COLUNAS  -->
+				<div id="LI2" class="row">
+					<!-- INICIO CAMPO CPF: -->
+					<div class="col-xl-6 col-md-6 col-sm-6 mb-4">
+						<br />
+						<p:inputMask id="inputCPF" placeholder="CPF" style="width: 100%"
+							value="#{afiliadoBean.afiliado.cpf}" readonly="true"
+							converter="upperCaseConverter" mask="999.999.999-99" />
+					</div>
+					<!-- FIM CAMPO NOME CPF -->
+
+
+				</div>
+				<!-- ####### FIM LINHA 2 -->
+
+				<!-- ####### INICIO LINHA 3 - 2 COLUNAS-->
+				<div id="LI3" class="row"></div>
+				<!-- ####### FIM LINHA 3 -->
+
+				<!-- ####### INICIO LINHA 4 - 4 COLUNAS-->
+				<div id="LI4" class="row">
+
+					<!-- INICIO CAMPO Telefone Fixo: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputTelFixo" placeholder="Telefone fixo"
+							style="width: 100%" size="15"
+							value="#{afiliadoBean.afiliado.telFixo}" readonly="true"
+							converter="upperCaseConverter" mask="(99)9999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Fixo -->
+
+					<!-- INICIO CAMPO Telefone Celular 1: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular1" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{afiliadoBean.afiliado.celular1}" readonly="true"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 1 -->
+
+					<!-- INICIO CAMPO Telefone Celular 2: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular2" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{afiliadoBean.afiliado.celular2}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 2 -->
+
+					<!-- INICIO CAMPO Telefone Celular 3: -->
+					<div class="col-xl-3 col-md-3 mb-4">
+						<br />
+						<p:inputMask id="inputCelular3" placeholder="Celular"
+							style="width: 100%" size="15"
+							value="#{afiliadoBean.afiliado.celular3}" readonly="false"
+							converter="upperCaseConverter" mask="(99)99999-9999" />
+					</div>
+					<!-- FIM CAMPO Telefone Celular 3 -->
+
+				</div>
+				<!-- ####### FIM LINHA 4 -->
+				<h:inputHidden value="#{afiliadoBean.afiliado.dataAfiliado}" />
+				<br />
+
+			</p:panel>
+			<!-- FIM DADOS PESSOAIS -->
 			<!-- INICIO PAINEL ENDEREÇO -->
 			<h3 class="mt-4 text-gray-100">Endereço</h3>
 
@@ -58,7 +161,7 @@
 						<p:inputText id="inputLogradouro" type="text"
 							placeholder="Logradouro" style="width: 100%" size="60"
 							value="#{afiliadoBean.afiliado.logradouro}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'LOGRADOURO' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO Logradouro -->
@@ -109,7 +212,7 @@
 						<p:inputText id="inputBairro" type="text" placeholder="Bairro"
 							style="width: 100%" size="40"
 							value="#{afiliadoBean.afiliado.bairro}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'BAIRRO' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO BAIRRO -->
@@ -120,7 +223,7 @@
 						<p:inputText id="inputCidade" type="text" placeholder="Cidade"
 							style="width: 100%" size="40"
 							value="#{afiliadoBean.afiliado.cidade}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'CIDADE' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO CIDADE -->
@@ -131,7 +234,7 @@
 						<p:inputText id="inputEstado" type="text" placeholder="Estado"
 							style="width: 100%" size="40"
 							value="#{afiliadoBean.afiliado.estado}" required="true"
-							readonly="false" converter="upperCaseConverter"
+							readonly="true" converter="upperCaseConverter"
 							requiredMessage="O campo 'ESTADO' é obrigatório" />
 					</div>
 					<!-- FIM CAMPO ESTADO -->
@@ -211,48 +314,11 @@
 			</p:panel>
 			<!-- FIM PAINEL DADOS BANCÁRIOS -->
 
-			<!-- INICIO PAINEL DADOS BANCÁRIOS -->
-			<h3 class="mt-4 text-gray-100">Dados Bancários</h3>
 
-			<p:panel id="pnlDadosBancarios" styleClass="box-warning card mt-2">
 
-				<!-- ####### INICIO LINHA 8 - 4 COLUNAS -->
-				<div id="LI8" class="row">
-					<!-- INICIO BANCO -->
-					<!-- INICIO SENHA -->
-					<div class="col-xl-6 col-md-6 mb-4">
-						<br />
+			<h:inputHidden value="#{afiliadoBean.afiliado.dataAfiliado}" />
+			<br />
 
-						<p:password id="inputSenha" placeholder="Digite a senha"
-							style="width: 100%" size="12"
-							value="#{usuarioBean.usuario.senha}" required="true"
-							requiredMessage="O campo 'SENHA' é obrigatório"
-							validatorMessage="Informe uma senha de no mínimo 8 caracteres">
-							<f:validateLength minimum="8" />
-						</p:password>
-
-					</div>
-					<!-- FIM CAMPO SENHA -->
-
-					<!-- INICIO CONFIRME A SENHA -->
-					<div class="col-xl-6 col-md-6 mb-4">
-						<br />
-						<p:password id="inputConfSenha" placeholder="Confirme a senha"
-							style="width: 100%" size="12"
-							value="#{usuarioBean.usuario.confSenha}" required="true"
-							requiredMessage="O campo 'SENHA' é obrigatório">
-						</p:password>
-					</div>
-					<!-- FIM CAMPO CONFIRME A SENHA -->					
-				</div>
-				
-				
-				<!-- ####### FIM LINHA 8 - 4 -->
-
-				<h:inputHidden value="#{afiliadoBean.afiliado.dataAfiliado}" />
-				<br />
-			</p:panel>
-			<!-- FIM PAINEL DADOS BANCÁRIOS -->
 
 		</h:form> <br />
 		</section>

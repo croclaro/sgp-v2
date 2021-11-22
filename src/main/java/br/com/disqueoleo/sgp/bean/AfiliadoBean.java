@@ -1,35 +1,33 @@
 package br.com.disqueoleo.sgp.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import com.google.gson.Gson;
 
 import br.com.disqueoleo.sgp.dao.AfiliadoDAO;
 import br.com.disqueoleo.sgp.dao.BancoDAO;
+import br.com.disqueoleo.sgp.dao.UsuarioDAO;
 import br.com.disqueoleo.sgp.domain.Afiliado;
 import br.com.disqueoleo.sgp.domain.Banco;
 import br.com.disqueoleo.sgp.domain.CEP;
-
+import br.com.disqueoleo.sgp.domain.EnviarEmail;
+import br.com.disqueoleo.sgp.domain.Usuario;
 
 //ATUALIZADO MASTER ....
 
@@ -40,6 +38,7 @@ public class AfiliadoBean implements Serializable {
 	private Afiliado afiliado;
 	private List<Afiliado> afiliados;
 	private List<Banco> bancos;
+	private EnviarEmail enviarEmail;
 
 	// MÉTODO GETTER AND SETTERS ...
 	// MÉTODO GET LEITURA..
@@ -50,6 +49,14 @@ public class AfiliadoBean implements Serializable {
 
 	public void setAfiliado(Afiliado afiliado) {
 		this.afiliado = afiliado;
+	}
+
+	public EnviarEmail getEnviarEmail() {
+		return enviarEmail;
+	}
+
+	public void setEnviarEmail(EnviarEmail enviarEmail) {
+		this.enviarEmail = enviarEmail;
 	}
 
 	public List<Afiliado> getAfiliados() {
@@ -72,6 +79,8 @@ public class AfiliadoBean implements Serializable {
 	public void cadastrar() {
 		try {
 			afiliado = new Afiliado();
+			enviarEmail = new EnviarEmail();
+
 			BancoDAO bancoDAO = new BancoDAO();
 			bancos = bancoDAO.listar();
 
@@ -81,72 +90,69 @@ public class AfiliadoBean implements Serializable {
 		}
 	}
 
+	public void upgrade() {
+		String codigo = Faces.getRequestParameter("codigo");
+
+		if (codigo == null) {
+			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+		}
+
+		AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
+		afiliado = afiliadoDAO.buscar(Long.valueOf(codigo));
+
+		if (afiliado == null) {
+			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+		}
+	}
+
 	public void salvar() {
 		try {
 			if (afiliado.getCpf() == "") {
-				Messages.addGlobalError("CPF não pode ficar em branco");
-			} else if (afiliado.getTelFixo() == "" && (afiliado.getCelular1() == "")) {
-				Messages.addGlobalError("Você precisa digitar pelo menos um telefone para prosseguir.");
+				Messages.addGlobalError("O campo CPF não pode ficar vazio");
+			}else {
 
 				AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
-				afiliadoDAO.merge(afiliado);
+				Afiliado afiliadoSalvo = afiliadoDAO.merge(afiliado);
+
+				if (afiliado.getCodigo() == null) {
+					enviarEmail.enviarEmailAfiliado(afiliadoSalvo);
+				} else {
+					UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+					Usuario usuario = new Usuario();
+					usuario.setAfiliado(afiliadoSalvo);
+
+					usuario.setDataUsuario(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(new Date()));
+
+					String senha = RandomStringUtils.randomAlphanumeric(6);
+					SimpleHash hash = new SimpleHash("md5", senha);
+					usuario.setSenha(hash.toHex());
+					usuario.setSenhaSemCriptografia(senha);
+
+					usuario.setStatus(true);
+
+					String token = RandomStringUtils.randomNumeric(6);
+					usuario.setToken(token);
+
+					Usuario usuarioSalvo = usuarioDAO.merge(usuario);
+					usuarioSalvo.setSenhaSemCriptografia(usuario.getSenhaSemCriptografia());
+
+					enviarEmail.enviarEmailUsuarioAfiliado(usuarioSalvo);
+
+					Faces.navigate("bt-login.xhtml?faces-redirect=true");
+				}
 
 				cadastrar();
-				enviarEmailAfiliado();
 
 				BancoDAO bancoDAO = new BancoDAO();
 				bancos = bancoDAO.listar();
 
-				Messages.addGlobalInfo("Afiliado salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
-			} else if (afiliado.getCpf() != "") {
-				AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
-				afiliadoDAO.merge(afiliado);
-
-				cadastrar();
-				enviarEmailAfiliado();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
-
-				Messages.addGlobalInfo("Afiliado salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
-			} else if (afiliado.getTelFixo() != "" && (afiliado.getCelular1() == "")) {
-				AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
-				afiliadoDAO.merge(afiliado);
-
-				cadastrar();
-				enviarEmailAfiliado();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
-
-				Messages.addGlobalInfo("Afiliado salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
-			} else if (afiliado.getTelFixo() == "" && (afiliado.getCelular1() != "")) {
-				AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
-				afiliadoDAO.merge(afiliado);
-
-				cadastrar();
-				enviarEmailAfiliado();
-
-				Messages.addGlobalInfo("Afiliado salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
-			} else if (afiliado.getTelFixo() != "" && (afiliado.getCelular1() != "")) {
-				AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
-				afiliadoDAO.merge(afiliado);
-
-				cadastrar();
-				enviarEmailAfiliado();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
-
-				Messages.addGlobalInfo("Afiliado salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
+				Messages.addFlashGlobalInfo("Afiliado salvo com sucesso!!!");
+				Messages.addFlashGlobalInfo("Você receberá um email para cadastrar o seu login");
 			}
+
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Afiliado Já existe!!!");
+			Messages.addGlobalError("Erro ao cadastrar o afiliado");
 			erro.printStackTrace();
 		}
 	}
@@ -192,45 +198,6 @@ public class AfiliadoBean implements Serializable {
 			afiliado.setCidade(cep.getCidade());
 			afiliado.setLogradouro(cep.getTipo_logradouro() + " " + cep.getLogradouro());
 			afiliado.setEstado(cep.getUf());
-		}
-	}
-
-	public void enviarEmailAfiliado() {
-
-		Properties props = new Properties();
-		/** Parâmetros de conexão com servidor Gmail */
-		props.put("mail.smtp.host", "mail.sgp-disqueoleo.com.br");
-		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", "465");
-
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("admin@sgp-disqueoleo.com.br", "C3lso1359");
-			}
-		});
-
-		/** Ativa Debug para sessão */
-		session.setDebug(true);
-
-		try {
-
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("admin@sgp-disqueoleo.com.br"));
-			// Remetente
-
-			Address[] toUser = InternetAddress.parse(getAfiliado().getEmail());
-
-			message.setRecipients(Message.RecipientType.TO, toUser);
-			message.setSubject("SGP - Sistema Gerenciador de Produtos");// Assunto
-			message.setText("Seu email foi enviado por: " + getAfiliado().getNomeCompleto());
-
-			/** Método para enviar a mensagem criada */
-			Transport.send(message);
-
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
 		}
 	}
 }

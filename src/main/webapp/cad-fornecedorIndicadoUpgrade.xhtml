@@ -5,11 +5,12 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modeloUpdate.xhtml">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="bt-modeloUpdate.xhtml">
 
 	<ui:define name="metadata">
 		<f:metadata>
-			<f:viewAction action="#{fornecedorBean.upgrade()}" />
+			<f:viewAction action="#{fornecedorBean.upgrade}" />
 		</f:metadata>
 	</ui:define>
 
@@ -34,9 +35,6 @@
 					update=":mensagem :formCadastro" icon="fa fa-floppy-o"
 					styleClass="btn-success" />
 
-				<p:commandButton value="Voltar" immediate="true"
-					action="con-fornecedor?faces-redirect=true" process="@this"
-					icon="fa fa-hand-o-left" styleClass="btn btn-sm" />
 
 			</p:panel>
 
@@ -153,7 +151,7 @@
 					<!-- INICIO CAMPO Telefone Fixo: -->
 					<div class="col-xl-3 col-md-3 mb-4">
 						<br />
-						<p:inputMask id="inputTelFixo" placeholder="Tefone fixo"
+						<p:inputMask id="inputTelFixo" placeholder="Telefone fixo"
 							style="width: 100%" size="15"
 							value="#{fornecedorBean.fornecedor.telFixo}" readonly="true"
 							converter="upperCaseConverter" mask="(99)9999-9999" />
@@ -375,7 +373,7 @@
 
 				</div>
 				<!-- ####### FIM LINHA 8 - 4 -->
-				
+
 				<h:inputHidden value="#{fornecedorBean.fornecedor.dataFornecedor}" />
 				<br />
 			</p:panel>
