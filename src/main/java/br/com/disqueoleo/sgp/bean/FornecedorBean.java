@@ -94,14 +94,14 @@ public class FornecedorBean implements Serializable {
 		String codigo = Faces.getRequestParameter("codigo");
 
 		if (codigo == null) {
-			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+			Faces.navigate("confEmail.xhtml?faces-redirect=true");
 		}
 
 		FornecedorDAO fornecedorDAO = new FornecedorDAO();
 		fornecedor = fornecedorDAO.buscar(Long.valueOf(codigo));
 
 		if (fornecedor == null) {
-			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+			Faces.navigate("confEmail.xhtml?faces-redirect=true");
 		}
 	}
 
@@ -144,7 +144,7 @@ public class FornecedorBean implements Serializable {
 
 					enviarEmail.enviarEmailUsuario(usuarioSalvo);
 
-					Faces.navigate("bt-login.xhtml?faces-redirect=true");
+					Faces.navigate("confEmail.xhtml?faces-redirect=true");
 				}
 
 				cadastrar();

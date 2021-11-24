@@ -94,14 +94,14 @@ public class AfiliadoBean implements Serializable {
 		String codigo = Faces.getRequestParameter("codigo");
 
 		if (codigo == null) {
-			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+			Faces.navigate("confEmail.xhtml?faces-redirect=true");
 		}
 
 		AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
 		afiliado = afiliadoDAO.buscar(Long.valueOf(codigo));
 
 		if (afiliado == null) {
-			Faces.navigate("bt-login.xhtml?faces-redirect=true");
+			Faces.navigate("confEmail.xhtml?faces-redirect=true");
 		}
 	}
 
@@ -139,7 +139,7 @@ public class AfiliadoBean implements Serializable {
 
 					enviarEmail.enviarEmailUsuarioAfiliado(usuarioSalvo);
 
-					Faces.navigate("bt-login.xhtml?faces-redirect=true");
+					Faces.navigate("confEmail.xhtml?faces-redirect=true");
 				}
 
 				cadastrar();
