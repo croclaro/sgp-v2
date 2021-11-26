@@ -136,7 +136,7 @@ public class FornecedorBean implements Serializable {
 				
 				Fornecedor fornecedorSalvo = fornecedorDAO.merge(fornecedor);
 
-				if(fornecedor.getCodigo() == null ) {
+				if(fornecedor.getCodigo() == null && usuarioLogado.getTipo() != 'A') {
 					enviarEmail.enviarEmailFornecedor(fornecedorSalvo);
 				} else {
 					UsuarioDAO usuarioDAO = new UsuarioDAO();
