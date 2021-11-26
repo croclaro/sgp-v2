@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -40,6 +41,9 @@ public class FornecedorBean implements Serializable {
 	private List<Banco> bancos;
 	private EnviarEmail enviarEmail;
 
+	@ManagedProperty("#{autenticacaoBean}")
+	private AutenticacaoBean autenticacaoBean;
+	
 	// MÉTODO GETTER AND SETTERS ...
 	// MÉTODO GET LEITURA..
 	// MÉTODO SET ESCRITA ...
@@ -73,6 +77,14 @@ public class FornecedorBean implements Serializable {
 
 	public void setEnviarEmail(EnviarEmail enviarEmail) {
 		this.enviarEmail = enviarEmail;
+	}
+	
+	public AutenticacaoBean getAutenticacaoBean() {
+		return autenticacaoBean;
+	}
+	
+	public void setAutenticacaoBean(AutenticacaoBean autenticacaoBean) {
+		this.autenticacaoBean = autenticacaoBean;
 	}
 
 	@PostConstruct
@@ -117,6 +129,11 @@ public class FornecedorBean implements Serializable {
 			} else if (!fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty())) {
 
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
+				
+				Usuario usuarioLogado = autenticacaoBean.getUsuarioLogado();
+				Fornecedor fornecedorUsuarioLogado = usuarioLogado.getFornecedor();
+				fornecedor.setFornecedor(fornecedorUsuarioLogado);
+				
 				Fornecedor fornecedorSalvo = fornecedorDAO.merge(fornecedor);
 
 				if(fornecedor.getCodigo() == null ) {
@@ -161,6 +178,7 @@ public class FornecedorBean implements Serializable {
 			} else if (fornecedor.getCpf() != "" && (fornecedor.getCnpj() == "")) {
 
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
+				
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
