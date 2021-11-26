@@ -132,11 +132,14 @@ public class FornecedorBean implements Serializable {
 				
 				Usuario usuarioLogado = autenticacaoBean.getUsuarioLogado();
 				Fornecedor fornecedorUsuarioLogado = usuarioLogado.getFornecedor();
-				fornecedor.setFornecedor(fornecedorUsuarioLogado);
+				
+				if (usuarioLogado.getFuncionario() == null) {
+					fornecedor.setFornecedor(fornecedorUsuarioLogado);
+				}
 				
 				Fornecedor fornecedorSalvo = fornecedorDAO.merge(fornecedor);
 
-				if(fornecedor.getCodigo() == null && usuarioLogado.getTipo() != 'A') {
+				if(fornecedor.getCodigo() == null && usuarioLogado.getFuncionario() == null) {
 					enviarEmail.enviarEmailFornecedor(fornecedorSalvo);
 				} else {
 					UsuarioDAO usuarioDAO = new UsuarioDAO();
