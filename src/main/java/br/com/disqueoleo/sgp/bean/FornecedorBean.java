@@ -119,6 +119,10 @@ public class FornecedorBean implements Serializable {
 
 	public void salvar() {
 		try {
+			FornecedorDAO fornecedorDAO = new FornecedorDAO();
+			Fornecedor achouCNPJ = fornecedorDAO.buscarPorCPFOuCNPJ(fornecedor.getCnpj());
+			Fornecedor achouCPF = fornecedorDAO.buscarPorCPFOuCNPJ(fornecedor.getCpf());
+			
 			if (fornecedor.getCnpj().isEmpty()  && (fornecedor.getCpf().isEmpty())) {
 				Messages.addGlobalError("CPF ou CNPJ não podem ficar em branco");
 			} else if (fornecedor.getTelFixo().isEmpty() && (fornecedor.getCelular1().isEmpty())) {
@@ -126,10 +130,9 @@ public class FornecedorBean implements Serializable {
 			} else if (ValidaCNPJ.isCNPJ(fornecedor.getCnpj()) == false
 					&& (!fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty()))) {
 				Messages.addGlobalError("O Cnpj " + fornecedor.getCnpj() + " está incorreto.");
-			} else if (!fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty())) {
-
-				FornecedorDAO fornecedorDAO = new FornecedorDAO();
-				
+			} else if (achouCNPJ != null || achouCPF != null) {
+				Messages.addGlobalError("CNPJ ou CPF já existe");
+			} else if (!fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty())) {			
 				Usuario usuarioLogado = autenticacaoBean.getUsuarioLogado();
 				Fornecedor fornecedorUsuarioLogado = usuarioLogado.getFornecedor();
 				
@@ -179,8 +182,6 @@ public class FornecedorBean implements Serializable {
 					&& (fornecedor.getCpf() != "" && (fornecedor.getCnpj() == ""))) {
 				Messages.addGlobalError("O CPF " + fornecedor.getCpf() + " está incorreto.");
 			} else if (fornecedor.getCpf() != "" && (fornecedor.getCnpj() == "")) {
-
-				FornecedorDAO fornecedorDAO = new FornecedorDAO();
 				
 				fornecedorDAO.merge(fornecedor);
 
@@ -194,7 +195,6 @@ public class FornecedorBean implements Serializable {
 				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
 
 			} else if (fornecedor.getTelFixo() != "" && (fornecedor.getCelular1() == "")) {
-				FornecedorDAO fornecedorDAO = new FornecedorDAO();
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
@@ -206,7 +206,6 @@ public class FornecedorBean implements Serializable {
 				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
 				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
 			} else if (fornecedor.getTelFixo() == "" && (fornecedor.getCelular1() != "")) {
-				FornecedorDAO fornecedorDAO = new FornecedorDAO();
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
@@ -218,7 +217,6 @@ public class FornecedorBean implements Serializable {
 				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
 				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
 			} else if (fornecedor.getTelFixo() != "" && (fornecedor.getCelular1() != "")) {
-				FornecedorDAO fornecedorDAO = new FornecedorDAO();
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
