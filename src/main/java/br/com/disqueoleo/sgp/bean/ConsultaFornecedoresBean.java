@@ -89,6 +89,7 @@ public class ConsultaFornecedoresBean implements Serializable {
 				retiradas = retiradaDao
 						.buscarPorRetirada(autenticacaoBean.getUsuarioLogado().getFornecedor().getCodigo());
 
+				fornecedores = fornecedorDAO.buscarPorAfiliado(autenticacaoBean.getUsuarioLogado().getFornecedor().getCodigo());
 			} else {
 				fornecedores = fornecedorDAO.listar();
 			}

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -40,6 +41,9 @@ public class FornecedorBean implements Serializable {
 	private List<Banco> bancos;
 	private EnviarEmail enviarEmail;
 
+	@ManagedProperty("#{autenticacaoBean}")
+	private AutenticacaoBean autenticacaoBean;
+	
 	// MÉTODO GETTER AND SETTERS ...
 	// MÉTODO GET LEITURA..
 	// MÉTODO SET ESCRITA ...
@@ -74,6 +78,14 @@ public class FornecedorBean implements Serializable {
 	public void setEnviarEmail(EnviarEmail enviarEmail) {
 		this.enviarEmail = enviarEmail;
 	}
+	
+	public AutenticacaoBean getAutenticacaoBean() {
+		return autenticacaoBean;
+	}
+	
+	public void setAutenticacaoBean(AutenticacaoBean autenticacaoBean) {
+		this.autenticacaoBean = autenticacaoBean;
+	}
 
 	@PostConstruct
 	public void cadastrar() {
@@ -89,25 +101,25 @@ public class FornecedorBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-
+	
 	public void upgrade() {
 		String codigo = Faces.getRequestParameter("codigo");
-
+		
 		if (codigo == null) {
-			Faces.navigate("confEmail.xhtml?faces-redirect=true");
+			Faces.navigate("bt-login.xhtml?faces-redirect=true");
 		}
-
+		
 		FornecedorDAO fornecedorDAO = new FornecedorDAO();
 		fornecedor = fornecedorDAO.buscar(Long.valueOf(codigo));
-
+		
 		if (fornecedor == null) {
-			Faces.navigate("confEmail.xhtml?faces-redirect=true");
+			Faces.navigate("bt-login.xhtml?faces-redirect=true");
 		}
 	}
 
 	public void salvar() {
 		try {
-			if (fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty())) {
+			if (fornecedor.getCnpj().isEmpty()  && (fornecedor.getCpf().isEmpty())) {
 				Messages.addGlobalError("CPF ou CNPJ não podem ficar em branco");
 			} else if (fornecedor.getTelFixo().isEmpty() && (fornecedor.getCelular1().isEmpty())) {
 				Messages.addGlobalError("Você precisa digitar pelo menos um telefone para prosseguir.");
@@ -117,43 +129,51 @@ public class FornecedorBean implements Serializable {
 			} else if (!fornecedor.getCnpj().isEmpty() && (fornecedor.getCpf().isEmpty())) {
 
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
+				
+				Usuario usuarioLogado = autenticacaoBean.getUsuarioLogado();
+				Fornecedor fornecedorUsuarioLogado = usuarioLogado.getFornecedor();
+				
+				if (usuarioLogado.getFuncionario() == null) {
+					fornecedor.setFornecedor(fornecedorUsuarioLogado);
+				}
+				
 				Fornecedor fornecedorSalvo = fornecedorDAO.merge(fornecedor);
 
-				if (fornecedor.getCodigo() == null) {
+				if(fornecedor.getCodigo() == null && usuarioLogado.getFuncionario() == null) {
 					enviarEmail.enviarEmailFornecedor(fornecedorSalvo);
 				} else {
 					UsuarioDAO usuarioDAO = new UsuarioDAO();
-
+					
 					Usuario usuario = new Usuario();
 					usuario.setFornecedor(fornecedorSalvo);
-
+					
 					usuario.setDataUsuario(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(new Date()));
-
+					
 					String senha = RandomStringUtils.randomAlphanumeric(6);
 					SimpleHash hash = new SimpleHash("md5", senha);
 					usuario.setSenha(hash.toHex());
 					usuario.setSenhaSemCriptografia(senha);
-
+					
 					usuario.setStatus(true);
-
+					
 					String token = RandomStringUtils.randomNumeric(6);
 					usuario.setToken(token);
 
 					Usuario usuarioSalvo = usuarioDAO.merge(usuario);
 					usuarioSalvo.setSenhaSemCriptografia(usuario.getSenhaSemCriptografia());
-
+					
 					enviarEmail.enviarEmailUsuario(usuarioSalvo);
-
+					
 					Faces.navigate("confEmail.xhtml?faces-redirect=true");
 				}
-
+				
 				cadastrar();
 
 				BancoDAO bancoDAO = new BancoDAO();
 				bancos = bancoDAO.listar();
 
-				Messages.addFlashGlobalInfo("Fornecedor salvo com sucesso!!!");
-				Messages.addFlashGlobalInfo("Você receberá um email para cadastrar o seu login");
+				Messages.addFlashGlobalInfo ("Fornecedor salvo com sucesso!!!");
+				Messages.addFlashGlobalInfo ("Você receberá um email para cadastrar o seu login");
 
 			} else if (ValidaCPF.isCPF(fornecedor.getCpf()) == false
 					&& (fornecedor.getCpf() != "" && (fornecedor.getCnpj() == ""))) {
@@ -161,27 +181,11 @@ public class FornecedorBean implements Serializable {
 			} else if (fornecedor.getCpf() != "" && (fornecedor.getCnpj() == "")) {
 
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
+				
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
-
-				BancoDAO bancoDAO = new BancoDAO();
-				bancos = bancoDAO.listar();
-
-				Messages.addGlobalInfo("Fornecedor salvo com sucesso!!!");
-				Messages.addGlobalInfo("Você receberá um email para cadastrar o seu login");
-
-			} else if (fornecedor.getCpf().equals(fornecedor.getCpf())
-					&& (fornecedor.getCnpj() != fornecedor.getCnpj())) {
-				Messages.addGlobalError("O CPF " + fornecedor.getCpf() + " Já existe");
-			} else if (fornecedor.getCnpj().equals(fornecedor.getCnpj())
-					&& (fornecedor.getCpf() != fornecedor.getCpf())) {
-
-				FornecedorDAO fornecedorDAO = new FornecedorDAO();
-				fornecedorDAO.merge(fornecedor);
-
-				cadastrar();
-
+				
 				BancoDAO bancoDAO = new BancoDAO();
 				bancos = bancoDAO.listar();
 
@@ -192,7 +196,7 @@ public class FornecedorBean implements Serializable {
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
 				fornecedorDAO.merge(fornecedor);
 
-				cadastrar();
+				cadastrar();				
 
 				BancoDAO bancoDAO = new BancoDAO();
 				bancos = bancoDAO.listar();
@@ -204,7 +208,7 @@ public class FornecedorBean implements Serializable {
 				fornecedorDAO.merge(fornecedor);
 
 				cadastrar();
-
+				
 				BancoDAO bancoDAO = new BancoDAO();
 				bancos = bancoDAO.listar();
 
@@ -214,7 +218,7 @@ public class FornecedorBean implements Serializable {
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
 				fornecedorDAO.merge(fornecedor);
 
-				cadastrar();
+				cadastrar();				
 
 				BancoDAO bancoDAO = new BancoDAO();
 				bancos = bancoDAO.listar();

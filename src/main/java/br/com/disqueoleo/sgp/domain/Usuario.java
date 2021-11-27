@@ -121,7 +121,9 @@ public class Usuario extends Generico {
 	public String getTipoFormatado() {
 		String tipoFormatado = null;
 
-		if (tipo == 'A') {
+		if (tipo == null) {
+			tipoFormatado = "";
+		} else if (tipo == 'A') {
 			tipoFormatado = "Administrador";
 		} else if (tipo == 'U') {
 			tipoFormatado = "Usuário";
