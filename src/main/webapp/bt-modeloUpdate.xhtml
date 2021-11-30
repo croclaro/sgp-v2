@@ -7,7 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" lang="en">
-	
+
 	<ui:insert name="metadata"></ui:insert>
 
 	<h:head>
@@ -71,16 +71,221 @@
 	</h:head>
 
 	<h:body id="page-top" class="hold-transition skin-yellow sidebar-mini">
-		
-			
+		<!-- Page Wrapper -->
+		<div id="wrapper">
+			<header class="main-header"> <!-- Logo --> <!-- ######################################################### -->
+			<a href="bt-principal.xhtml" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b>S</b>GP</span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><b>Disque óleo</b></span>
+			</a> <nav class="navbar navbar-static-top" role="navigation"> <!-- ######################################################### -->
+			<!-- inicio BOTÃO PARA RECOLHER/EXIBIR BARRA LATERAL --> <!-- Sidebar toggle button-->
+
+
+
+			<!-- ######################################################### --> <!-- INICIO MENU CABECALHO DIREITA -->
+			<!-- Navbar Right Menu -->
+			<div class="navbar-custom-menu">
+				<ul class="nav navbar-nav">
+
+
+				</ul>
+			</div>
+			<!-- END Navbar Right Menu --> <!-- FIM MENU CABECALHO DIREITA --> </nav> <!-- END Header Navbar -->
+			</header>
+			<!-- END Main Header -->
+			<!-- FIM CABECALHO PRINCIPAL -->
+
+
+			<!-- ######################################################### -->
+			<!-- INICIO BARRA LATERAL -->
+			<!-- Left side column. contains the logo and sidebar -->
+			<!-- ######################################################### -->
+			<aside class="main-sidebar"> <!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar"> <!-- ######################################################### -->
+			<!-- INICIO ITENS MENU LATERAL --> <!-- Sidebar Menu -->
+			<ul class="sidebar-menu" data-widget="tree">
+
+				<li class="treeview">GESTÃO</li>
+
+				<!-- ITEM MENU PAINEL DE CONTROLE -->
+				<li class="active"><a href="bt-principal.xhtml"><i
+						class="fa fa-tachometer"></i> <span>Painel de Controle</span></a></li>
+				<li class="header"></li>
+
+
+				<li class="treeview">OPERAÇÃO</li>
+				<!-- Optionally, you can add icons to the links -->
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR'])}"
+						href="con-afiliado.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Afiliado indicado</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-banco.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Banco</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-beneficiario.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Beneficiário</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-cliente.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span> Cliente</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO', 'AFILIADO'])}"
+						href="con-fornecedor.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span> Fornecedor</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR'])}"
+						href="rel-retiradasFornecedor.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span> Retiradas</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['AFILIADO', 'FORNECEDOR'])}"
+						href="con-fornecedorIndicado.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span> Fornecedor indicado</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-funcionario.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Funcionário</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-funcao.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Função</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-produto.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Produto</span>
+					</p:link></li>
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="con-usuario.xhtml">
+						<i class="fas fa-oil-can"></i>
+						<span>Usuário</span>
+					</p:link></li>
+
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FORNECEDOR', 'AFILIADO'])}"></p:link></li>
+
+				<li class="treeview"></li>
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"></p:link>RELATÓRIOS</li>
+
+				<li><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+						href="rel-cartaoFornecedor.xhtml">
+						<i class="fa fa-credit-card"></i>
+						<span>Cartão fornecedor</span>
+					</p:link></li>
+
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}" href="#">
+						<i class="fa fa-address-card"></i>
+						<span>Crachá</span>
+						<span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+						</span>
+					</p:link>
+					<ul class="treeview-menu">
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-crachaFrente.xhtml">Crachá frente</p:link></li>
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-crachaVerso.xhtml">Crachá verso</p:link></li>
+					</ul></li>
+
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}" href="#">
+						<i class="fa fa-flag"></i>
+						<span>Retiradas</span>
+						<span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+						</span>
+					</p:link>
+					<ul class="treeview-menu">
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-retiradas.xhtml">Consolidadas</p:link></li>
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-retiradas.xhtml">Por Bairros</p:link></li>
+
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="rel-retiradas.xhtml">Por Bairros</p:link></li>
+					</ul></li>
+			</ul>
+			<!-- /.sidebar-menu --> <!-- FIM ITENS MENU LATERAL --> </section> </aside>
+			<!-- FIM BARRA LATERAL -->
+
+
+			<!-- Content Wrapper -->
 			<!-- INICIO CONTEÚDO -->
 			<div class="content-wrapper">
 				<ui:insert name="bt-conteudo" />
 			</div>
-			
+			<!-- FIM CONTEÚDO -->
+			<!-- End of Content Wrapper -->
 
-		
 
-		
+		</div>
+		<!-- End of Page Wrapper -->
+
+
+		<!-- REQUIRED JS SCRIPTS -->
+
+		<!-- Footer -->
+		<footer class="sticky-footer bg-white">
+		<div class="container my-auto">
+			<div class="copyright text-center my-auto">
+				<span>© Copyright 2017 SGP - Sistema Gerenciador de Produtos.</span>
+			</div>
+		</div>
+		</footer>
+		<!-- End of Footer -->
+
+
+		<!-- Bootstrap 3.3.7 -->
+		<!-- <script src="resources/template/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
+		<!-- Bootstrap 4.0.0 -->
+		<script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+		<!-- AdminLTE App -->
+		<script src="resources/template/dist/js/adminlte.min.js"></script>
+
+		<!-- Optionally, you can add Slimscroll and FastClick plugins.
+	     Both of these plugins are recommended to enhance the
+	     user experience. -->
+
+		<!-- Page level plugins -->
+		<script src="resources/vendor/chart.js/Chart.min.js"></script>
+
+		<!-- Page level custom scripts -->
+		<script src="resources/js/demo/chart-area-demo.js"></script>
+		<script src="resources/js/demo/chart-pie-demo.js"></script>
+
+
+		<!-- BIBLIOTECAS COMPLEMENTARES E OPCIONAIS -->
+
 	</h:body>
 </ui:composition>

@@ -83,9 +83,17 @@ public class EnviarEmail {
 			StringBuilder texto = new StringBuilder();
 			texto.append("Seja bem-vindo,  " +fornecedor.getRazaoSocial());
 			texto.append("\n");
-			texto.append("Clique no link abaixo para terminar o seu cadastro.");
 			texto.append("\n");
-			texto.append("http://localhost:8080/SGP/cad-fornecedorIndicadoUpgrade.xhtml?codigo=" + fornecedor.getCodigo());
+			texto.append("Pedimos a gentileza de clicar no link abaixo para terminar o seu cadastro.");
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("https://sgp-disqueoleo.com.br/cad-fornecedorIndicadoUpgrade.xhtml?codigo=" + fornecedor.getCodigo());
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Atenciosamente,");
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Equipe Disque Óleo");
 			message.setText(texto.toString());
 
 			/** Método para enviar a mensagem criada */
@@ -128,9 +136,10 @@ public class EnviarEmail {
 			StringBuilder texto = new StringBuilder();
 			texto.append("Seja bem-vindo,  " +afiliado.getNomeCompleto());
 			texto.append("\n");
-			texto.append("Clique no link abaixo para terminar o seu cadastro.");
 			texto.append("\n");
-			texto.append("http://localhost:8080/SGP/cad-afiliadoIndicadoUpgrade.xhtml?codigo=" + afiliado.getCodigo());
+			texto.append("Pedimos a gentileza de clicar no link abaixo para terminar o seu cadastro.");
+			texto.append("\n");
+			texto.append("https://sgp-disqueoleo.com.br/cad-afiliadoIndicadoUpgrade.xhtml?codigo=" + afiliado.getCodigo());
 			message.setText(texto.toString());
 
 			/** Método para enviar a mensagem criada */
@@ -171,13 +180,26 @@ public class EnviarEmail {
 			message.setSubject("SGP - Sistema Gerenciador de Produtos");// Assunto
 			
 			StringBuilder texto = new StringBuilder();
+			
+			texto.append("Seja bem-vindo!!!");
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Siga os passos abaixo para finalizar o seu login: ");
+			texto.append("\n");
+			texto.append("\n");
 			texto.append("Token: " + usuario.getToken());
 			texto.append("\n");
 			texto.append(" CNPJ: " + usuario.getFornecedor().getCnpj());
 			texto.append("\n");
 			texto.append(" Senha Provisória: " + usuario.getSenhaSemCriptografia());
 			texto.append("\n");
-			texto.append("http://localhost:8080/SGP/bt-loginCodigo.xhtml?codigo=" + usuario.getFornecedor().getCodigo());
+			texto.append("https://sgp-disqueoleo.com.br/bt-loginCodigo.xhtml?codigo=" + usuario.getFornecedor().getCodigo());
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Atenciosamente,");
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Equipe Disque Oleo");
 			message.setText(texto.toString());
 
 			/** Método para enviar a mensagem criada */
@@ -218,13 +240,25 @@ public class EnviarEmail {
 			message.setSubject("SGP - Sistema Gerenciador de Produtos");// Assunto
 			
 			StringBuilder texto = new StringBuilder();
+			texto.append("Seja bem-vindo!!!");
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Siga os passos abaixo para finalizar o seu login: ");
+			texto.append("\n");
+			texto.append("\n");
 			texto.append("Token: " + usuario.getToken());
 			texto.append("\n");
-			texto.append(" CNPJ: " + usuario.getAfiliado().getCpf());
+			texto.append(" CNPJ: " + usuario.getFornecedor().getCnpj());
 			texto.append("\n");
 			texto.append(" Senha Provisória: " + usuario.getSenhaSemCriptografia());
 			texto.append("\n");
-			texto.append("http://localhost:8080/SGP/bt-loginCodigo.xhtml?codigo=" + usuario.getAfiliado().getCodigo());
+			texto.append("https://sgp-disqueoleo.com.br/bt-loginCodigo.xhtml?codigo=" + usuario.getAfiliado().getCodigo());
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Atenciosamente,");
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Equipe Disque Oleo");
 			message.setText(texto.toString());
 
 			/** Método para enviar a mensagem criada */
