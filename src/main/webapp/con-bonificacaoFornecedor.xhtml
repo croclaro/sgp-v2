@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $%$%$%$%$%$%$%$$%% Desenvolvido por Celso Jr® &*&**&*&*&*&*&*&*&*&*&*& -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="bt-modelo.xhtml">
+
+
+	<ui:define name="bt-conteudo">
+
+		<!-- INICIO FORMULÁRIO DE CONSULTA -->
+		<p:growl id="mensagem" />
+
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+		<h1>SGP - SISTEMA GERENCIADOR DE PRODUTOS</h1>
+		</section>
+
+
+		<!-- Main content -->
+		<section class="content container-fluid"> <h:form
+			id="formConsulta">
+
+			<!-- INICIO PAINEL DE BOTÕES -->
+			<p:panel id="pnlBotoes" styleClass="box-warning card mb-4">
+
+				<p:commandButton value="Novo"
+					action="/cad-funcionario?faces-redirect=true" update="@form"
+					icon="fa fa-plus-square" styleClass="btn-primary" />
+
+				<p:commandButton value="Gerar PDF" ajax="false"
+					icon="fa fa-file-pdf-o"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+					<p:dataExporter type="pdf" encoding="iso-8859-1" target=":formConsulta:tabela" 
+						fileName="funcionarios" preProcessor="#{relatoriosBean.preProcessPDF}"/>
+				</p:commandButton>
+				
+				<p:commandButton value="Gerar Excel" ajax="false"
+					icon="fa fa-file-excel-o"
+					styleClass="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+					<p:dataExporter type="xls" encoding="iso-8859-1" target=":formConsulta:tabela" 
+						fileName="funcionarios" postProcessor="#{relatoriosBean.postProcessXLS}"/>
+				</p:commandButton>
+
+
+			</p:panel>
+			<!-- FIM PAINEL DE BOTÕES -->
+
+			<!-- INICIO CONSULTA DE CLIENTE -->
+			<h3 class="mt-4 text-gray-100">Consulta de Bonificação de Fornecedores</h3>
+
+			<!-- INICIO PAINEL DE CONSULTA -->
+			<p:panel id="pnlDados" styleClass="box-warning card mt-2">
+
+				<p:dataTable id="tabela" widgetVar="dtFuncionario"
+					var="funcionario" value="#{consultaFuncionariosBean.funcionarios}"
+					reflow="true" rows="6" selection="funcionarioSelecionado"
+					paginator="true" paginatorPosition="bottom"
+					emptyMessage="Nenhum registro encontrado."
+					styleClass="products-table" rowSelectMode="add"
+					rowKey="#{funcionario.codigo}">
+
+					<f:facet name="header">
+						<div class="products-table-header">
+							<span class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search"></i> <p:inputText id="globalFilter"
+									onkeyup="PF('dtFuncionarios').filter()"
+									placeholder="Pesquisar..." />
+							</span>
+						</div>
+					</f:facet>
+
+					<p:column headerText="Nome" sortBy="#{funcionario.nome}"
+						filterBy="#{funcionario.nome}">
+						<h:outputText value="#{funcionario.nome}" />
+					</p:column>
+
+					<p:column headerText="CPF" sortBy="#{funcionario.cpf}"
+						filterBy="#{funcionario.cpf}">
+						<h:outputText value="#{funcionario.cpf}" />
+					</p:column>
+
+					<p:column headerText="CNH" sortBy="#{funcionario.cnh}"
+						filterBy="#{funcionario.cnh}">
+						<h:outputText value="#{funcionario.cnh}" />
+					</p:column>
+
+					<p:column headerText="Mopp" sortBy="#{funcionario.mopp}"
+						filterBy="#{funcionario.mopp}">
+						<h:outputText value="#{funcionario.mopp}" />
+					</p:column>
+
+					<p:column headerText="Função"
+						sortBy="#{funcionario.funcao.nomeFuncao}"
+						filterBy="#{funcionario.funcao.nomeFuncao}">
+						<h:outputText value="#{funcionario.funcao.nomeFuncao}" />
+					</p:column>
+
+					<p:column headerText="Fator RH"
+						sortBy="#{funcionario.tipoSanguineo.tipoSanguineo}"
+						filterBy="#{funcionario.tipoSanguineo.tipoSanguineo}">
+						<h:outputText value="#{funcionario.tipoSanguineo.tipoSanguineo}" />
+					</p:column>
+
+					<p:column headerText="Bairro" sortBy="#{funcionario.bairro}"
+						filterBy="#{funcionario.bairro}">
+						<h:outputText value="#{funcionario.bairro}" />
+					</p:column>
+
+					<!-- INICIO COLUNA COM BOTÕES  -->
+					<p:column style="width:11rem;text-align: center"
+						headerText="Opções" exportable="false">
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{consultaFuncionariosBean.editar}"
+							update=":formCadastro:painel" oncomplete="PF('dialogo').show();">
+							<f:attribute name="funcionarioSelecionado" value="#{funcionario}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{consultaFuncionariosBean.excluir}"
+							update=":mensagem :formConsulta:tabela">
+							<p:confirm header="Atenção:" message="Permissão negada."
+								icon="ui-icon-alert" />
+							<f:attribute name="funcionarioSelecionado" value="#{funcionario}" />
+						</p:commandButton>
+
+					</p:column>
+				</p:dataTable>
+				<!-- FIM COLUNA COM BOTÕES  -->
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sair" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</p:panel>
+			<!-- FIM CONSULTA DE CLIENTE -->
+
+		</h:form> <p:dialog header="Editar funcionário" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true" closable="false"
+			footer="SGP - Sistema Gerenciador de Produtos" showEffect="slide">
+			<h:form id="formCadastro">
+				<h:panelGrid id="painel" columns="2">
+					<p:outputLabel value="Nome"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputText id="nome" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.nome}"
+						converter="upperCaseConverter">
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel value="Apelido"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputText id="apelido" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.apelido}"
+						converter="upperCaseConverter">
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel value="CPF:"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputMask id="cpf" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.cpf}"
+						converter="upperCaseConverter" mask="999.999.999-99">
+						<p:ajax event="blur" update="@this" />
+					</p:inputMask>
+
+					<p:outputLabel value="CNH"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputText id="cnh" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.cnh}"
+						converter="upperCaseConverter">
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel value="Mopp"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputText id="mopp" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.mopp}"
+						converter="upperCaseConverter">
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel value="Função"
+						style="font-weight:bold; float: right;" />
+					<p:selectOneMenu id="funcao" filter="true"
+						value="#{consultaFuncionariosBean.funcionario.funcao}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione uma função" />
+						<f:selectItems value="#{consultaFuncoesBean.funcoes}" var="funcao"
+							itemValue="#{banco}" itemLabel="#{funcao.nomeFuncao}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Email:"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputText id="email" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.email}"
+						converter="upperCaseConverter">
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel value="Telefone fixo:"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputText id="telFixo" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.telFixo}"
+						converter="upperCaseConverter" mask="(99)9999-9999">
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel value="Celular 1:"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputMask id="celular1" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.celular1}"
+						converter="upperCaseConverter" mask="(99)99999-9999">
+						<p:ajax event="blur" update="@this" />
+					</p:inputMask>
+
+					<p:outputLabel value="Celular 2:"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputMask id="celular2" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.celular2}"
+						converter="upperCaseConverter" mask="(99)99999-9999">
+						<p:ajax event="blur" update="@this" />
+					</p:inputMask>
+
+					<p:outputLabel value="Celular 3:"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputMask id="celular3" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.celular3}"
+						converter="upperCaseConverter" mask="(99)99999-9999">
+						<p:ajax event="blur" update="@this" />
+					</p:inputMask>
+
+					<p:outputLabel value="Complemento:"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:inputText id="complemento" maxlength="50" size="30"
+						value="#{consultaFuncionariosBean.funcionario.complemento}"
+						converter="upperCaseConverter">
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel for="tipoSanguineo" value="Tipo Sanguineo"
+						style="font-weight:bold; padding-right: 5px; float: right;" />
+					<p:selectOneMenu id="tipoSanguineo" filter="true"
+						value="#{consultaClientesBean.cliente.banco}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione o Tipo Sanguíneo" />
+						<f:selectItems
+							value="#{consultaTipoSanguineoBean.tiposSanguineos}"
+							var="tipoSanguineo" itemValue="#{tipoSanguineo}"
+							itemLabel="#{tipoSanguineo.tipoSanguineo}" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{consultaFuncionariosBean.salvar}"
+						update=":mensagem :formCadastro:painel :formConsulta:tabela" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog> </section>
+	</ui:define>
+</ui:composition>

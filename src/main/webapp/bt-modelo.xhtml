@@ -7,7 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" lang="en">
-	
+
 	<ui:insert name="metadata"></ui:insert>
 
 	<h:head>
@@ -278,6 +278,26 @@
 						<i class="fas fa-oil-can"></i>
 						<span>Beneficiário</span>
 					</p:link></li>
+
+				<li class="treeview"><p:link
+						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}" href="#">
+						<i class="fas fa-oil-can"></i>
+						<span>Bonificação</span>
+						<span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+						</span>
+					</p:link>
+					<ul class="treeview-menu">
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="cad-bonificacaoAfiliado.xhtml">Afiliado</p:link></li>
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="cad-bonificacaoFornecedor.xhtml">Fornecedor</p:link></li>
+						<li><p:link
+								rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
+								href="cad-bonificacaoFuncionario.xhtml">Funcionário</p:link></li>
+					</ul></li>
 				<li><p:link
 						rendered="#{autenticacaoBean.temPerfis(['FUNCIONARIO'])}"
 						href="con-cliente.xhtml">

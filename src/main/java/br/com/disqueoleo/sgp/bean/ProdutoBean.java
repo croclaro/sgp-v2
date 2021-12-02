@@ -52,6 +52,7 @@ public class ProdutoBean implements Serializable {
 
 			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtos = produtoDAO.listar();
+			
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro cadastrar o produto");
 			erro.printStackTrace();

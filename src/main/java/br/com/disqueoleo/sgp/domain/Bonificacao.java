@@ -50,7 +50,7 @@ public class Bonificacao extends Generico {
 
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
-	}
+	}	
 
 	public String getDataBonificacao() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
