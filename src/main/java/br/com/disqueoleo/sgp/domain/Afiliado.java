@@ -18,15 +18,15 @@ import org.hibernate.validator.constraints.br.CPF;
 @Entity // QUER DIZER QUE É UMA ENTIDADE. O HIBERNATE VAI CRIAR UMA TABELA
 public class Afiliado extends Generico {
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 100, nullable = true)
 	private String nomeCompleto;
 
 	@CPF(message = "CPF inválido!!!")
-	@Column(length = 11, nullable = false, unique = true)
+	@Column(length = 11, nullable = true)
 	private String cpf;
 
 	@Email(message = "EMAIL INVÁLIDO!!!")
-	@Column(length = 100, nullable = false, unique = true)
+	@Column(length = 100, nullable = true)
 	private String email;
 
 	@Column(length = 100, nullable = true)
@@ -84,6 +84,9 @@ public class Afiliado extends Generico {
 	@Column(nullable = true)
 	private Boolean status;	
 	
+	@Transient
+	private Afiliado afiliado;
+	
 	@ManyToOne
 	@JoinColumn(nullable = true)
 	private Fornecedor fornecedor;
@@ -106,6 +109,14 @@ public class Afiliado extends Generico {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf.replaceAll("\\D", "").replace("-", "");
+	}
+
+	public Afiliado getAfiliado() {
+		return afiliado;
+	}
+
+	public void setAfiliado(Afiliado afiliado) {
+		this.afiliado = afiliado;
 	}
 
 	public String getEmail() {

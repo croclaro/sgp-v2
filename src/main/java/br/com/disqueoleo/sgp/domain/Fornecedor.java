@@ -41,7 +41,7 @@ public class Fornecedor extends Generico {
 	private Long codBarras = (long) (10000000000000L + Math.random() * 89999999999999L);
 
 	@Email(message = "EMAIL INVÁLIDO!!!")
-	@Column(length = 100, nullable = true, unique = true)
+	@Column(length = 100, nullable = true)
 	private String email;
 
 	@Column(length = 100, nullable = true)

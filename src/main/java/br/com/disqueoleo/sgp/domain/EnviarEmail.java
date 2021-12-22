@@ -139,8 +139,16 @@ public class EnviarEmail {
 			texto.append("\n");
 			texto.append("Pedimos a gentileza de clicar no link abaixo para terminar o seu cadastro.");
 			texto.append("\n");
-			texto.append("https://sgp-disqueoleo.com.br/cad-afiliadoIndicadoUpgrade.xhtml?codigo=" + afiliado.getCodigo());
+			texto.append("\n");
+			texto.append("http://localhost:8080/SGP/cad-afiliadoIndicadoUpgrade.xhtml?codigo=" + afiliado.getCodigo());
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Atenciosamente,");
+			texto.append("\n");
+			texto.append("\n");
+			texto.append("Equipe Disque Óleo");
 			message.setText(texto.toString());
+
 
 			/** Método para enviar a mensagem criada */
 			Transport.send(message);
@@ -248,7 +256,7 @@ public class EnviarEmail {
 			texto.append("\n");
 			texto.append("Token: " + usuario.getToken());
 			texto.append("\n");
-			texto.append(" CNPJ: " + usuario.getFornecedor().getCnpj());
+			texto.append(" CNPJ: " + usuario.getAfiliado().getCpf());
 			texto.append("\n");
 			texto.append(" Senha Provisória: " + usuario.getSenhaSemCriptografia());
 			texto.append("\n");

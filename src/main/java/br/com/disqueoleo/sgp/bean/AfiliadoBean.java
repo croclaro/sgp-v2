@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -40,6 +41,9 @@ public class AfiliadoBean implements Serializable {
 	private List<Banco> bancos;
 	private EnviarEmail enviarEmail;
 
+	@ManagedProperty("#{autenticacaoBean}")
+	private AutenticacaoBean autenticacaoBean;
+
 	// MÉTODO GETTER AND SETTERS ...
 	// MÉTODO GET LEITURA..
 	// MÉTODO SET ESCRITA ...
@@ -49,6 +53,14 @@ public class AfiliadoBean implements Serializable {
 
 	public void setAfiliado(Afiliado afiliado) {
 		this.afiliado = afiliado;
+	}
+
+	public AutenticacaoBean getAutenticacaoBean() {
+		return autenticacaoBean;
+	}
+
+	public void setAutenticacaoBean(AutenticacaoBean autenticacaoBean) {
+		this.autenticacaoBean = autenticacaoBean;
 	}
 
 	public EnviarEmail getEnviarEmail() {
@@ -109,13 +121,45 @@ public class AfiliadoBean implements Serializable {
 		try {
 			if (afiliado.getCpf() == "") {
 				Messages.addGlobalError("O campo CPF não pode ficar vazio");
-			}else {
+			} else if (afiliado.getCpf() != "") {
 
 				AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
+
+				Usuario usuarioLogado = autenticacaoBean.getUsuario();
+				Afiliado afiliadoUsuarioLogado = usuarioLogado.getAfiliado();
+
+				if (usuarioLogado.getFuncionario() == null) {
+					afiliado.setAfiliado(afiliadoUsuarioLogado);
+				}
+
 				Afiliado afiliadoSalvo = afiliadoDAO.merge(afiliado);
 
-				if (afiliado.getCodigo() == null) {
+				if (usuarioLogado.getAfiliado() != null) {
 					enviarEmail.enviarEmailAfiliado(afiliadoSalvo);
+				} else if (usuarioLogado.getAfiliado() == null) {
+
+					UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+					Usuario usuario = new Usuario();
+					usuario.setAfiliado(afiliadoSalvo);
+
+					usuario.setDataUsuario(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(new Date()));
+
+					String senha = RandomStringUtils.randomAlphanumeric(6);
+					SimpleHash hash = new SimpleHash("md5", senha);
+					usuario.setSenha(hash.toHex());
+					usuario.setSenhaSemCriptografia(senha);
+
+					usuario.setStatus(true);
+
+					String token = RandomStringUtils.randomNumeric(6);
+					usuario.setToken(token);
+
+					Usuario usuarioSalvo = usuarioDAO.merge(usuario);
+					usuarioSalvo.setSenhaSemCriptografia(usuario.getSenhaSemCriptografia());
+
+					enviarEmail.enviarEmailUsuarioAfiliado(usuarioSalvo);
+
 				} else {
 					UsuarioDAO usuarioDAO = new UsuarioDAO();
 

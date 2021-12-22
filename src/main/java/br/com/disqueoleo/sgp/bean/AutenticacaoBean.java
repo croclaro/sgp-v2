@@ -44,9 +44,27 @@ public class AutenticacaoBean implements Serializable {
 	private Long fornecedores;
 	private String nomeIndicacao;
 	private String dadosPessoais;
+	private String comissao;
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public String getComissao() {
+		if(usuarioLogado.getTipoUsuario() == TipoUsuario.AFILIADO) {
+			comissao = "Bonificação";
+		}else if(usuarioLogado.getTipoUsuario() == TipoUsuario.FORNECEDOR) {
+			comissao = "Bonificação";
+		}else if (usuarioLogado.getTipoUsuario() == TipoUsuario.FUNCIONARIO) {
+			comissao = "Ganhos";
+		}else {
+			comissao = "Erro";
+		}
+		return comissao;
+	}
+
+	public void setComissao(String comissao) {
+		this.comissao = comissao;
 	}
 
 	public String getNomeIndicacao() {

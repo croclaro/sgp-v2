@@ -142,6 +142,7 @@ public class FornecedorBean implements Serializable {
 				if (fornecedor.getCodigo() == null && usuarioLogado.getFuncionario() == null) {
 					enviarEmail.enviarEmailFornecedor(fornecedorSalvo);
 				} else if (fornecedor.getCodigo() == null && usuarioLogado.getFuncionario() != null) {
+					
 					UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 					Usuario usuario = new Usuario();
