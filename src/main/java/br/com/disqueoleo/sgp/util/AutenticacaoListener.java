@@ -22,7 +22,8 @@ public class AutenticacaoListener implements PhaseListener {
 				paginaAtual.contains("bt-forgot-password.xhtml") || 
 				paginaAtual.contains("bt-register.xhtml") ||
 				paginaAtual.contains("cad-fornecedorIndicadoUpgrade.xhtml") ||
-				paginaAtual.contains("bt-loginCodigo.xhtml");
+				paginaAtual.contains("bt-loginCodigo.xhtml") ||
+				paginaAtual.contains("cad-afiliadoIndicadoUpgrade.xhtml");
 
 		if (!ehPaginaPublica) {
 			

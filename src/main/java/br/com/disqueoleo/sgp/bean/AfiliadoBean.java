@@ -23,11 +23,13 @@ import com.google.gson.Gson;
 
 import br.com.disqueoleo.sgp.dao.AfiliadoDAO;
 import br.com.disqueoleo.sgp.dao.BancoDAO;
+import br.com.disqueoleo.sgp.dao.FornecedorDAO;
 import br.com.disqueoleo.sgp.dao.UsuarioDAO;
 import br.com.disqueoleo.sgp.domain.Afiliado;
 import br.com.disqueoleo.sgp.domain.Banco;
 import br.com.disqueoleo.sgp.domain.CEP;
 import br.com.disqueoleo.sgp.domain.EnviarEmail;
+import br.com.disqueoleo.sgp.domain.Fornecedor;
 import br.com.disqueoleo.sgp.domain.Usuario;
 
 //ATUALIZADO MASTER ....
@@ -43,6 +45,8 @@ public class AfiliadoBean implements Serializable {
 
 	@ManagedProperty("#{autenticacaoBean}")
 	private AutenticacaoBean autenticacaoBean;
+	
+	private String acao;
 
 	// MÉTODO GETTER AND SETTERS ...
 	// MÉTODO GET LEITURA..
@@ -95,6 +99,14 @@ public class AfiliadoBean implements Serializable {
 
 			BancoDAO bancoDAO = new BancoDAO();
 			bancos = bancoDAO.listar();
+			
+			String codigo = Faces.getRequestParameter("codigo");
+
+			if (codigo == null) {
+				acao = "N";
+			} else {
+				acao = "U";
+			}
 
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao gerar o afiliado");
@@ -106,6 +118,7 @@ public class AfiliadoBean implements Serializable {
 		String codigo = Faces.getRequestParameter("codigo");
 
 		if (codigo == null) {
+			acao = "N";
 			Faces.navigate("confEmail.xhtml?faces-redirect=true");
 		}
 
@@ -113,6 +126,7 @@ public class AfiliadoBean implements Serializable {
 		afiliado = afiliadoDAO.buscar(Long.valueOf(codigo));
 
 		if (afiliado == null) {
+			acao = "U";
 			Faces.navigate("confEmail.xhtml?faces-redirect=true");
 		}
 	}
@@ -124,24 +138,15 @@ public class AfiliadoBean implements Serializable {
 			} else if (afiliado.getCpf() != "") {
 
 				AfiliadoDAO afiliadoDAO = new AfiliadoDAO();
-
+				UsuarioDAO usuarioDAO = new UsuarioDAO();
+				FornecedorDAO fornecedorDAO = new FornecedorDAO();
+				
 				Usuario usuarioLogado = autenticacaoBean.getUsuario();
-				Afiliado afiliadoUsuarioLogado = usuarioLogado.getAfiliado();
-
-				if (usuarioLogado.getFuncionario() == null) {
-					afiliado.setAfiliado(afiliadoUsuarioLogado);
-				}
-
-				Afiliado afiliadoSalvo = afiliadoDAO.merge(afiliado);
-
-				if (usuarioLogado.getAfiliado() != null) {
-					enviarEmail.enviarEmailAfiliado(afiliadoSalvo);
-				} else if (usuarioLogado.getAfiliado() == null) {
-
-					UsuarioDAO usuarioDAO = new UsuarioDAO();
-
+				
+				// Admin
+				if (usuarioLogado.getFuncionario().getCodigo() != null) {
 					Usuario usuario = new Usuario();
-					usuario.setAfiliado(afiliadoSalvo);
+					usuario.setAfiliado(afiliado);
 
 					usuario.setDataUsuario(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(new Date()));
 
@@ -159,12 +164,27 @@ public class AfiliadoBean implements Serializable {
 					usuarioSalvo.setSenhaSemCriptografia(usuario.getSenhaSemCriptografia());
 
 					enviarEmail.enviarEmailUsuarioAfiliado(usuarioSalvo);
+				} 
+				
+				// Não Admin - Novo
+				else if (acao.equals("N")) {						
+					Fornecedor fornecedorUsuarioLogado = fornecedorDAO.buscarPorCPFOuCNPJ(usuarioLogado.getLogin());
 
-				} else {
-					UsuarioDAO usuarioDAO = new UsuarioDAO();
+					if (usuarioLogado.getFuncionario().getCodigo() == null) {
+						afiliado.setFornecedor(fornecedorUsuarioLogado);
+					}
 
+					Afiliado afiliadoSalvo = afiliadoDAO.merge(afiliado);
+					
+					enviarEmail.enviarEmailAfiliado(afiliadoSalvo);
+				} 
+				
+				// Não Admim - Upgrade
+				else if (acao.equals("U")) {
+					Afiliado afiliadoSalvo = afiliadoDAO.merge(afiliado);
+					
 					Usuario usuario = new Usuario();
-					usuario.setAfiliado(afiliadoSalvo);
+					usuario.setAfiliado(afiliado);
 
 					usuario.setDataUsuario(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(new Date()));
 
@@ -184,7 +204,7 @@ public class AfiliadoBean implements Serializable {
 					enviarEmail.enviarEmailUsuarioAfiliado(usuarioSalvo);
 
 					Faces.navigate("confEmail.xhtml?faces-redirect=true");
-				}
+				} 
 
 				cadastrar();
 

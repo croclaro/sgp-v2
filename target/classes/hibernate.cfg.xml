@@ -44,7 +44,7 @@
 		<mapping class="br.com.disqueoleo.sgp.domain.Usuario" />
 		<mapping class="br.com.disqueoleo.sgp.domain.Produto" />
 		<mapping class="br.com.disqueoleo.sgp.domain.Afiliado" />	
-		<mapping class="br.com.disqueoleo.sgp.domain.Bonificacao" />			
+		<!-- <mapping class="br.com.disqueoleo.sgp.domain.Bonificacao" />  -->			
 
 	</session-factory>
 
